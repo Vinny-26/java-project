@@ -16,6 +16,7 @@ Adicione um "OK" sempre que um requisito for atendido!
 1. Implementar classe veículo com restrições seguras(identificador único imutável)
 2. Sobrescrever método Equals e testar
 3. Estruturar métodos necessários. (Reserva, Pagamento, fimReserva)
+
 Atualize esta seção em cada marco do projeto.
 
 ## Como executar
