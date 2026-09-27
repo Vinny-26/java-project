@@ -1,4 +1,4 @@
-public static final class Pessoa
+private static final class Pessoa
 {
     private String titular;
     private int saldo;
@@ -7,12 +7,21 @@ public static final class Pessoa
     {
         this.titular = titular;
     }
+    public String getTitular()
+    {
+        return this.titular;
+    }
+    public int getSaldo()
+    {
+        return this.saldo;
+    }
 }
 
 public static void main(String[] args)
 {
     Pessoa p = new Pessoa();
     p.setTitular("Niggolas");
-    System.out.println(p.titular);
+    System.out.println(p.getTitular());
+    System.out.println(p.getSaldo());
 }
 
