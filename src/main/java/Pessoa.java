@@ -2,6 +2,7 @@ private static final class Pessoa
 {
     private String titular;
     private int saldo;
+    private int cpf;
 
     public void setTitular(String titular)
     {
