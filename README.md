@@ -2,16 +2,20 @@
 
 ## Equipe
 
-- Integrante 1:
-- Integrante 2, se houver:
+- Integrante 1: Vinícius
+- Integrante 2: Felipe
+- Integrante 3: Nicolas
 
 ## Variante
 
-- Variante:
-- Regra específica:
+- Variante: Veículos
+- Regra específica: Um veículo só pode ser alugado por uma pessoa de cada vez, devemos utilizar um identificador único para cada veículo.
 
 ## Requisitos atendidos
-
+Adicione um "OK" sempre que um requisito for atendido!
+1. Implementar classe veículo com restrições seguras(identificador único imutável)
+2. Sobrescrever método Equals e testar
+3. Estruturar métodos necessários. (Reserva, Pagamento, fimReserva)
 Atualize esta seção em cada marco do projeto.
 
 ## Como executar
