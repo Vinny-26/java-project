@@ -15,7 +15,7 @@ public void setPlaca (string placa) {
     this.placa = placa;
 }
 
-public void setMarca (String marca) {
+public void setMarca (string marca) {
 
     this.marca = marca;
 }
