@@ -15,7 +15,7 @@ public void setPlaca (string placa) {
     this.placa = placa;
 }
 
-public void setMarca (string marca) {
+public void setMarca (String marca) {
 
     this.marca = marca;
 }
@@ -40,4 +40,8 @@ public void setKmFinal (Float KmFinal) {
     this.KmFinal = KmFinal;
 }
 
+set valorKmRodado (float valorKmRodado) {
+
+    this,valorKmRodado = valorKmFinal;
+}
 }
