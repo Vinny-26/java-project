@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class carro {
+public class Carro {
     private String placa;
     private String cor;
     private boolean arCondicionado;
@@ -9,7 +9,7 @@ public class carro {
     private String modelo;
 
     // Construtor com todos os atributos
-    public carro(String placa, String cor, boolean arCondicionado, int precoEmCentavos, boolean disponivel, String marca, String modelo) {
+    public Carro(String placa, String cor, boolean arCondicionado, int precoEmCentavos, boolean disponivel, String marca, String modelo) {
         this.placa = placa;
         this.cor = cor;
         this.arCondicionado = arCondicionado;
@@ -117,7 +117,7 @@ public class carro {
         System.out.print("Digite o preço em centavos (ex: 15000): ");
         int precoEmCentavos = Integer.parseInt(leitor.nextLine());
 
-        carro meuCarro = new carro(placa, cor, arCondicionado, precoEmCentavos, true, marca, modelo);
+        Carro meuCarro = new Carro(placa, cor, arCondicionado, precoEmCentavos, true, marca, modelo);
 
         System.out.println("\nCarro cadastrado com sucesso:");
         System.out.println(meuCarro);
