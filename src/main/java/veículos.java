@@ -15,33 +15,33 @@ public void setPlaca (string placa) {
     this.placa = placa;
 }
 
-public void setMarca (String marca) {
+public void setMarca (string marca) {
 
     this.marca = marca;
 }
 
-public void setModelo (Int modelo) {
+public void setModelo (int modelo) {
 
     this.modelo = modelo;
 }
 
-public void setAno (Int ano) {
+public void setAno (int ano) {
 
     this.ano = ano;
 }
 
-public void setKmInicial (Float KmInicial) {
+public void setKmInicial (float KmInicial) {
 
     this.KmInicial = KmInicial;
 }
 
-public void setKmFinal (Float KmFinal) {
+public void setKmFinal (float KmFinal) {
 
     this.KmFinal = KmFinal;
 }
 
 public void set valorKmRodado (float valorKmRodado) {
 
-    this,valorKmRodado = valorKmFinal;
+    this.valorKmRodado = valorKmFinal;
 }
 }
