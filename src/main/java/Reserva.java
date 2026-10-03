@@ -1,7 +1,7 @@
 public class reserva {
     private int id;
     private StatusReserva status; //Enum (Guarda 1 de 3 opções "CANCELADA, CRIADA E CONCLUIDA")
-    private Periodo periodo; //Record composição (guarda as datas de início e fim da resrva)
+    private Periodo periodo; //Record composição (guarda as datas de início e fim da reserva)
     private Responsavel pessoa; //Associação (classe pessoa/responsável)
     private Recurso carro; //Associação (classe recurso)
 
