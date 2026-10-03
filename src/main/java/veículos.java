@@ -40,7 +40,7 @@ public void setKmFinal (Float KmFinal) {
     this.KmFinal = KmFinal;
 }
 
-set valorKmRodado (float valorKmRodado) {
+public void set valorKmRodado (float valorKmRodado) {
 
     this,valorKmRodado = valorKmFinal;
 }
