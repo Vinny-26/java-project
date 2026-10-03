@@ -42,6 +42,6 @@ public void setKmFinal (float KmFinal) {
 
 public void set valorKmRodado (float valorKmRodado) {
 
-    this.valorKmRodado = valorKmFinal;
+    this.valorKmRodado = valorKmRodado;
 }
 }
