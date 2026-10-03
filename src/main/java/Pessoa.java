@@ -1,28 +1,13 @@
-private static final class Pessoa
+public class Pessoa
 {
     private String titular;
-    private int saldo;
-    private int cpf;
-
-    public void setTitular(String titular)
+    private int saldoEmCentavos;
+    private String cpf;
+    public Pessoa(String titular, int saldoEmCentavos, String cpf)
     {
-        this.titular = titular;
+            this.titular = titular;
+            this.saldoEmCentavos = saldoEmCentavos;
+            this.cpf = cpf; // reimplementar Equals usando cpf
     }
-    public String getTitular()
-    {
-        return this.titular;
-    }
-    public int getSaldo()
-    {
-        return this.saldo;
-    }
-}
-
-public static void main(String[] args)
-{
-    Pessoa p = new Pessoa();
-    p.setTitular("Niggolas");
-    System.out.println(p.getTitular());
-    System.out.println(p.getSaldo());
 }
 
