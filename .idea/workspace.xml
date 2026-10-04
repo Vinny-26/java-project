@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Repositório Limpo">
-      <change afterPath="$PROJECT_DIR$/src/test/java/PeriodoTest.java" afterDir="false" />
+    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Fim da primeira parte dos testes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Periodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Periodo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pessoa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/PeriodoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PeriodoTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,9 +56,17 @@
     "Application.Carro.executor": "Run",
     "Application.Pessoa.executor": "Run",
     "Application.main.executor": "Run",
+    "JUnit.PeriodoTest.ContencaoEnvelopamento.executor": "Run",
+    "JUnit.PeriodoTest.PeriodoNuloNaoGeraExcecao.executor": "Run",
+    "JUnit.PeriodoTest.aEnvoltoemB.executor": "Run",
     "JUnit.PeriodoTest.construcaoRecusaEstadoInicialInvalido.executor": "Run",
     "JUnit.PeriodoTest.criacaoValida.executor": "Run",
+    "JUnit.PeriodoTest.executor": "Run",
     "JUnit.PeriodoTest.inicialPosteriorfinal.executor": "Run",
+    "JUnit.PeriodoTest.retiraNaDevolucao.executor": "Run",
+    "JUnit.PeriodoTest.sobreposicaoDireita.executor": "Run",
+    "JUnit.PeriodoTest.sobreposicaoEsquerda.executor": "Run",
+    "JUnit.PeriodoTest.sobreposicaoInexistente.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -79,40 +85,52 @@
       <recent name="$PROJECT_DIR$/docs" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PeriodoTest.construcaoRecusaEstadoInicialInvalido">
-    <configuration name="Pessoa" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="UNNAMED_CLASS_CONFIGURATION" value="true" />
-      <option name="MAIN_CLASS_NAME" value="Pessoa" />
-      <module name="plataforma-reservas" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PeriodoTest.construcaoRecusaEstadoInicialInvalido" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.PeriodoTest.aEnvoltoemB">
+    <configuration name="PeriodoTest.aEnvoltoemB" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="PeriodoTest" />
-      <option name="METHOD_NAME" value="construcaoRecusaEstadoInicialInvalido" />
+      <option name="METHOD_NAME" value="aEnvoltoemB" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PeriodoTest.criacaoValida" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PeriodoTest.periodoNuloNaoGeraExcecao" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="PeriodoTest" />
-      <option name="METHOD_NAME" value="criacaoValida" />
+      <option name="METHOD_NAME" value="periodoNuloNaoGeraExcecao" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PeriodoTest.inicialPosteriorfinal" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PeriodoTest.retiraNaDevolucao" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="PeriodoTest" />
-      <option name="METHOD_NAME" value="inicialPosteriorfinal" />
+      <option name="METHOD_NAME" value="retiraNaDevolucao" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PeriodoTest.sobreposicaoEsquerda" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="plataforma-reservas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PeriodoTest" />
+      <option name="METHOD_NAME" value="sobreposicaoEsquerda" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PeriodoTest.sobreposicaoInexistente" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="plataforma-reservas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PeriodoTest" />
+      <option name="METHOD_NAME" value="sobreposicaoInexistente" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -120,10 +138,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PeriodoTest.construcaoRecusaEstadoInicialInvalido" />
-        <item itemvalue="JUnit.PeriodoTest.inicialPosteriorfinal" />
-        <item itemvalue="JUnit.PeriodoTest.criacaoValida" />
-        <item itemvalue="Application.Pessoa" />
+        <item itemvalue="JUnit.PeriodoTest.aEnvoltoemB" />
+        <item itemvalue="JUnit.PeriodoTest.sobreposicaoEsquerda" />
+        <item itemvalue="JUnit.PeriodoTest.periodoNuloNaoGeraExcecao" />
+        <item itemvalue="JUnit.PeriodoTest.retiraNaDevolucao" />
+        <item itemvalue="JUnit.PeriodoTest.sobreposicaoInexistente" />
       </list>
     </recent_temporary>
   </component>
@@ -192,6 +211,7 @@
     <MESSAGE value="Criação de get e set pessoa" />
     <MESSAGE value="Ultima alteração na classe Pessoa" />
     <MESSAGE value="Repositório Limpo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Repositório Limpo" />
+    <MESSAGE value="Fim da primeira parte dos testes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fim da primeira parte dos testes" />
   </component>
 </project>
