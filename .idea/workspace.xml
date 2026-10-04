@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Fim da primeira parte dos testes">
+    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Fim da suite de testes de Periodo">
+      <change afterPath="$PROJECT_DIR$/src/test/java/PessoaTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/PeriodoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PeriodoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pessoa.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +68,26 @@
     "JUnit.PeriodoTest.sobreposicaoDireita.executor": "Run",
     "JUnit.PeriodoTest.sobreposicaoEsquerda.executor": "Run",
     "JUnit.PeriodoTest.sobreposicaoInexistente.executor": "Run",
+    "JUnit.PessoaTest.comparacaoComNuloOuOutroTipo.executor": "Run",
+    "JUnit.PessoaTest.contratoHashCode.executor": "Run",
+    "JUnit.PessoaTest.cpfNulo.executor": "Run",
+    "JUnit.PessoaTest.cpfPossuiTamanhoCorreto.executor": "Run",
+    "JUnit.PessoaTest.cpfVazio.executor": "Run",
+    "JUnit.PessoaTest.creditarComSucesso.executor": "Run",
+    "JUnit.PessoaTest.creditarNegativo.executor": "Run",
+    "JUnit.PessoaTest.creditarValorZero.executor": "Run",
+    "JUnit.PessoaTest.criacaoValida.executor": "Run",
+    "JUnit.PessoaTest.debitarComSaldoInsuficiente.executor": "Run",
+    "JUnit.PessoaTest.debitarComSucesso.executor": "Run",
+    "JUnit.PessoaTest.debitarNegativo.executor": "Run",
+    "JUnit.PessoaTest.debitarValorZero.executor": "Run",
+    "JUnit.PessoaTest.pessoasComCpfDiferentesNaoSaoIguais.executor": "Run",
+    "JUnit.PessoaTest.pessoasComMesmoCpfSaoIguais.executor": "Run",
+    "JUnit.PessoaTest.saldoIgualValor.executor": "Run",
+    "JUnit.PessoaTest.saldoInvalidoLancaExcecao.executor": "Run",
+    "JUnit.PessoaTest.saldoMenorValor.executor": "Run",
+    "JUnit.PessoaTest.titularEhvazio.executor": "Run",
+    "JUnit.PessoaTest.titularNulo.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -76,7 +97,8 @@
     "last_opened_file_path": "/home/vinnyx/POO/desafio1finalizado",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -85,52 +107,52 @@
       <recent name="$PROJECT_DIR$/docs" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PeriodoTest.aEnvoltoemB">
-    <configuration name="PeriodoTest.aEnvoltoemB" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.PessoaTest.comparacaoComNuloOuOutroTipo">
+    <configuration name="PessoaTest.comparacaoComNuloOuOutroTipo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PeriodoTest" />
-      <option name="METHOD_NAME" value="aEnvoltoemB" />
+      <option name="MAIN_CLASS_NAME" value="PessoaTest" />
+      <option name="METHOD_NAME" value="comparacaoComNuloOuOutroTipo" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PeriodoTest.periodoNuloNaoGeraExcecao" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PessoaTest.contratoHashCode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PeriodoTest" />
-      <option name="METHOD_NAME" value="periodoNuloNaoGeraExcecao" />
+      <option name="MAIN_CLASS_NAME" value="PessoaTest" />
+      <option name="METHOD_NAME" value="contratoHashCode" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PeriodoTest.retiraNaDevolucao" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PessoaTest.cpfVazio" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PeriodoTest" />
-      <option name="METHOD_NAME" value="retiraNaDevolucao" />
+      <option name="MAIN_CLASS_NAME" value="PessoaTest" />
+      <option name="METHOD_NAME" value="cpfVazio" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PeriodoTest.sobreposicaoEsquerda" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PessoaTest.pessoasComCpfDiferentesNaoSaoIguais" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PeriodoTest" />
-      <option name="METHOD_NAME" value="sobreposicaoEsquerda" />
+      <option name="MAIN_CLASS_NAME" value="PessoaTest" />
+      <option name="METHOD_NAME" value="pessoasComCpfDiferentesNaoSaoIguais" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PeriodoTest.sobreposicaoInexistente" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PessoaTest.pessoasComMesmoCpfSaoIguais" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PeriodoTest" />
-      <option name="METHOD_NAME" value="sobreposicaoInexistente" />
+      <option name="MAIN_CLASS_NAME" value="PessoaTest" />
+      <option name="METHOD_NAME" value="pessoasComMesmoCpfSaoIguais" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -138,11 +160,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PeriodoTest.aEnvoltoemB" />
-        <item itemvalue="JUnit.PeriodoTest.sobreposicaoEsquerda" />
-        <item itemvalue="JUnit.PeriodoTest.periodoNuloNaoGeraExcecao" />
-        <item itemvalue="JUnit.PeriodoTest.retiraNaDevolucao" />
-        <item itemvalue="JUnit.PeriodoTest.sobreposicaoInexistente" />
+        <item itemvalue="JUnit.PessoaTest.comparacaoComNuloOuOutroTipo" />
+        <item itemvalue="JUnit.PessoaTest.contratoHashCode" />
+        <item itemvalue="JUnit.PessoaTest.pessoasComCpfDiferentesNaoSaoIguais" />
+        <item itemvalue="JUnit.PessoaTest.pessoasComMesmoCpfSaoIguais" />
+        <item itemvalue="JUnit.PessoaTest.cpfVazio" />
       </list>
     </recent_temporary>
   </component>
@@ -212,6 +234,7 @@
     <MESSAGE value="Ultima alteração na classe Pessoa" />
     <MESSAGE value="Repositório Limpo" />
     <MESSAGE value="Fim da primeira parte dos testes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fim da primeira parte dos testes" />
+    <MESSAGE value="Fim da suite de testes de Periodo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fim da suite de testes de Periodo" />
   </component>
 </project>
