@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Ultima alteração na classe Pessoa">
+    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Repositório Limpo">
+      <change afterPath="$PROJECT_DIR$/src/test/java/PeriodoTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Carro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Carro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/veículos.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Periodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Periodo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pessoa.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,11 +18,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="SimpleSourceFile" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="vinicius" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -51,11 +58,14 @@
     "Application.Carro.executor": "Run",
     "Application.Pessoa.executor": "Run",
     "Application.main.executor": "Run",
+    "JUnit.PeriodoTest.construcaoRecusaEstadoInicialInvalido.executor": "Run",
+    "JUnit.PeriodoTest.criacaoValida.executor": "Run",
+    "JUnit.PeriodoTest.inicialPosteriorfinal.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHELLCHECK.PATH": "I do mind",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "vinicius",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/vinnyx/POO/desafio1finalizado",
     "project.structure.last.edited": "Modules",
@@ -65,10 +75,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test/java" />
       <recent name="$PROJECT_DIR$/docs" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.PeriodoTest.construcaoRecusaEstadoInicialInvalido">
     <configuration name="Pessoa" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="UNNAMED_CLASS_CONFIGURATION" value="true" />
       <option name="MAIN_CLASS_NAME" value="Pessoa" />
@@ -77,8 +88,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PeriodoTest.construcaoRecusaEstadoInicialInvalido" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="plataforma-reservas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PeriodoTest" />
+      <option name="METHOD_NAME" value="construcaoRecusaEstadoInicialInvalido" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PeriodoTest.criacaoValida" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="plataforma-reservas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PeriodoTest" />
+      <option name="METHOD_NAME" value="criacaoValida" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PeriodoTest.inicialPosteriorfinal" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="plataforma-reservas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PeriodoTest" />
+      <option name="METHOD_NAME" value="inicialPosteriorfinal" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PeriodoTest.construcaoRecusaEstadoInicialInvalido" />
+        <item itemvalue="JUnit.PeriodoTest.inicialPosteriorfinal" />
+        <item itemvalue="JUnit.PeriodoTest.criacaoValida" />
         <item itemvalue="Application.Pessoa" />
       </list>
     </recent_temporary>
@@ -94,11 +138,48 @@
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="vinicius" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/vinicius" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -110,6 +191,7 @@
     <MESSAGE value="teste pessoa" />
     <MESSAGE value="Criação de get e set pessoa" />
     <MESSAGE value="Ultima alteração na classe Pessoa" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ultima alteração na classe Pessoa" />
+    <MESSAGE value="Repositório Limpo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Repositório Limpo" />
   </component>
 </project>

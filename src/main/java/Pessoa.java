@@ -1,8 +1,8 @@
 public class Pessoa
 {
-    private String titular;
+    private final String titular;
     private int saldoEmCentavos;
-    private String cpf;
+    private final String cpf;
     public Pessoa(String titular, int saldoEmCentavos, String cpf)
     {
             this.titular = titular;
