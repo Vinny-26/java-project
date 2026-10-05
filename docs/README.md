@@ -36,7 +36,7 @@ classDiagram
     }
     
     class Carro {
-      -String placa
+      -String place
       -String cor
       -boolean arCondicionado
       -int precoEmCentavos

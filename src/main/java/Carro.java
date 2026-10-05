@@ -1,5 +1,5 @@
 public class Carro {
-    private final String placa;
+    private String placa;
     private String cor;
     private boolean arCondicionado;
     private int precoEmCentavos;
@@ -8,12 +8,37 @@ public class Carro {
     private final String modelo;
 
     // Construtor com todos os atributos
-    public Carro(String placa, String cor, boolean arCondicionado, int precoEmCentavos, boolean ativo, String marca, String modelo) {
+    public Carro(String placa, String cor, boolean arCondicionado, int precoEmCentavos, boolean status, String marca, String modelo) {
+        if(placa == null || placa.isBlank())
+        {
+            throw new IllegalArgumentException("A placa do carro não pode ser nula ou vazia");
+        }
+        if(cor == null || cor.isBlank())
+        {
+            throw new IllegalArgumentException("Não é possível inserir carro com cor nula ou vazia");
+        }
+        if(marca == null || marca.isBlank())
+        {
+            throw new IllegalArgumentException("Não é possível cadastrar carro com marca nula ou vazia");
+        }
+        if (modelo == null || modelo.isBlank())
+        {
+            throw new IllegalArgumentException("Não é possível cadastrar carro com modelo nulo ou vazio");
+        }
+        if(placa.length() != 7)
+        {
+            throw new IllegalArgumentException("A placa do carro deve conter exatamente 7 caracteres");
+        }
+        if(precoEmCentavos <= 0)
+        {
+            throw new IllegalArgumentException("Não é possível cadastrar carro com valor menor ou igual a 0");
+        }
+        placa = placa.trim().toUpperCase();
         this.placa = placa;
-        this.cor = cor;
+        this.cor = cor; // Estudar possível enum
         this.arCondicionado = arCondicionado;
         this.precoEmCentavos = precoEmCentavos;
-        this.ativo = ativo;
+        this.ativo = status;
         this.marca = marca;
         this.modelo = modelo;
     }

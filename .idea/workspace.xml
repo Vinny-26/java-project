@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Fim da suite de testes de Periodo">
-      <change afterPath="$PROJECT_DIR$/src/main/java/main.java" afterDir="false" />
+    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Alterações na classe Carro">
+      <change afterPath="$PROJECT_DIR$/src/test/java/CarroTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/diagrama-de-classes.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/diagrama-de-classes.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Carro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Carro.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,12 +38,12 @@
     &quot;assignee&quot;: &quot;Vinny-26&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Vinny-26/java-project.git",
-    "accountId": "7befff23-3654-4cd0-a0d5-bbd1c3e0be79"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Vinny-26/java-project.git&quot;,
+    &quot;accountId&quot;: &quot;7befff23-3654-4cd0-a0d5-bbd1c3e0be79&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5,
   &quot;fromUser&quot;: false
@@ -51,108 +53,120 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Carro.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Pessoa.executor&quot;: &quot;Run&quot;,
-    &quot;Application.main.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PeriodoTest.ContencaoEnvelopamento.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PeriodoTest.PeriodoNuloNaoGeraExcecao.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PeriodoTest.aEnvoltoemB.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PeriodoTest.construcaoRecusaEstadoInicialInvalido.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PeriodoTest.criacaoValida.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PeriodoTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PeriodoTest.inicialPosteriorfinal.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PeriodoTest.retiraNaDevolucao.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PeriodoTest.sobreposicaoDireita.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PeriodoTest.sobreposicaoEsquerda.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PeriodoTest.sobreposicaoInexistente.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.comparacaoComNuloOuOutroTipo.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.contratoHashCode.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.cpfNulo.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.cpfPossuiTamanhoCorreto.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.cpfVazio.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.creditarComSucesso.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.creditarNegativo.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.creditarValorZero.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.criacaoValida.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.debitarComSaldoInsuficiente.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.debitarComSucesso.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.debitarNegativo.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.debitarValorZero.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.pessoasComCpfDiferentesNaoSaoIguais.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.pessoasComMesmoCpfSaoIguais.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.saldoIgualValor.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.saldoInvalidoLancaExcecao.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.saldoMenorValor.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.titularEhvazio.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PessoaTest.titularNulo.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHELLCHECK.PATH&quot;: &quot;I do mind&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;vinicius&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/vinnyx/POO/desafio1finalizado&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.Carro.executor": "Run",
+    "Application.Pessoa.executor": "Run",
+    "Application.main.executor": "Run",
+    "JUnit.CarroTest.CriacaoValida.executor": "Run",
+    "JUnit.CarroTest.ativaCarroAtivo.executor": "Run",
+    "JUnit.CarroTest.carroGratuitoInvalidaCriacao.executor": "Run",
+    "JUnit.CarroTest.carroNegativoInvalidaCriacao.executor": "Run",
+    "JUnit.CarroTest.corNulaInvalidaCriacao.executor": "Run",
+    "JUnit.CarroTest.corVaziaInvalidaCriacao.executor": "Run",
+    "JUnit.CarroTest.desativarCarroDesativado.executor": "Run",
+    "JUnit.CarroTest.marcaNulaInvalidaCriacao.executor": "Run",
+    "JUnit.CarroTest.marcaVaziaInvalidaCriacao.executor": "Run",
+    "JUnit.CarroTest.placaInvalidaCriacao.executor": "Run",
+    "JUnit.CarroTest.placaNulaInvalidaCriacao.executor": "Run",
+    "JUnit.CarroTest.placaVaziaInvalidaCriacao.executor": "Run",
+    "JUnit.PeriodoTest.ContencaoEnvelopamento.executor": "Run",
+    "JUnit.PeriodoTest.PeriodoNuloNaoGeraExcecao.executor": "Run",
+    "JUnit.PeriodoTest.aEnvoltoemB.executor": "Run",
+    "JUnit.PeriodoTest.construcaoRecusaEstadoInicialInvalido.executor": "Run",
+    "JUnit.PeriodoTest.criacaoValida.executor": "Run",
+    "JUnit.PeriodoTest.executor": "Run",
+    "JUnit.PeriodoTest.inicialPosteriorfinal.executor": "Run",
+    "JUnit.PeriodoTest.retiraNaDevolucao.executor": "Run",
+    "JUnit.PeriodoTest.sobreposicaoDireita.executor": "Run",
+    "JUnit.PeriodoTest.sobreposicaoEsquerda.executor": "Run",
+    "JUnit.PeriodoTest.sobreposicaoInexistente.executor": "Run",
+    "JUnit.PessoaTest.comparacaoComNuloOuOutroTipo.executor": "Run",
+    "JUnit.PessoaTest.contratoHashCode.executor": "Run",
+    "JUnit.PessoaTest.cpfNulo.executor": "Run",
+    "JUnit.PessoaTest.cpfPossuiTamanhoCorreto.executor": "Run",
+    "JUnit.PessoaTest.cpfVazio.executor": "Run",
+    "JUnit.PessoaTest.creditarComSucesso.executor": "Run",
+    "JUnit.PessoaTest.creditarNegativo.executor": "Run",
+    "JUnit.PessoaTest.creditarValorZero.executor": "Run",
+    "JUnit.PessoaTest.criacaoValida.executor": "Run",
+    "JUnit.PessoaTest.debitarComSaldoInsuficiente.executor": "Run",
+    "JUnit.PessoaTest.debitarComSucesso.executor": "Run",
+    "JUnit.PessoaTest.debitarNegativo.executor": "Run",
+    "JUnit.PessoaTest.debitarValorZero.executor": "Run",
+    "JUnit.PessoaTest.pessoasComCpfDiferentesNaoSaoIguais.executor": "Run",
+    "JUnit.PessoaTest.pessoasComMesmoCpfSaoIguais.executor": "Run",
+    "JUnit.PessoaTest.saldoIgualValor.executor": "Run",
+    "JUnit.PessoaTest.saldoInvalidoLancaExcecao.executor": "Run",
+    "JUnit.PessoaTest.saldoMenorValor.executor": "Run",
+    "JUnit.PessoaTest.titularEhvazio.executor": "Run",
+    "JUnit.PessoaTest.titularNulo.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHELLCHECK.PATH": "I do mind",
+    "git-widget-placeholder": "vinicius",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/vinnyx/POO/desafio1finalizado",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/test/java" />
       <recent name="$PROJECT_DIR$/docs" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PessoaTest.comparacaoComNuloOuOutroTipo">
-    <configuration name="PessoaTest.comparacaoComNuloOuOutroTipo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.CarroTest.desativarCarroDesativado">
+    <configuration name="CarroTest.ativaCarroAtivo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PessoaTest" />
-      <option name="METHOD_NAME" value="comparacaoComNuloOuOutroTipo" />
+      <option name="MAIN_CLASS_NAME" value="CarroTest" />
+      <option name="METHOD_NAME" value="ativaCarroAtivo" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PessoaTest.contratoHashCode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CarroTest.carroGratuitoInvalidaCriacao" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PessoaTest" />
-      <option name="METHOD_NAME" value="contratoHashCode" />
+      <option name="MAIN_CLASS_NAME" value="CarroTest" />
+      <option name="METHOD_NAME" value="carroGratuitoInvalidaCriacao" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PessoaTest.cpfVazio" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CarroTest.carroNegativoInvalidaCriacao" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PessoaTest" />
-      <option name="METHOD_NAME" value="cpfVazio" />
+      <option name="MAIN_CLASS_NAME" value="CarroTest" />
+      <option name="METHOD_NAME" value="carroNegativoInvalidaCriacao" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PessoaTest.pessoasComCpfDiferentesNaoSaoIguais" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CarroTest.desativarCarroDesativado" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PessoaTest" />
-      <option name="METHOD_NAME" value="pessoasComCpfDiferentesNaoSaoIguais" />
+      <option name="MAIN_CLASS_NAME" value="CarroTest" />
+      <option name="METHOD_NAME" value="desativarCarroDesativado" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PessoaTest.pessoasComMesmoCpfSaoIguais" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CarroTest.marcaVaziaInvalidaCriacao" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PessoaTest" />
-      <option name="METHOD_NAME" value="pessoasComMesmoCpfSaoIguais" />
+      <option name="MAIN_CLASS_NAME" value="CarroTest" />
+      <option name="METHOD_NAME" value="marcaVaziaInvalidaCriacao" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -160,11 +174,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PessoaTest.comparacaoComNuloOuOutroTipo" />
-        <item itemvalue="JUnit.PessoaTest.contratoHashCode" />
-        <item itemvalue="JUnit.PessoaTest.pessoasComCpfDiferentesNaoSaoIguais" />
-        <item itemvalue="JUnit.PessoaTest.pessoasComMesmoCpfSaoIguais" />
-        <item itemvalue="JUnit.PessoaTest.cpfVazio" />
+        <item itemvalue="JUnit.CarroTest.desativarCarroDesativado" />
+        <item itemvalue="JUnit.CarroTest.ativaCarroAtivo" />
+        <item itemvalue="JUnit.CarroTest.carroNegativoInvalidaCriacao" />
+        <item itemvalue="JUnit.CarroTest.carroGratuitoInvalidaCriacao" />
+        <item itemvalue="JUnit.CarroTest.marcaVaziaInvalidaCriacao" />
       </list>
     </recent_temporary>
   </component>
@@ -235,6 +249,7 @@
     <MESSAGE value="Repositório Limpo" />
     <MESSAGE value="Fim da primeira parte dos testes" />
     <MESSAGE value="Fim da suite de testes de Periodo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fim da suite de testes de Periodo" />
+    <MESSAGE value="Alterações na classe Carro" />
+    <option name="LAST_COMMIT_MESSAGE" value="Alterações na classe Carro" />
   </component>
 </project>
