@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Ultima alteração na classe Pessoa">
+    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Fim da suite de testes de Periodo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Carro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Carro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/veículos.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pessoa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CarroTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CarroTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,11 +18,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="SimpleSourceFile" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="vinicius" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -51,35 +58,122 @@
     "Application.Carro.executor": "Run",
     "Application.Pessoa.executor": "Run",
     "Application.main.executor": "Run",
+    "JUnit.CarroTest.ativaCarroAtivo.executor": "Run",
+    "JUnit.CarroTest.ativarComSucesso.executor": "Run",
+    "JUnit.CarroTest.carroComMesmaPlacaSaoIguais.executor": "Run",
+    "JUnit.CarroTest.carroComPlacasDiferentesNaoSaoIguais.executor": "Run",
+    "JUnit.CarroTest.comparacaoComNuloOuOutroTipo.executor": "Run",
+    "JUnit.CarroTest.contratoHashCode.executor": "Run",
+    "JUnit.CarroTest.criacaoValida.executor": "Run",
+    "JUnit.CarroTest.desativarComSucesso.executor": "Run",
+    "JUnit.PeriodoTest.ContencaoEnvelopamento.executor": "Run",
+    "JUnit.PeriodoTest.PeriodoNuloNaoGeraExcecao.executor": "Run",
+    "JUnit.PeriodoTest.aEnvoltoemB.executor": "Run",
+    "JUnit.PeriodoTest.construcaoRecusaEstadoInicialInvalido.executor": "Run",
+    "JUnit.PeriodoTest.criacaoValida.executor": "Run",
+    "JUnit.PeriodoTest.executor": "Run",
+    "JUnit.PeriodoTest.inicialPosteriorfinal.executor": "Run",
+    "JUnit.PeriodoTest.retiraNaDevolucao.executor": "Run",
+    "JUnit.PeriodoTest.sobreposicaoDireita.executor": "Run",
+    "JUnit.PeriodoTest.sobreposicaoEsquerda.executor": "Run",
+    "JUnit.PeriodoTest.sobreposicaoInexistente.executor": "Run",
+    "JUnit.PessoaTest.comparacaoComNuloOuOutroTipo.executor": "Run",
+    "JUnit.PessoaTest.contratoHashCode.executor": "Run",
+    "JUnit.PessoaTest.cpfNulo.executor": "Run",
+    "JUnit.PessoaTest.cpfPossuiTamanhoCorreto.executor": "Run",
+    "JUnit.PessoaTest.cpfVazio.executor": "Run",
+    "JUnit.PessoaTest.creditarComSucesso.executor": "Run",
+    "JUnit.PessoaTest.creditarNegativo.executor": "Run",
+    "JUnit.PessoaTest.creditarValorZero.executor": "Run",
+    "JUnit.PessoaTest.criacaoValida.executor": "Run",
+    "JUnit.PessoaTest.debitarComSaldoInsuficiente.executor": "Run",
+    "JUnit.PessoaTest.debitarComSucesso.executor": "Run",
+    "JUnit.PessoaTest.debitarNegativo.executor": "Run",
+    "JUnit.PessoaTest.debitarValorZero.executor": "Run",
+    "JUnit.PessoaTest.pessoasComCpfDiferentesNaoSaoIguais.executor": "Run",
+    "JUnit.PessoaTest.pessoasComMesmoCpfSaoIguais.executor": "Run",
+    "JUnit.PessoaTest.saldoIgualValor.executor": "Run",
+    "JUnit.PessoaTest.saldoInvalidoLancaExcecao.executor": "Run",
+    "JUnit.PessoaTest.saldoMenorValor.executor": "Run",
+    "JUnit.PessoaTest.titularEhvazio.executor": "Run",
+    "JUnit.PessoaTest.titularNulo.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHELLCHECK.PATH": "I do mind",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "vinicius",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/vinnyx/POO/desafio1finalizado",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test/java" />
       <recent name="$PROJECT_DIR$/docs" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="Pessoa" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="UNNAMED_CLASS_CONFIGURATION" value="true" />
-      <option name="MAIN_CLASS_NAME" value="Pessoa" />
+  <component name="RunManager" selected="JUnit.CarroTest.comparacaoComNuloOuOutroTipo">
+    <configuration name="CarroTest.ativarComSucesso" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CarroTest" />
+      <option name="METHOD_NAME" value="ativarComSucesso" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CarroTest.carroComPlacasDiferentesNaoSaoIguais" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="plataforma-reservas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CarroTest" />
+      <option name="METHOD_NAME" value="carroComPlacasDiferentesNaoSaoIguais" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CarroTest.comparacaoComNuloOuOutroTipo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="plataforma-reservas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CarroTest" />
+      <option name="METHOD_NAME" value="comparacaoComNuloOuOutroTipo" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CarroTest.contratoHashCode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="plataforma-reservas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CarroTest" />
+      <option name="METHOD_NAME" value="contratoHashCode" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CarroTest.desativarComSucesso" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="plataforma-reservas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CarroTest" />
+      <option name="METHOD_NAME" value="desativarComSucesso" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Pessoa" />
+        <item itemvalue="JUnit.CarroTest.comparacaoComNuloOuOutroTipo" />
+        <item itemvalue="JUnit.CarroTest.contratoHashCode" />
+        <item itemvalue="JUnit.CarroTest.carroComPlacasDiferentesNaoSaoIguais" />
+        <item itemvalue="JUnit.CarroTest.desativarComSucesso" />
+        <item itemvalue="JUnit.CarroTest.ativarComSucesso" />
       </list>
     </recent_temporary>
   </component>
@@ -94,11 +188,48 @@
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="vinicius" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/vinicius" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -110,6 +241,9 @@
     <MESSAGE value="teste pessoa" />
     <MESSAGE value="Criação de get e set pessoa" />
     <MESSAGE value="Ultima alteração na classe Pessoa" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ultima alteração na classe Pessoa" />
+    <MESSAGE value="Repositório Limpo" />
+    <MESSAGE value="Fim da primeira parte dos testes" />
+    <MESSAGE value="Fim da suite de testes de Periodo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fim da suite de testes de Periodo" />
   </component>
 </project>

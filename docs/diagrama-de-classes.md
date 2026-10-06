@@ -19,12 +19,14 @@ classDiagram
       -int saldoEmCentavos
     }
     
-    class Veiculo {
-      -String placa
+    class Carro {
+      -String place
       -String cor
       -boolean arCondicionado
       -int precoEmCentavos
       -boolean ativo
+      -String marca
+      -String modelo
       +ativar()
       +desativar()
       +boolean estaAtivo()
@@ -45,6 +47,6 @@ classDiagram
     
     Reserva "1" *-- "1" Periodo : composição
     Reserva "0..*" --> "1" Pessoa : responsável
-    Reserva "0..*" --> "1" Veiculo : recurso
+    Reserva "0..*" --> "1" Carro : recurso
     Reserva "1" --> "1" StatusReserva : estado
 ```

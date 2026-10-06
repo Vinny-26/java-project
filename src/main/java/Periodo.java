@@ -8,9 +8,13 @@ public record Periodo(LocalDateTime inicio, LocalDateTime fim)
         {
             throw new IllegalArgumentException("Inicio e fim são obrigatórios.");
         }
-        if (inicio.isBefore(fim))
+        if (inicio.isAfter(fim))
         {
             throw new IllegalArgumentException("A data/hora inicial deve ser estritamente anterior à final.");
+        }
+        if (inicio.isEqual(fim))
+        {
+            throw new IllegalArgumentException("A duração da reserva deve ser estritamente maior do que 0 horas");
         }
     }
     public boolean temSobreposicao(Periodo outro)
