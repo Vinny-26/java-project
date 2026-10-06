@@ -69,7 +69,7 @@ public class Pessoa
         {
             if(!saldoSuficiente(valorEmCentavos))
             {
-                throw new IllegalArgumentException("Voce não possui saldo suficiente para efetuar a Reserva");
+                throw new IllegalArgumentException("Voce não possui saldo suficiente para efetuar a Reserva.java");
             }
             else
             {

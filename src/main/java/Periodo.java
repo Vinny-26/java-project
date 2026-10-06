@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public record Periodo(LocalDateTime inicio, LocalDateTime fim)
 {
@@ -25,6 +26,10 @@ public record Periodo(LocalDateTime inicio, LocalDateTime fim)
         }
         return this.inicio.isBefore(outro.fim()) && this.fim.isAfter(outro.inicio());
         // Retorna resultado do teste se inicio é depois do fim do outro e fim é antes do início do outro
+    }
+    public int diasDoPeriodo()
+    {
+        return (int) ChronoUnit.DAYS.between(this.inicio, this.fim);
     }
     LocalDateTime getPeriodo()
     {
