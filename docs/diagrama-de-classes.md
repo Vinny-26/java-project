@@ -17,6 +17,9 @@ classDiagram
       -String nome
       -String cpf
       -int saldoEmCentavos
+      +boolean saldoSuficiente
+      +debitar()
+      +creditar()
     }
     
     class Carro {
@@ -29,7 +32,6 @@ classDiagram
       -String modelo
       +ativar()
       +desativar()
-      +boolean estaAtivo()
     }
 
     class Periodo {
@@ -37,12 +39,14 @@ classDiagram
         +LocalDateTime inicio
         +LocalDateTime fim
         +temSobreposicao(outro: Periodo) boolean
+        +diasDoPeriodo(outro: Periodo) boolean
     }
 
     class Reserva {
       -int id
       -StatusReserva status
       +cancelar()
+      +concluir()
     }
     
     Reserva "1" *-- "1" Periodo : composição

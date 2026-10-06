@@ -7,10 +7,10 @@ documentação ou decisões.
 
 ### Uso
 
-- Data:
-- Ferramenta:
-- Objetivo:
-- Parte do projeto afetada:
-- Resultado aproveitado:
-- Verificações executadas:
-- Correções ou decisões da equipe:
+- Data: todo o ciclo do projeto
+- Ferramenta: Gemini
+- Objetivo: Corrigir bugs, aumentar a cobertura dos testes e revisar o código implementado pelos integrantes
+- Parte do projeto afetada: UML e arquivos de teste
+- Resultado aproveitado: Durante a implementação das classes iniciais, pudemos verificar alguns métodos faltantes e aumentar a cobertura dos testes
+- Verificações executadas: Todos os testes foram implementados pelos integrantes, utilizando a IA apenas para verificar partes do código que não foram testadas corretamente ou estavam com falso positivo
+- Correções ou decisões da equipe: Decidimos utilizar a IA apenas na verificação do código e cobertura dos testes.

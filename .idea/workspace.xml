@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Fim da suite de testes de Periodo">
-      <change afterPath="$PROJECT_DIR$/src/main/java/StatusReserva.java" afterDir="false" />
+    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Fim da classe Reserva e adição do método diasDoPeriodo na classe Periodo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Periodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Periodo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pessoa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Reserva.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reserva.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/IA_USAGE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/IA_USAGE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/decisoes.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/decisoes.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/diagrama-de-classes.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/diagrama-de-classes.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,17 +196,17 @@
             <list>
               <RecentGroup>
                 <option name="FILTER_VALUES">
+                  <option value="vinicius" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
                   <option value="origin/main" />
                 </option>
               </RecentGroup>
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="main" />
-                </option>
-              </RecentGroup>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="vinicius" />
                 </option>
               </RecentGroup>
             </list>
@@ -224,7 +224,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="vinicius" />
                       </list>
                     </value>
                   </entry>
@@ -245,6 +245,7 @@
     <MESSAGE value="Repositório Limpo" />
     <MESSAGE value="Fim da primeira parte dos testes" />
     <MESSAGE value="Fim da suite de testes de Periodo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fim da suite de testes de Periodo" />
+    <MESSAGE value="Fim da classe Reserva e adição do método diasDoPeriodo na classe Periodo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fim da classe Reserva e adição do método diasDoPeriodo na classe Periodo" />
   </component>
 </project>

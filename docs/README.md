@@ -9,8 +9,8 @@ README:
 
 ## Variante
 
-- Variante: Veículos
-- Regra específica: Um veículo só pode ser alugado por uma pessoa de cada vez, devemos utilizar um identificador único para cada veículo.
+- Variante: Carro
+- Regra específica: Um carro só pode ser alugado por uma pessoa de cada vez, devemos utilizar um identificador único para cada veículo.
 
 ## Diagrama de Classes
 
