@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CarroTest {
 
 @Test
-    void CriacaoValida()
+    void criacaoValida()
 {
     String placa = "A6EVBCD";
     String cor = "Azul";
@@ -19,9 +19,9 @@ class CarroTest {
 
     assertEquals(placa, carro.getPlaca());
     assertEquals(cor, carro.getCor());
-    assertEquals(arCondicionado, carro.getArCondicionado());
+    assertTrue(carro.getArCondicionado());
     assertEquals(precoEmCentavos, carro.getPrecoEmCentavos());
-    assertEquals(ativo, carro.getAtivo());
+    assertTrue(carro.getAtivo());
     assertEquals(marca, carro.getMarca());
     assertEquals(modelo, carro.getModelo());
 }
@@ -207,6 +207,116 @@ class CarroTest {
     }
 
     @Test
+    void carroComMesmaPlacaSaoIguais()
+    {
+        String placaA = "A6EVBCD";
+        String corA = "Azul";
+        boolean arCondicionadoA = true;
+        int precoEmCentavosA = 1000;
+        boolean ativoA = true;
+        String marcaA = "Hyundai";
+        String modeloA = "HB-20";
+
+        String placaB = "A6EVBCD";
+        String corB = "Vermelho";
+        boolean arCondicionadoB = true;
+        int precoEmCentavosB = 1500;
+        boolean ativoB = true;
+        String marcaB = "Hyundai";
+        String modeloB = "HB-20";
+
+        Carro carroA = new Carro(placaA, corA, arCondicionadoA, precoEmCentavosA, ativoA, marcaA, modeloA);
+        Carro carroB = new Carro(placaB, corB, arCondicionadoB, precoEmCentavosB, ativoB, marcaB, modeloB);
+
+        assertEquals(carroA, carroB);
+    }
+
+    @Test
+    void carroComPlacasDiferentesNaoSaoIguais()
+    {
+        String placaA = "A6EVBCD";
+        String corA = "Azul";
+        boolean arCondicionadoA = true;
+        int precoEmCentavosA = 1000;
+        boolean ativoA = true;
+        String marcaA = "Hyundai";
+        String modeloA = "HB-20";
+
+        String placaB = "A6EVBCT";
+        String corB = "Vermelho";
+        boolean arCondicionadoB = true;
+        int precoEmCentavosB = 1500;
+        boolean ativoB = true;
+        String marcaB = "Hyundai";
+        String modeloB = "HB-20";
+
+        Carro carroA = new Carro(placaA, corA, arCondicionadoA, precoEmCentavosA, ativoA, marcaA, modeloA);
+        Carro carroB = new Carro(placaB, corB, arCondicionadoB, precoEmCentavosB, ativoB, marcaB, modeloB);
+
+        assertNotEquals(carroA, carroB);
+    }
+
+    @Test
+    void contratoHashCode()
+    {
+        String placaA = "A6EVBCD";
+        String corA = "Azul";
+        boolean arCondicionadoA = true;
+        int precoEmCentavosA = 1000;
+        boolean ativoA = true;
+        String marcaA = "Hyundai";
+        String modeloA = "HB-20";
+
+        String placaB = "A6EVBCD";
+        String corB = "Vermelho";
+        boolean arCondicionadoB = true;
+        int precoEmCentavosB = 1500;
+        boolean ativoB = true;
+        String marcaB = "Hyundai";
+        String modeloB = "HB-20";
+
+        Carro carroA = new Carro(placaA, corA, arCondicionadoA, precoEmCentavosA, ativoA, marcaA, modeloA);
+        Carro carroB = new Carro(placaB, corB, arCondicionadoB, precoEmCentavosB, ativoB, marcaB, modeloB);
+
+        assertEquals(carroA.hashCode(), carroB.hashCode());
+    }
+
+    @Test
+    void comparacaoComNuloOuOutroTipo()
+    {
+        String placaA = "A6EVBCD";
+        String corA = "Azul";
+        boolean arCondicionadoA = true;
+        int precoEmCentavosA = 1000;
+        boolean ativoA = true;
+        String marcaA = "Hyundai";
+        String modeloA = "HB-20";
+
+        Carro carroA = new Carro(placaA, corA, arCondicionadoA, precoEmCentavosA, ativoA, marcaA, modeloA);
+
+        assertFalse(carroA.equals(null));
+        assertFalse(carroA.equals("String de teste"));
+    }
+
+    @Test
+    void ativarComSucesso()
+    {
+        String placa = "A6EVBCD";
+        String cor = "Azul";
+        boolean arCondicionado = true;
+        int precoEmCentavos = 1000;
+        boolean ativo = false;
+        String marca = "Hyundai";
+        String modelo = "HB-20";
+
+        Carro carro = new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo);
+
+        carro.ativar();
+
+        assertTrue(carro.getAtivo());
+    }
+
+    @Test
     void ativaCarroAtivo()
     {
         String placa = "A6EVBCD";
@@ -220,9 +330,27 @@ class CarroTest {
         Carro carro = new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo);
 
         assertThrows(
-                IllegalArgumentException.class,
+                IllegalStateException.class,
                 () -> carro.ativar()
         );
+    }
+
+    @Test
+    void desativarComSucesso()
+    {
+        String placa = "A6EVBCD";
+        String cor = "Azul";
+        boolean arCondicionado = true;
+        int precoEmCentavos = 1000;
+        boolean ativo = true;
+        String marca = "Hyundai";
+        String modelo = "HB-20";
+
+        Carro carro = new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo);
+
+        carro.desativar();
+
+        assertFalse(carro.getAtivo());
     }
 
     @Test
@@ -239,7 +367,7 @@ class CarroTest {
         Carro carro = new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo);
 
         assertThrows(
-                IllegalArgumentException.class,
+                IllegalStateException.class,
                 () -> carro.desativar()
         );
     }

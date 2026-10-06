@@ -7,6 +7,24 @@ public class Carro {
     private final String marca;
     private final String modelo;
 
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj) return true;
+
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Carro outro = (Carro) obj;
+
+        return this.placa.equals(outro.placa);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return java.util.Objects.hash(placa);
+    }
+
     // Construtor com todos os atributos
     public Carro(String placa, String cor, boolean arCondicionado, int precoEmCentavos, boolean status, String marca, String modelo) {
         if(placa == null || placa.isBlank())
@@ -74,14 +92,15 @@ public class Carro {
 
     public void ativar() {
         if (this.ativo) {
-            throw new IllegalArgumentException("O carro já está alugado!");
+            throw new IllegalStateException("O carro já está alugado!");
         }
         this.ativo = true;
     }
     public void desativar() {
         if (!this.ativo) {
-            throw new IllegalArgumentException("O carro já está disponível!");
+            throw new IllegalStateException("O carro já está disponível!");
         }
+        this.ativo = false;
         System.out.println("Carro devolvido com sucesso!");
     }
 

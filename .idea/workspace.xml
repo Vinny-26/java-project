@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Alterações na classe Carro">
-      <change afterPath="$PROJECT_DIR$/src/test/java/CarroTest.java" afterDir="false" />
+    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Fim da suite de testes de Periodo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/diagrama-de-classes.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/diagrama-de-classes.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Carro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Carro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Pessoa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CarroTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CarroTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +40,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Vinny-26/java-project.git&quot;,
-    &quot;accountId&quot;: &quot;7befff23-3654-4cd0-a0d5-bbd1c3e0be79&quot;
+    &quot;accountId&quot;: &quot;a5819eb8-a219-464d-8521-d9f722c61dc4&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -59,18 +58,14 @@
     "Application.Carro.executor": "Run",
     "Application.Pessoa.executor": "Run",
     "Application.main.executor": "Run",
-    "JUnit.CarroTest.CriacaoValida.executor": "Run",
     "JUnit.CarroTest.ativaCarroAtivo.executor": "Run",
-    "JUnit.CarroTest.carroGratuitoInvalidaCriacao.executor": "Run",
-    "JUnit.CarroTest.carroNegativoInvalidaCriacao.executor": "Run",
-    "JUnit.CarroTest.corNulaInvalidaCriacao.executor": "Run",
-    "JUnit.CarroTest.corVaziaInvalidaCriacao.executor": "Run",
-    "JUnit.CarroTest.desativarCarroDesativado.executor": "Run",
-    "JUnit.CarroTest.marcaNulaInvalidaCriacao.executor": "Run",
-    "JUnit.CarroTest.marcaVaziaInvalidaCriacao.executor": "Run",
-    "JUnit.CarroTest.placaInvalidaCriacao.executor": "Run",
-    "JUnit.CarroTest.placaNulaInvalidaCriacao.executor": "Run",
-    "JUnit.CarroTest.placaVaziaInvalidaCriacao.executor": "Run",
+    "JUnit.CarroTest.ativarComSucesso.executor": "Run",
+    "JUnit.CarroTest.carroComMesmaPlacaSaoIguais.executor": "Run",
+    "JUnit.CarroTest.carroComPlacasDiferentesNaoSaoIguais.executor": "Run",
+    "JUnit.CarroTest.comparacaoComNuloOuOutroTipo.executor": "Run",
+    "JUnit.CarroTest.contratoHashCode.executor": "Run",
+    "JUnit.CarroTest.criacaoValida.executor": "Run",
+    "JUnit.CarroTest.desativarComSucesso.executor": "Run",
     "JUnit.PeriodoTest.ContencaoEnvelopamento.executor": "Run",
     "JUnit.PeriodoTest.PeriodoNuloNaoGeraExcecao.executor": "Run",
     "JUnit.PeriodoTest.aEnvoltoemB.executor": "Run",
@@ -121,52 +116,52 @@
       <recent name="$PROJECT_DIR$/docs" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CarroTest.desativarCarroDesativado">
-    <configuration name="CarroTest.ativaCarroAtivo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.CarroTest.comparacaoComNuloOuOutroTipo">
+    <configuration name="CarroTest.ativarComSucesso" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="CarroTest" />
-      <option name="METHOD_NAME" value="ativaCarroAtivo" />
+      <option name="METHOD_NAME" value="ativarComSucesso" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CarroTest.carroGratuitoInvalidaCriacao" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CarroTest.carroComPlacasDiferentesNaoSaoIguais" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="CarroTest" />
-      <option name="METHOD_NAME" value="carroGratuitoInvalidaCriacao" />
+      <option name="METHOD_NAME" value="carroComPlacasDiferentesNaoSaoIguais" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CarroTest.carroNegativoInvalidaCriacao" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CarroTest.comparacaoComNuloOuOutroTipo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="CarroTest" />
-      <option name="METHOD_NAME" value="carroNegativoInvalidaCriacao" />
+      <option name="METHOD_NAME" value="comparacaoComNuloOuOutroTipo" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CarroTest.desativarCarroDesativado" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CarroTest.contratoHashCode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="CarroTest" />
-      <option name="METHOD_NAME" value="desativarCarroDesativado" />
+      <option name="METHOD_NAME" value="contratoHashCode" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CarroTest.marcaVaziaInvalidaCriacao" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CarroTest.desativarComSucesso" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="plataforma-reservas" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="CarroTest" />
-      <option name="METHOD_NAME" value="marcaVaziaInvalidaCriacao" />
+      <option name="METHOD_NAME" value="desativarComSucesso" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -174,11 +169,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CarroTest.desativarCarroDesativado" />
-        <item itemvalue="JUnit.CarroTest.ativaCarroAtivo" />
-        <item itemvalue="JUnit.CarroTest.carroNegativoInvalidaCriacao" />
-        <item itemvalue="JUnit.CarroTest.carroGratuitoInvalidaCriacao" />
-        <item itemvalue="JUnit.CarroTest.marcaVaziaInvalidaCriacao" />
+        <item itemvalue="JUnit.CarroTest.comparacaoComNuloOuOutroTipo" />
+        <item itemvalue="JUnit.CarroTest.contratoHashCode" />
+        <item itemvalue="JUnit.CarroTest.carroComPlacasDiferentesNaoSaoIguais" />
+        <item itemvalue="JUnit.CarroTest.desativarComSucesso" />
+        <item itemvalue="JUnit.CarroTest.ativarComSucesso" />
       </list>
     </recent_temporary>
   </component>
@@ -249,7 +244,6 @@
     <MESSAGE value="Repositório Limpo" />
     <MESSAGE value="Fim da primeira parte dos testes" />
     <MESSAGE value="Fim da suite de testes de Periodo" />
-    <MESSAGE value="Alterações na classe Carro" />
-    <option name="LAST_COMMIT_MESSAGE" value="Alterações na classe Carro" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fim da suite de testes de Periodo" />
   </component>
 </project>

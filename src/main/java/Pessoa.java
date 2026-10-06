@@ -42,7 +42,7 @@ public class Pessoa
         }
             this.titular = titular;
             this.saldoEmCentavos = saldoEmCentavos;
-            this.cpf = cpf; // reimplementar Equals usando cpf
+            this.cpf = cpf;
     }
 
     public String getTitular()
