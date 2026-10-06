@@ -19,3 +19,10 @@ Registre decisões que afetem o modelo, a API, as dependências ou a evolução.
 - Decisão: Criação de branch
 - Consequências: Organização da estrutura do projeto, trabalho em execução na branch do colaborador e trabalho concluído e testado na main
 - Teste ou evidência que verifica a decisão: Os erros diminuíram e os códigos voltaram a compilar normalmente, dividindo o trabalho de cada integrante e aumentando a produtividade
+
+- Data: 06/10
+- Problema observado: Necessidade de representar valores monetários (dinheiro) com precisão absoluta e sem erros de arredondamento
+- Alternativas consideradas: `BigDecimal` vs. `int` (valor expresso em centavos)
+- Decisão: Adoção de `int` representando a menor unidade monetária (centavos, ex: R$ 10,00 = 1000 centavos)
+- Consequências: Eliminação de imprecisões (comuns em `float`/`double`), simplificação das operações de débito e crédito (`+` e `-`), e código mais enxuto mantendo total precisão financeira para operações do escopo atual
+- Teste ou evidência que verifica a decisão: Testes unitários em `PessoaTest` e `ReservaTest` validando os débitos e saldos com exatidão

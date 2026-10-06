@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Fim da classe Reserva e adição do método diasDoPeriodo na classe Periodo">
-      <change afterPath="$PROJECT_DIR$/src/test/java/ReservaTest.java" afterDir="false" />
+    <list default="true" id="8d4fec55-d48f-4a96-9f07-ad6e0cf0bacd" name="Changes" comment="Finalização checkpoint 1, últimos testes implantados na classe Reserva">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Carro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Carro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/decisoes.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/decisoes.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,6 +101,7 @@
     "JUnit.ReservaTest.carroInativoLancaExcecao.executor": "Run",
     "JUnit.ReservaTest.carroNuloLancaExcecao.executor": "Run",
     "JUnit.ReservaTest.concluirComSucesso.executor": "Run",
+    "JUnit.ReservaTest.concluirReservaCanceladaLancaExcecao.executor": "Run",
     "JUnit.ReservaTest.concluirReservaJaConcluidaLancaExcecao.executor": "Run",
     "JUnit.ReservaTest.criacaoValida.executor": "Run",
     "JUnit.ReservaTest.idInvalidoLancaExcecao.executor": "Run",
@@ -276,6 +276,7 @@
     <MESSAGE value="Fim da primeira parte dos testes" />
     <MESSAGE value="Fim da suite de testes de Periodo" />
     <MESSAGE value="Fim da classe Reserva e adição do método diasDoPeriodo na classe Periodo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fim da classe Reserva e adição do método diasDoPeriodo na classe Periodo" />
+    <MESSAGE value="Finalização checkpoint 1, últimos testes implantados na classe Reserva" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finalização checkpoint 1, últimos testes implantados na classe Reserva" />
   </component>
 </project>
