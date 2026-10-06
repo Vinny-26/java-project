@@ -95,13 +95,14 @@ public class Carro {
             throw new IllegalStateException("O carro já está alugado!");
         }
         this.ativo = true;
+        System.out.println("Carro devolvido com sucesso!");
     }
     public void desativar() {
         if (!this.ativo) {
             throw new IllegalStateException("O carro já está disponível!");
         }
         this.ativo = false;
-        System.out.println("Carro devolvido com sucesso!");
+        System.out.println("Carro reservado com sucesso!");
     }
 
 }

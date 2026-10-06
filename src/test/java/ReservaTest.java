@@ -1,0 +1,129 @@
+import org.junit.jupiter.api.BeforeEach;
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class ReservaTest {
+
+    private Pessoa pessoaValida;
+    private Carro carroValido;
+    private Periodo periodoValido;
+
+    @BeforeEach
+    void setUp()
+    {
+        pessoaValida = new Pessoa("Vinícius", 10000, "11111111111");
+        carroValido = new Carro("A6EVBCD", "Azul", true, 1000, true, "Hyundai", "HB-20");
+        periodoValido = new Periodo(LocalDateTime.now(), LocalDateTime.now().plusDays(2));
+    }
+
+    @Test
+    void criacaoValida()
+    {
+        Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
+
+        assertEquals(1, reserva.getId());
+        assertEquals(periodoValido, reserva.getPeriodo());
+        assertEquals(pessoaValida, reserva.getPessoa());
+        assertEquals(carroValido, reserva.getCarro());
+        assertEquals(StatusReserva.CRIADA,reserva.getStatus());
+        assertEquals(8000,pessoaValida.getSaldoEmCentavos());
+    }
+
+    @Test
+    void idInvalidoLancaExcecao() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Reserva (-1, periodoValido, pessoaValida, carroValido)
+        );
+    }
+
+    @Test
+    void periodoNuloLancaExcecao() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Reserva (1, null, pessoaValida, carroValido)
+        );
+    }
+
+    @Test
+    void pessoaNulaLancaExcecao() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Reserva (1, periodoValido, null, carroValido)
+        );
+    }
+
+    @Test
+    void carroNuloLancaExcecao() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Reserva (1, periodoValido, pessoaValida, null)
+        );
+    }
+
+    @Test
+    void carroInativoLancaExcecao() {
+        carroValido.desativar();
+        assertThrows(IllegalStateException.class,
+                () -> new Reserva (1, periodoValido, pessoaValida, carroValido)
+        );
+    }
+
+    @Test
+    void saldoInsuficienteLancaExcecao() {
+        pessoaValida = new Pessoa("Vinícius", 100, "11111111111");
+        assertThrows(IllegalArgumentException.class,
+                () -> new Reserva (1, periodoValido, pessoaValida, carroValido)
+        );
+    }
+
+    // ==========================================
+    // 2. TRANSIÇÕES DE ESTADO (MÁQUINA DE ESTADOS)
+    // ==========================================
+
+    @Test
+    void cancelarComSucesso() {
+        Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        reserva.cancelar();
+        assertEquals(StatusReserva.CANCELADA, reserva.getStatus());
+    }
+
+    @Test
+    void concluirComSucesso() {
+        Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        reserva.concluir();
+        assertEquals(StatusReserva.CONCLUIDA, reserva.getStatus());
+    }
+
+    @Test
+    void cancelarReservaJaCanceladaLancaExcecao() {
+        Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        reserva.cancelar();
+        assertThrows(IllegalStateException.class,
+                () -> reserva.cancelar());
+    }
+
+    @Test
+    void cancelarReservaConcluidaLancaExcecao() {
+        Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        reserva.concluir();
+        assertThrows(IllegalStateException.class,
+                () -> reserva.cancelar());
+    }
+
+    @Test
+    void concluirReservaJaConcluidaLancaExcecao() {
+        Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        reserva.concluir();
+        assertThrows(IllegalStateException.class,
+                () -> reserva.concluir());
+    }
+
+    @Test
+    void concluirReservaCanceladaLancaExcecao() {
+        Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        reserva.cancelar();
+        assertThrows(IllegalStateException.class,
+                () -> reserva.concluir());
+    }
+}
+
