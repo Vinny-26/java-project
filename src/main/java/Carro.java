@@ -46,6 +46,7 @@ public class Carro {
         {
             throw new DadosInvalidosException("Não é possível cadastrar carro com modelo nulo ou vazio");
         }
+        placa = placa.trim().toUpperCase();
         if(placa.length() != 7)
         {
             throw new DadosInvalidosException("A placa do carro deve conter exatamente 7 caracteres");
@@ -54,7 +55,6 @@ public class Carro {
         {
             throw new DadosInvalidosException("Não é possível cadastrar carro com valor menor ou igual a 0");
         }
-        placa = placa.trim().toUpperCase();
         this.placa = placa;
         this.cor = cor; // Estudar possível enum
         this.arCondicionado = arCondicionado;
@@ -70,13 +70,13 @@ public class Carro {
     public String getCor() {
         return cor;
     }
-    public boolean getArCondicionado() {
+    public boolean hasArCondicionado() {
         return arCondicionado;
     }
     public int getPrecoEmCentavos() {
         return precoEmCentavos;
     }
-    public boolean getAtivo() {
+    public boolean isAtivo() {
         return ativo;
     }
     public String getMarca() {
@@ -87,6 +87,8 @@ public class Carro {
     }
 
     public void setCor(String cor) {
+        if(cor == null || cor.isBlank())
+            throw new DadosInvalidosException("Não é possível alterar a cor do carro para null ou vazia!");
         this.cor = cor;
     }
     public void setArCondicionado(boolean arCondicionado) {
@@ -95,17 +97,14 @@ public class Carro {
 
     public void ativar() {
         if (this.ativo) {
-            throw new EstadoInvalidoException("O carro já está alugado!");
+            throw new EstadoInvalidoException("O carro já está ativo no sistema!");
         }
         this.ativo = true;
-        System.out.println("Carro devolvido com sucesso!");
     }
     public void desativar() {
         if (!this.ativo) {
-            throw new EstadoInvalidoException("O carro já está disponível!");
+            throw new EstadoInvalidoException("O carro já está inativo no sistema!");
         }
         this.ativo = false;
-        System.out.println("Carro reservado com sucesso!");
     }
-
 }

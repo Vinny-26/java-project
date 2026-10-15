@@ -21,9 +21,9 @@ class CarroTest {
 
     assertEquals(placa, carro.getPlaca());
     assertEquals(cor, carro.getCor());
-    assertTrue(carro.getArCondicionado());
+    assertTrue(carro.hasArCondicionado());
     assertEquals(precoEmCentavos, carro.getPrecoEmCentavos());
-    assertTrue(carro.getAtivo());
+    assertTrue(carro.isAtivo());
     assertEquals(marca, carro.getMarca());
     assertEquals(modelo, carro.getModelo());
 }
@@ -301,6 +301,60 @@ class CarroTest {
     }
 
     @Test
+    void setCorValido()
+    {
+        String placa = "A6EVBCD";
+        String cor = "Azul";
+        boolean arCondicionado = true;
+        int precoEmCentavos = 1000;
+        boolean ativo = false;
+        String marca = "Hyundai";
+        String modelo = "HB-20";
+
+        Carro carro = new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo);
+        carro.setCor("Amarelo");
+        assertEquals("Amarelo", carro.getCor());
+    }
+
+    @Test
+    void setCorNula()
+    {
+        String placa = "A6EVBCD";
+        String cor = "Azul";
+        boolean arCondicionado = true;
+        int precoEmCentavos = 1000;
+        boolean ativo = false;
+        String marca = "Hyundai";
+        String modelo = "HB-20";
+
+        Carro carro = new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo);
+
+        assertThrows(
+                DadosInvalidosException.class,
+                () -> carro.setCor(null)
+        );
+    }
+
+    @Test
+    void setCorVazia()
+    {
+        String placa = "A6EVBCD";
+        String cor = "Azul";
+        boolean arCondicionado = true;
+        int precoEmCentavos = 1000;
+        boolean ativo = false;
+        String marca = "Hyundai";
+        String modelo = "HB-20";
+
+        Carro carro = new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo);
+
+        assertThrows(
+                DadosInvalidosException.class,
+                () -> carro.setCor(" ")
+        );
+    }
+
+    @Test
     void ativarComSucesso()
     {
         String placa = "A6EVBCD";
@@ -315,7 +369,7 @@ class CarroTest {
 
         carro.ativar();
 
-        assertTrue(carro.getAtivo());
+        assertTrue(carro.isAtivo());
     }
 
     @Test
@@ -352,7 +406,7 @@ class CarroTest {
 
         carro.desativar();
 
-        assertFalse(carro.getAtivo());
+        assertFalse(carro.isAtivo());
     }
 
     @Test
