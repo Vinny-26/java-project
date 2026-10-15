@@ -1,3 +1,8 @@
+import excecoes.CreditoInsuficienteException;
+import excecoes.DadosInvalidosException;
+import excecoes.EstadoInvalidoException;
+import excecoes.SaldoInsuficienteException;
+
 public class Pessoa
 {
     private final String titular;
@@ -26,19 +31,19 @@ public class Pessoa
     {
         if(titular == null || titular.isBlank())
         {
-            throw new IllegalArgumentException("O nome do titular deve estar preenchido e não pode ser nulo");
+            throw new DadosInvalidosException("O nome do titular deve estar preenchido e não pode ser nulo");
         }
         if(cpf == null || cpf.isBlank())
         {
-            throw new IllegalArgumentException("O cpf do titular deve estar preenchido e não pode ser nulo");
+            throw new DadosInvalidosException("O cpf do titular deve estar preenchido e não pode ser nulo");
         }
         if(cpf.length() != 11)
         {
-            throw new IllegalArgumentException("O cpf do titular deve conter apenas 11 digitos");
+            throw new DadosInvalidosException("O cpf do titular deve conter apenas 11 digitos");
         }
         if(saldoEmCentavos <= 0)
         {
-            throw new IllegalArgumentException("O saldo do titular não pode ser menor ou igual a 0");
+            throw new DadosInvalidosException("O saldo do titular não pode ser menor ou igual a 0");
         }
             this.titular = titular;
             this.saldoEmCentavos = saldoEmCentavos;
@@ -69,7 +74,7 @@ public class Pessoa
         {
             if(!saldoSuficiente(valorEmCentavos))
             {
-                throw new IllegalArgumentException("Voce não possui saldo suficiente para efetuar a Reserva.java");
+                throw new SaldoInsuficienteException("Voce não possui saldo suficiente para efetuar a Reserva.java");
             }
             else
             {
@@ -78,7 +83,7 @@ public class Pessoa
         }
         else
         {
-            throw new IllegalArgumentException("Não é possível debitar um valor negativo");
+            throw new EstadoInvalidoException("Não é possível debitar um valor negativo");
         }
     }
     public void creditar(int valorEmCentavos)
@@ -89,7 +94,7 @@ public class Pessoa
         }
         else
         {
-            throw new IllegalArgumentException("Não é possível creditar valor negativo");
+            throw new EstadoInvalidoException("Não é possível creditar valor negativo");
         }
     }
 }

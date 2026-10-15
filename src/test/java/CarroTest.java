@@ -1,3 +1,5 @@
+import excecoes.DadosInvalidosException;
+import excecoes.EstadoInvalidoException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,7 +40,7 @@ class CarroTest {
         String modelo = "HB-20";
 
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
         );
     }
@@ -55,7 +57,7 @@ class CarroTest {
         String modelo = "HB-20";
 
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
         );
     }
@@ -70,7 +72,7 @@ class CarroTest {
         String marca = "Hyundai";
         String modelo = "HB-20";
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
         );
     }
@@ -87,7 +89,7 @@ class CarroTest {
         String modelo = "HB-20";
 
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
         );
     }
@@ -103,7 +105,7 @@ class CarroTest {
         String marca = "Hyundai";
         String modelo = "HB-20";
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
         );
     }
@@ -120,7 +122,7 @@ class CarroTest {
         String modelo = "HB-20";
 
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
         );
     }
@@ -136,7 +138,7 @@ class CarroTest {
         String marca = " ";
         String modelo = "HB-20";
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
         );
     }
@@ -153,7 +155,7 @@ class CarroTest {
         String modelo = null;
 
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
         );
     }
@@ -169,7 +171,7 @@ class CarroTest {
         String marca = "Hyundai";
         String modelo = " ";
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
         );
     }
@@ -185,7 +187,7 @@ class CarroTest {
         String marca = "Hyundai";
         String modelo = "HB-20";
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
         );
     }
@@ -201,7 +203,7 @@ class CarroTest {
         String marca = "Hyundai";
         String modelo = "HB-20";
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
         );
     }
@@ -330,7 +332,7 @@ class CarroTest {
         Carro carro = new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo);
 
         assertThrows(
-                IllegalStateException.class,
+                EstadoInvalidoException.class,
                 () -> carro.ativar()
         );
     }
@@ -367,7 +369,7 @@ class CarroTest {
         Carro carro = new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo);
 
         assertThrows(
-                IllegalStateException.class,
+                EstadoInvalidoException.class,
                 () -> carro.desativar()
         );
     }

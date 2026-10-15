@@ -1,3 +1,6 @@
+import excecoes.DadosInvalidosException;
+import excecoes.EstadoInvalidoException;
+import excecoes.SaldoInsuficienteException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,7 +30,7 @@ class PessoaTest
         String cpf = "11111111111";
 
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Pessoa(titular, saldoEmCentavos, cpf)
         );
     }
@@ -39,7 +42,7 @@ class PessoaTest
         int saldoEmCentavos = 1000;
         String cpf = "11111111111";
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Pessoa(titular, saldoEmCentavos, cpf)
         );
     }
@@ -52,7 +55,7 @@ class PessoaTest
         String cpf = null;
 
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Pessoa(titular, saldoEmCentavos, cpf)
         );
     }
@@ -65,7 +68,7 @@ class PessoaTest
         String cpf = " ";
 
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Pessoa(titular, saldoEmCentavos, cpf)
         );
     }
@@ -77,7 +80,7 @@ class PessoaTest
         int saldoEmCentavos = 1000;
         String cpf = "111.111.111-11111";
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Pessoa(titular, saldoEmCentavos, cpf)
         );
     }
@@ -89,7 +92,7 @@ class PessoaTest
         int saldoEmCentavos = -1;
         String cpf = "11111111111";
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Pessoa(titular, saldoEmCentavos, cpf)
         );
     }
@@ -213,7 +216,7 @@ class PessoaTest
         int valorEmCentavos = 0;
 
         assertThrows(
-                IllegalArgumentException.class,
+                EstadoInvalidoException.class,
                 () -> pessoa.debitar(valorEmCentavos)
         );
     }
@@ -244,7 +247,7 @@ class PessoaTest
         int valorEmCentavos = -200;
 
         assertThrows(
-                IllegalArgumentException.class,
+                EstadoInvalidoException.class,
                 () -> pessoa.debitar(valorEmCentavos)
         );
     }
@@ -260,7 +263,7 @@ class PessoaTest
         int valorEmCentavos = 1000;
 
         assertThrows(
-                IllegalArgumentException.class,
+                SaldoInsuficienteException.class,
                 () -> pessoa.debitar(valorEmCentavos)
         );
     }
@@ -278,7 +281,7 @@ class PessoaTest
         int valorEmCentavos = 0;
 
         assertThrows(
-                IllegalArgumentException.class,
+                EstadoInvalidoException.class,
                 () -> pessoa.creditar(valorEmCentavos)
         );
     }
@@ -309,7 +312,7 @@ class PessoaTest
         int valorEmCentavos = -200;
 
         assertThrows(
-                IllegalArgumentException.class,
+                EstadoInvalidoException.class,
                 () -> pessoa.creditar(valorEmCentavos)
         );
     }

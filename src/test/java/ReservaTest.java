@@ -1,3 +1,7 @@
+import excecoes.DadosInvalidosException;
+import excecoes.EstadoInvalidoException;
+import excecoes.SaldoInsuficienteException;
+import excecoes.SobreposicaoPeriodoException;
 import org.junit.jupiter.api.BeforeEach;
 import java.time.LocalDateTime;
 
@@ -34,28 +38,28 @@ class ReservaTest {
 
     @Test
     void idInvalidoLancaExcecao() {
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(DadosInvalidosException.class,
                 () -> new Reserva (-1, periodoValido, pessoaValida, carroValido)
         );
     }
 
     @Test
     void periodoNuloLancaExcecao() {
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(DadosInvalidosException.class,
                 () -> new Reserva (1, null, pessoaValida, carroValido)
         );
     }
 
     @Test
     void pessoaNulaLancaExcecao() {
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(DadosInvalidosException.class,
                 () -> new Reserva (1, periodoValido, null, carroValido)
         );
     }
 
     @Test
     void carroNuloLancaExcecao() {
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(DadosInvalidosException.class,
                 () -> new Reserva (1, periodoValido, pessoaValida, null)
         );
     }
@@ -63,7 +67,7 @@ class ReservaTest {
     @Test
     void carroInativoLancaExcecao() {
         carroValido.desativar();
-        assertThrows(IllegalStateException.class,
+        assertThrows(SobreposicaoPeriodoException.class,
                 () -> new Reserva (1, periodoValido, pessoaValida, carroValido)
         );
     }
@@ -71,7 +75,7 @@ class ReservaTest {
     @Test
     void saldoInsuficienteLancaExcecao() {
         pessoaValida = new Pessoa("Vinícius", 100, "11111111111");
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(SaldoInsuficienteException.class,
                 () -> new Reserva (1, periodoValido, pessoaValida, carroValido)
         );
     }
@@ -98,7 +102,7 @@ class ReservaTest {
     void cancelarReservaJaCanceladaLancaExcecao() {
         Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
         reserva.cancelar();
-        assertThrows(IllegalStateException.class,
+        assertThrows(EstadoInvalidoException.class,
                 () -> reserva.cancelar());
     }
 
@@ -106,7 +110,7 @@ class ReservaTest {
     void cancelarReservaConcluidaLancaExcecao() {
         Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
         reserva.concluir();
-        assertThrows(IllegalStateException.class,
+        assertThrows(EstadoInvalidoException.class,
                 () -> reserva.cancelar());
     }
 
@@ -114,7 +118,7 @@ class ReservaTest {
     void concluirReservaJaConcluidaLancaExcecao() {
         Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
         reserva.concluir();
-        assertThrows(IllegalStateException.class,
+        assertThrows(EstadoInvalidoException.class,
                 () -> reserva.concluir());
     }
 
@@ -122,7 +126,7 @@ class ReservaTest {
     void concluirReservaCanceladaLancaExcecao() {
         Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
         reserva.cancelar();
-        assertThrows(IllegalStateException.class,
+        assertThrows(EstadoInvalidoException.class,
                 () -> reserva.concluir());
     }
 }

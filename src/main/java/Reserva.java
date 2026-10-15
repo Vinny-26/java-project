@@ -1,3 +1,7 @@
+import excecoes.DadosInvalidosException;
+import excecoes.EstadoInvalidoException;
+import excecoes.SobreposicaoPeriodoException;
+
 public class Reserva {
     private int id;
     private StatusReserva status; //Enum (Guarda 1 de 3 opções "CANCELADA, CRIADA E CONCLUIDA")
@@ -9,11 +13,11 @@ public Reserva(int id, Periodo periodo, Pessoa pessoa, Carro carro)
 {
     if( id <= 0 || periodo == null || pessoa == null || carro == null)
     {
-        throw new IllegalArgumentException("Não é possível criar Reserva com dados inválidos");
+        throw new DadosInvalidosException("Não é possível criar Reserva com dados inválidos");
     }
     if (!carro.getAtivo())
     {
-        throw new IllegalStateException("Não é possível criar a reserva, o carro está inativo");
+        throw new SobreposicaoPeriodoException("Não é possível criar a reserva, o carro está inativo");
     }
 
     int custoTotal = carro.getPrecoEmCentavos() * periodo.diasDoPeriodo();
@@ -30,7 +34,7 @@ public Reserva(int id, Periodo periodo, Pessoa pessoa, Carro carro)
 public void cancelar() {
     if (this.status != StatusReserva.CRIADA)
     {
-        throw new IllegalStateException("Apenas reservas com status CRIADA podem ser canceladas.");
+        throw new EstadoInvalidoException("Apenas reservas com status CRIADA podem ser canceladas.");
     }
     this.status = StatusReserva.CANCELADA;
 }
@@ -38,7 +42,7 @@ public void cancelar() {
 public void concluir() {
     if (this.status != StatusReserva.CRIADA)
     {
-        throw new IllegalStateException("Apenas reservas com status CRIADA podem ser concluídas.");
+        throw new EstadoInvalidoException("Apenas reservas com status CRIADA podem ser concluídas.");
     }
     this.status = StatusReserva.CONCLUIDA;
 

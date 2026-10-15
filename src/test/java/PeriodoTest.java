@@ -1,3 +1,5 @@
+import excecoes.DadosInvalidosException;
+import excecoes.SobreposicaoPeriodoException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -25,7 +27,7 @@ class PeriodoTest {
         LocalDateTime fim = LocalDateTime.of(2026, 10, 10, 8, 0);
 
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Periodo(inicio, fim));
     }
 
@@ -36,7 +38,7 @@ class PeriodoTest {
         LocalDateTime fim = LocalDateTime.of(2026, 10, 10, 10, 0);
 
         assertThrows(
-                IllegalArgumentException.class,
+                SobreposicaoPeriodoException.class,
                 () -> new Periodo(inicio, fim));
     }
 
@@ -47,7 +49,7 @@ class PeriodoTest {
         LocalDateTime fim = LocalDateTime.of(2026, 10, 10, 8, 0);
 
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Periodo(inicio, fim)
         );
     }
@@ -59,7 +61,7 @@ class PeriodoTest {
         LocalDateTime fim = null;
 
         assertThrows(
-                IllegalArgumentException.class,
+                DadosInvalidosException.class,
                 () -> new Periodo(inicio, fim)
         );
     }

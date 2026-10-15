@@ -1,3 +1,6 @@
+import excecoes.DadosInvalidosException;
+import excecoes.EstadoInvalidoException;
+
 public class Carro {
     private String placa;
     private String cor;
@@ -29,27 +32,27 @@ public class Carro {
     public Carro(String placa, String cor, boolean arCondicionado, int precoEmCentavos, boolean status, String marca, String modelo) {
         if(placa == null || placa.isBlank())
         {
-            throw new IllegalArgumentException("A placa do carro não pode ser nula ou vazia");
+            throw new DadosInvalidosException("A placa do carro não pode ser nula ou vazia");
         }
         if(cor == null || cor.isBlank())
         {
-            throw new IllegalArgumentException("Não é possível inserir carro com cor nula ou vazia");
+            throw new DadosInvalidosException("Não é possível inserir carro com cor nula ou vazia");
         }
         if(marca == null || marca.isBlank())
         {
-            throw new IllegalArgumentException("Não é possível cadastrar carro com marca nula ou vazia");
+            throw new DadosInvalidosException("Não é possível cadastrar carro com marca nula ou vazia");
         }
         if (modelo == null || modelo.isBlank())
         {
-            throw new IllegalArgumentException("Não é possível cadastrar carro com modelo nulo ou vazio");
+            throw new DadosInvalidosException("Não é possível cadastrar carro com modelo nulo ou vazio");
         }
         if(placa.length() != 7)
         {
-            throw new IllegalArgumentException("A placa do carro deve conter exatamente 7 caracteres");
+            throw new DadosInvalidosException("A placa do carro deve conter exatamente 7 caracteres");
         }
         if(precoEmCentavos <= 0)
         {
-            throw new IllegalArgumentException("Não é possível cadastrar carro com valor menor ou igual a 0");
+            throw new DadosInvalidosException("Não é possível cadastrar carro com valor menor ou igual a 0");
         }
         placa = placa.trim().toUpperCase();
         this.placa = placa;
@@ -92,14 +95,14 @@ public class Carro {
 
     public void ativar() {
         if (this.ativo) {
-            throw new IllegalStateException("O carro já está alugado!");
+            throw new EstadoInvalidoException("O carro já está alugado!");
         }
         this.ativo = true;
         System.out.println("Carro devolvido com sucesso!");
     }
     public void desativar() {
         if (!this.ativo) {
-            throw new IllegalStateException("O carro já está disponível!");
+            throw new EstadoInvalidoException("O carro já está disponível!");
         }
         this.ativo = false;
         System.out.println("Carro reservado com sucesso!");
