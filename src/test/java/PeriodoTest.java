@@ -38,7 +38,7 @@ class PeriodoTest {
         LocalDateTime fim = LocalDateTime.of(2026, 10, 10, 10, 0);
 
         assertThrows(
-                SobreposicaoPeriodoException.class,
+                DadosInvalidosException.class,
                 () -> new Periodo(inicio, fim));
     }
 

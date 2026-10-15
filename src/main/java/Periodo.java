@@ -13,13 +13,9 @@ public record Periodo(LocalDateTime inicio, LocalDateTime fim)
         {
             throw new DadosInvalidosException("Inicio e fim são obrigatórios.");
         }
-        if (inicio.isAfter(fim))
+        if (!inicio.isBefore(fim))
         {
             throw new DadosInvalidosException("A data/hora inicial deve ser estritamente anterior à final.");
-        }
-        if (inicio.isEqual(fim))
-        {
-            throw new SobreposicaoPeriodoException("A duração da reserva deve ser estritamente maior do que 0 horas");
         }
     }
     public boolean temSobreposicao(Periodo outro)
@@ -31,13 +27,16 @@ public record Periodo(LocalDateTime inicio, LocalDateTime fim)
         return this.inicio.isBefore(outro.fim()) && this.fim.isAfter(outro.inicio());
         // Retorna resultado do teste se inicio é antes do fim do outro e fim é depois do início do outro
     }
+
+    public void validarSemSobreposicao(Periodo outro) {
+        if (temSobreposicao(outro)) {
+            throw new SobreposicaoPeriodoException("O período informado se sobrepõe a um período já existente.");
+        }
+    }
+
     public int diasDoPeriodo()
     {
         int dias = (int) ChronoUnit.DAYS.between(this.inicio, this.fim);
         return Math.max(1, dias);
-    }
-    public LocalDateTime getPeriodo()
-    {
-        return this.inicio;
     }
 }
