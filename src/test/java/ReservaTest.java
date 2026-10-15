@@ -129,5 +129,42 @@ class ReservaTest {
         assertThrows(EstadoInvalidoException.class,
                 () -> reserva.concluir());
     }
+
+    @Test
+    void reservaMesmoIdSaoIguais()
+    {
+        Reserva reservaA = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        Reserva reservaB = new Reserva(1, periodoValido, pessoaValida, carroValido);
+
+        assertEquals(reservaA, reservaB);
+    }
+
+    @Test
+    void reservaIdDiferentesNaoSaoIguais()
+    {
+        Reserva reservaA = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        Reserva reservaB = new Reserva(3, periodoValido, pessoaValida, carroValido);
+
+        assertNotEquals(reservaA, reservaB);
+    }
+
+    @Test
+    void contratoHashCode()
+    {
+        Reserva reservaA = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        Reserva reservaB = new Reserva(1, periodoValido, pessoaValida, carroValido);
+
+        assertEquals(reservaA.hashCode(), reservaB.hashCode());
+    }
+
+    @Test
+    void comparacaoComNuloOuOutroTipo()
+    {
+        Reserva reservaA = new Reserva(1, periodoValido, pessoaValida, carroValido);
+
+        assertFalse(reservaA.equals(null));
+        assertFalse(reservaA.equals("String de teste"));
+    }
+
 }
 

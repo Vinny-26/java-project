@@ -1,13 +1,13 @@
 import excecoes.DadosInvalidosException;
 import excecoes.EstadoInvalidoException;
-import excecoes.SobreposicaoPeriodoException;
+import java.util.Objects;
 
 public class Reserva {
-    private int id;
+    private final int id;
     private StatusReserva status; //Enum (Guarda 1 de 3 opções "CANCELADA, CRIADA E CONCLUIDA")
-    private Periodo periodo; //Record composição (guarda as datas de início e fim da resrva)
-    private Pessoa pessoa; //Associação (classe pessoa/responsável)
-    private Carro carro; //Associação (classe recurso)
+    private final Periodo periodo; //Record composição (guarda as datas de início e fim da resrva)
+    private final Pessoa pessoa; //Associação (classe pessoa/responsável)
+    private final Carro carro; //Associação (classe recurso)
 
 public Reserva(int id, Periodo periodo, Pessoa pessoa, Carro carro)
 {
@@ -15,14 +15,12 @@ public Reserva(int id, Periodo periodo, Pessoa pessoa, Carro carro)
     {
         throw new DadosInvalidosException("Não é possível criar Reserva com dados inválidos");
     }
-    if (!carro.getAtivo())
+    if (!carro.isAtivo())
     {
-        throw new SobreposicaoPeriodoException("Não é possível criar a reserva, o carro está inativo");
+        throw new EstadoInvalidoException("Não é possível criar a reserva, o carro está inativo");
     }
 
-    int custoTotal = carro.getPrecoEmCentavos() * periodo.diasDoPeriodo();
-
-    pessoa.debitar(custoTotal);
+    pessoa.debitar(calcularCustoTotal(carro, periodo));
 
     this.id = id;
     this.periodo = periodo;
@@ -31,11 +29,17 @@ public Reserva(int id, Periodo periodo, Pessoa pessoa, Carro carro)
     this.status = StatusReserva.CRIADA; //Iniciar o status como criada ;)
 }
 
+    private int calcularCustoTotal(Carro carro, Periodo periodo)
+    {
+        return carro.getPrecoEmCentavos() * periodo.diasDoPeriodo();
+    }
+
 public void cancelar() {
     if (this.status != StatusReserva.CRIADA)
     {
         throw new EstadoInvalidoException("Apenas reservas com status CRIADA podem ser canceladas.");
     }
+    pessoa.creditar(calcularCustoTotal(carro, periodo));
     this.status = StatusReserva.CANCELADA;
 }
 
@@ -53,4 +57,20 @@ public StatusReserva getStatus() {return status; }
 public Periodo getPeriodo() {return periodo; }
 public Pessoa getPessoa() {return pessoa; }
 public Carro getCarro() {return carro; }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Reserva outra = (Reserva) obj;
+        return this.id == outra.id;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(id);
+    }
+
 }
