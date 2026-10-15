@@ -216,7 +216,7 @@ class PessoaTest
         int valorEmCentavos = 0;
 
         assertThrows(
-                EstadoInvalidoException.class,
+                DadosInvalidosException.class,
                 () -> pessoa.debitar(valorEmCentavos)
         );
     }
@@ -247,7 +247,7 @@ class PessoaTest
         int valorEmCentavos = -200;
 
         assertThrows(
-                EstadoInvalidoException.class,
+                DadosInvalidosException.class,
                 () -> pessoa.debitar(valorEmCentavos)
         );
     }
@@ -281,7 +281,7 @@ class PessoaTest
         int valorEmCentavos = 0;
 
         assertThrows(
-                EstadoInvalidoException.class,
+                DadosInvalidosException.class,
                 () -> pessoa.creditar(valorEmCentavos)
         );
     }
@@ -312,7 +312,7 @@ class PessoaTest
         int valorEmCentavos = -200;
 
         assertThrows(
-                EstadoInvalidoException.class,
+                DadosInvalidosException.class,
                 () -> pessoa.creditar(valorEmCentavos)
         );
     }

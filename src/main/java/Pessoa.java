@@ -1,17 +1,14 @@
-import excecoes.CreditoInsuficienteException;
 import excecoes.DadosInvalidosException;
 import excecoes.EstadoInvalidoException;
 import excecoes.SaldoInsuficienteException;
 
-public class Pessoa
-{
+public class Pessoa {
     private final String titular;
     private int saldoEmCentavos;
     private final String cpf;
 
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (this == obj) return true;
 
         if (obj == null || getClass() != obj.getClass()) return false;
@@ -22,69 +19,52 @@ public class Pessoa
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return java.util.Objects.hash(cpf);
     }
 
-    public Pessoa(String titular, int saldoEmCentavos, String cpf)
-    {
-        if(titular == null || titular.isBlank())
-        {
+    public Pessoa(String titular, int saldoEmCentavos, String cpf) {
+        if (titular == null || titular.isBlank()) {
             throw new DadosInvalidosException("O nome do titular deve estar preenchido e não pode ser nulo");
         }
-        if(cpf == null || cpf.isBlank())
-        {
+        if (cpf == null || cpf.isBlank()) {
             throw new DadosInvalidosException("O cpf do titular deve estar preenchido e não pode ser nulo");
         }
-        if(cpf.length() != 11)
-        {
+        if (cpf.length() != 11) {
             throw new DadosInvalidosException("O cpf do titular deve conter apenas 11 digitos");
         }
-        if(saldoEmCentavos <= 0)
-        {
-            throw new DadosInvalidosException("O saldo do titular não pode ser menor ou igual a 0");
+        if (saldoEmCentavos < 0) {
+            throw new DadosInvalidosException("O saldo do titular não pode ser menor que 0");
         }
-            this.titular = titular;
-            this.saldoEmCentavos = saldoEmCentavos;
-            this.cpf = cpf;
+        this.titular = titular;
+        this.saldoEmCentavos = saldoEmCentavos;
+        this.cpf = cpf;
     }
 
-    public String getTitular()
-    {
+    public String getTitular() {
         return this.titular;
     }
-    public int getSaldoEmCentavos()
-    {
+
+    public int getSaldoEmCentavos() {
         return this.saldoEmCentavos;
     }
-    public String getCpf()
-    {
+
+    public String getCpf() {
         return this.cpf;
     }
 
-    boolean saldoSuficiente(int valorEmCentavos)
-    {
+    boolean saldoSuficiente(int valorEmCentavos) {
         return this.saldoEmCentavos >= valorEmCentavos;
     }
 
-    public void debitar(int valorEmCentavos)
-    {
-        if(valorEmCentavos > 0)
-        {
-            if(!saldoSuficiente(valorEmCentavos))
-            {
-                throw new SaldoInsuficienteException("Voce não possui saldo suficiente para efetuar a Reserva.java");
-            }
-            else
-            {
-                this.saldoEmCentavos -= valorEmCentavos;
-            }
+    public void debitar(int valorEmCentavos) {
+        if (valorEmCentavos <= 0) {
+            throw new DadosInvalidosException("O valor para débito deve ser estritamente positivo");
         }
-        else
-        {
-            throw new EstadoInvalidoException("Não é possível debitar um valor negativo");
+        if (!saldoSuficiente(valorEmCentavos)) {
+            throw new SaldoInsuficienteException("Saldo insuficiente para efetuar a Reserva");
         }
+        this.saldoEmCentavos -= valorEmCentavos;
     }
     public void creditar(int valorEmCentavos)
     {
@@ -94,7 +74,7 @@ public class Pessoa
         }
         else
         {
-            throw new EstadoInvalidoException("Não é possível creditar valor negativo");
+            throw new DadosInvalidosException("Não é possível creditar valor negativo");
         }
     }
 }
