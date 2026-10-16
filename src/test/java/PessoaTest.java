@@ -1,5 +1,4 @@
 import excecoes.DadosInvalidosException;
-import excecoes.EstadoInvalidoException;
 import excecoes.SaldoInsuficienteException;
 import org.junit.jupiter.api.Test;
 
@@ -7,93 +6,87 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PessoaTest
 {
+
+    // Métodos auxiliares para simplificação de código(Sugestão de IA)
+    private Pessoa criarPessoaPadrao()
+    {
+        return new Pessoa("Vinicius", 1000, "11111111111");
+    }
+
+    private Pessoa criarPessoaComSaldo(int saldoEmCentavos)
+    {
+        return new Pessoa("Vinicius", saldoEmCentavos, "11111111111");
+    }
+
     // Validação do construtor
     @Test
     void criacaoValida()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
 
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
+        Pessoa pessoa = criarPessoaPadrao();
 
-        assertEquals(titular, pessoa.getTitular());
-        assertEquals(saldoEmCentavos, pessoa.getSaldoEmCentavos());
-        assertEquals(cpf, pessoa.getCpf());
+        assertEquals("Vinicius", pessoa.getTitular());
+        assertEquals(1000, pessoa.getSaldoEmCentavos());
+        assertEquals("11111111111", pessoa.getCpf());
     }
 
     @Test
-    void titularNulo()
+    void permiteSaldoZero()
     {
-        String titular = null;
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
+        assertDoesNotThrow(() -> criarPessoaComSaldo(0));
+    }
 
+    @Test
+    void titularNuloLancaExcecao()
+    {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Pessoa(titular, saldoEmCentavos, cpf)
+                () -> new Pessoa(null, 1000, "11111111111")
         );
     }
 
     @Test
-    void titularVazio()
+    void titularVazioLancaExcecao()
     {
-        String titular = " ";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Pessoa(titular, saldoEmCentavos, cpf)
+                () -> new Pessoa(" ", 1000, "11111111111")
         );
     }
 
     @Test
-    void cpfNulo()
+    void cpfNuloLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = null;
-
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Pessoa(titular, saldoEmCentavos, cpf)
+                () -> new Pessoa("Vinicius", 1000, null)
         );
     }
 
     @Test
-    void cpfVazio()
+    void cpfVazioLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = " ";
-
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Pessoa(titular, saldoEmCentavos, cpf)
+                () -> new Pessoa("Vinicius", 1000, " ")
         );
     }
 
     @Test
     void cpfInvalidoLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "111.111.111-11111";
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Pessoa(titular, saldoEmCentavos, cpf)
+                () -> new Pessoa("Vinicius", 1000, "111.111.111-11111")
         );
     }
 
     @Test
     void saldoInvalidoLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = -1;
-        String cpf = "11111111111";
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Pessoa(titular, saldoEmCentavos, cpf)
+                () -> new Pessoa("Vinicius", -1, "11111111111")
         );
     }
 
@@ -101,16 +94,8 @@ class PessoaTest
     @Test
     void pessoasComMesmoCpfSaoIguais()
     {
-        String titularA = "Vinicius";
-        int saldoEmCentavosA = 1000;
-        String cpfA = "11111111111";
-
-        String titularB = "Felipe";
-        int saldoEmCentavosB = 1500;
-        String cpfB = "11111111111";
-
-        Pessoa pessoaA = new Pessoa(titularA, saldoEmCentavosA, cpfA);
-        Pessoa pessoaB = new Pessoa(titularB, saldoEmCentavosB, cpfB);
+        Pessoa pessoaA = new Pessoa("Vinicius", 1000, "11111111111");
+        Pessoa pessoaB = new Pessoa("Felipe", 1500, "11111111111");
 
         assertEquals(pessoaA, pessoaB);
     }
@@ -118,16 +103,8 @@ class PessoaTest
     @Test
     void pessoasComCpfDiferentesNaoSaoIguais()
     {
-        String titularA = "Vinicius";
-        int saldoEmCentavosA = 1000;
-        String cpfA = "11111111111";
-
-        String titularB = "Vinicius";
-        int saldoEmCentavosB = 1500;
-        String cpfB = "22222222222";
-
-        Pessoa pessoaA = new Pessoa(titularA, saldoEmCentavosA, cpfA);
-        Pessoa pessoaB = new Pessoa(titularB, saldoEmCentavosB, cpfB);
+        Pessoa pessoaA = new Pessoa("Vinicius", 1000, "11111111111");
+        Pessoa pessoaB = new Pessoa("Vinicius", 1000, "22222222222");
 
         assertNotEquals(pessoaA, pessoaB);
     }
@@ -135,16 +112,8 @@ class PessoaTest
     @Test
     void contratoHashCode()
     {
-        String titularA = "Vinicius";
-        int saldoEmCentavosA = 1000;
-        String cpfA = "11111111111";
-
-        String titularB = "Felipe";
-        int saldoEmCentavosB = 1500;
-        String cpfB = "11111111111";
-
-        Pessoa pessoaA = new Pessoa(titularA, saldoEmCentavosA, cpfA);
-        Pessoa pessoaB = new Pessoa(titularB, saldoEmCentavosB, cpfB);
+        Pessoa pessoaA = new Pessoa("Vinicius", 1000, "11111111111");
+        Pessoa pessoaB = new Pessoa("Felipe", 1500, "11111111111");
 
         assertEquals(pessoaA.hashCode(), pessoaB.hashCode());
     }
@@ -152,11 +121,7 @@ class PessoaTest
     @Test
     void comparacaoComNuloOuOutroTipo()
     {
-        String titularA = "Vinicius";
-        int saldoEmCentavosA = 1000;
-        String cpfA = "11111111111";
-
-        Pessoa pessoaA = new Pessoa(titularA, saldoEmCentavosA, cpfA);
+        Pessoa pessoaA = criarPessoaPadrao();
 
         assertFalse(pessoaA.equals(null));
         assertFalse(pessoaA.equals("String de teste"));
@@ -167,153 +132,97 @@ class PessoaTest
     @Test
     void saldoMaiorValor()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 200;
-
-        assertTrue(pessoa.saldoSuficiente(valorEmCentavos));
+        Pessoa pessoa = criarPessoaComSaldo(1000);
+        assertTrue(pessoa.saldoSuficiente(200));
     }
 
     @Test
     void saldoIgualValor()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 200;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 200;
-
-        assertTrue(pessoa.saldoSuficiente(valorEmCentavos));
+        Pessoa pessoa = criarPessoaComSaldo(200);
+        assertTrue(pessoa.saldoSuficiente(200));
     }
 
     @Test
     void saldoMenorValor()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 200;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 1000;
-
-        assertFalse(pessoa.saldoSuficiente(valorEmCentavos));
+        Pessoa pessoa = criarPessoaComSaldo(200);
+        assertFalse(pessoa.saldoSuficiente(1000));
     }
 
     // Validacao debitar
 
     @Test
-    void debitarValorZero()
+    void debitarValorZeroLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 0;
-
+        Pessoa pessoa = criarPessoaPadrao();
         assertThrows(
                 DadosInvalidosException.class,
-                () -> pessoa.debitar(valorEmCentavos)
+                () -> pessoa.debitar(0)
         );
     }
 
     @Test
     void debitarComSucesso()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 200;
-
-        pessoa.debitar(valorEmCentavos);
+        Pessoa pessoa = criarPessoaComSaldo(1000);
+        pessoa.debitar(200);
 
         assertEquals(800, pessoa.getSaldoEmCentavos());
     }
 
     @Test
-    void debitarNegativo()
+    void debitarNegativoLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = -200;
+        Pessoa pessoa = criarPessoaPadrao();
 
         assertThrows(
                 DadosInvalidosException.class,
-                () -> pessoa.debitar(valorEmCentavos)
+                () -> pessoa.debitar(-200)
         );
     }
 
     @Test
-    void debitarComSaldoInsuficiente()
+    void debitarComSaldoInsuficienteLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 200;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 1000;
+        Pessoa pessoa = criarPessoaComSaldo(200);
 
         assertThrows(
                 SaldoInsuficienteException.class,
-                () -> pessoa.debitar(valorEmCentavos)
+                () -> pessoa.debitar(1000)
         );
     }
 
     // Validacao creditar
 
     @Test
-    void creditarValorZero()
+    void creditarValorZeroLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 0;
+        Pessoa pessoa = criarPessoaPadrao();
 
         assertThrows(
                 DadosInvalidosException.class,
-                () -> pessoa.creditar(valorEmCentavos)
+                () -> pessoa.creditar(0)
         );
     }
 
     @Test
     void creditarComSucesso()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 200;
-
-        pessoa.creditar(valorEmCentavos);
+        Pessoa pessoa = criarPessoaComSaldo(1000);
+        pessoa.creditar(200);
 
         assertEquals(1200, pessoa.getSaldoEmCentavos());
     }
 
     @Test
-    void creditarNegativo()
+    void creditarNegativoLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = -200;
+        Pessoa pessoa = criarPessoaPadrao();
 
         assertThrows(
                 DadosInvalidosException.class,
-                () -> pessoa.creditar(valorEmCentavos)
+                () -> pessoa.creditar(-200)
         );
     }
 }
