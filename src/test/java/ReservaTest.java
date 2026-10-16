@@ -18,7 +18,7 @@ class ReservaTest {
     void setUp()
     {
         pessoaValida = new Pessoa("Vinícius", 10000, "11111111111");
-        carroValido = new Carro("A6EVBCD", "Azul", true, 1000, true, "Hyundai", "HB-20");
+        carroValido = new Carro("A6EVBCD", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "HB20");
         periodoValido = new Periodo(LocalDateTime.now(), LocalDateTime.now().plusDays(2));
     }
 

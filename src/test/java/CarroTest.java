@@ -8,11 +8,11 @@ class CarroTest {
 
     // Métodos auxiliares para simplificação de código(Sugestão de IA)
     private Carro criarCarroPadrao() {
-        return new Carro("A6EVBCD", "Azul", true, 1000, true, "Hyundai", "HB-20");
+        return new Carro("A6EVBCD", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "HB20");
     }
 
     private Carro criarCarroInativo() {
-        return new Carro("A6EVBCD", "Azul", true, 1000, false, "Hyundai", "HB-20");
+        return new Carro("A6EVBCD", "Azul", true, 1000, false, MarcaCarro.HYUNDAI, "HB20");
     }
 
 @Test
@@ -25,13 +25,13 @@ class CarroTest {
     assertTrue(carro.hasArCondicionado());
     assertEquals(1000, carro.getPrecoEmCentavos());
     assertTrue(carro.isAtivo());
-    assertEquals("Hyundai", carro.getMarca());
-    assertEquals("HB-20", carro.getModelo());
+    assertEquals(MarcaCarro.HYUNDAI, carro.getMarca());
+    assertEquals("HB20", carro.getModelo());
 }
 
     @Test
     void placaEspacadaEMinusculaEFormatada() {
-        Carro carro = new Carro(" a6evbcd ", "Azul", true, 1000, true, "Hyundai", "HB-20");
+        Carro carro = new Carro(" a6evbcd ", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "HB20");
 
         assertEquals("A6EVBCD", carro.getPlaca());
     }
@@ -40,7 +40,7 @@ class CarroTest {
     void placaTamanhoInvalidaCriacao() {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("aaecdeasv23", "Azul", true, 1000, true, "Hyundai", "HB-20")
+                () -> new Carro("aaecdeasv23", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
@@ -49,7 +49,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro(null, "Azul", true, 1000, true, "Hyundai", "HB-20")
+                () -> new Carro(null, "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
     @Test
@@ -57,7 +57,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro(" ", "Azul", true, 1000, true, "Hyundai", "HB-20")
+                () -> new Carro(" ", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
@@ -66,7 +66,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", null, true, 1000, true, "Hyundai", "HB-20")
+                () -> new Carro("A6EVBCD", null, true, 1000, true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
@@ -75,7 +75,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", " ", true, 1000, true, "Hyundai", "HB-20")
+                () -> new Carro("A6EVBCD", " ", true, 1000, true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
@@ -84,16 +84,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", "Azul", true, 1000, true, null, "HB-20")
-        );
-    }
-
-    @Test
-    void marcaVaziaInvalidaCriacao()
-    {
-        assertThrows(
-                DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", "Azul", true, 1000, true, " ", "HB-20")
+                () -> new Carro("A6EVBCD", "Azul", true, 1000, true, null, "HB20")
         );
     }
 
@@ -102,7 +93,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", "Azul", true, 1000, true, "Hyundai", null)
+                () -> new Carro("A6EVBCD", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, null)
         );
     }
 
@@ -111,7 +102,16 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", "Azul", true, 1000, true, "Hyundai", " ")
+                () -> new Carro("A6EVBCD", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, " ")
+        );
+    }
+
+    @Test
+    void modeloIncompativelLancaExcecao()
+    {
+        assertThrows(
+                DadosInvalidosException.class,
+                () -> new Carro("A6EVBCD", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "Gol")
         );
     }
 
@@ -120,7 +120,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", "Azul", true, 0, true, "Hyundai", "HB-20")
+                () -> new Carro("A6EVBCD", "Azul", true, 0, true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
@@ -129,7 +129,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", "Azul", true, -1, true, "Hyundai", "HB-20")
+                () -> new Carro("A6EVBCD", "Azul", true, -1, true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
@@ -138,7 +138,7 @@ class CarroTest {
     void carroComMesmaPlacaSaoIguais()
     {
         Carro carroA = criarCarroPadrao();
-        Carro carroB = new Carro("A6EVBCD", "Vermelho", false, 2000, false, "Fiat", "Uno");
+        Carro carroB = new Carro("A6EVBCD", "Vermelho", false, 2000, false, MarcaCarro.FIAT, "Uno");
 
         assertEquals(carroA, carroB);
     }
@@ -147,7 +147,7 @@ class CarroTest {
     void carroComPlacasDiferentesNaoSaoIguais()
     {
         Carro carroA = criarCarroPadrao();
-        Carro carroB = new Carro("A6EVBCT", "Azul", true, 1000, true, "Hyundai", "HB-20");
+        Carro carroB = new Carro("A6EVBCT", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "HB20");
 
         assertNotEquals(carroA, carroB);
     }
@@ -156,7 +156,7 @@ class CarroTest {
     void contratoHashCode()
     {
         Carro carroA = criarCarroPadrao();
-        Carro carroB = new Carro("A6EVBCD", "Vermelho", false, 2000, false, "Fiat", "Uno");
+        Carro carroB = new Carro("A6EVBCD", "Vermelho", false, 2000, false, MarcaCarro.FIAT, "Uno");
 
         assertEquals(carroA.hashCode(), carroB.hashCode());
     }
