@@ -1,7 +1,6 @@
 import excecoes.DadosInvalidosException;
 import excecoes.EstadoInvalidoException;
 import excecoes.SaldoInsuficienteException;
-import excecoes.SobreposicaoPeriodoException;
 import org.junit.jupiter.api.BeforeEach;
 import java.time.LocalDateTime;
 
@@ -67,8 +66,8 @@ class ReservaTest {
     @Test
     void carroInativoLancaExcecao() {
         carroValido.desativar();
-        assertThrows(SobreposicaoPeriodoException.class,
-                () -> new Reserva (1, periodoValido, pessoaValida, carroValido)
+        assertThrows(EstadoInvalidoException.class,
+                () -> new Reserva(1, periodoValido, pessoaValida, carroValido)
         );
     }
 
@@ -85,10 +84,13 @@ class ReservaTest {
     // ==========================================
 
     @Test
-    void cancelarComSucesso() {
+    void cancelarComSucessoEstorno() {
         Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        assertEquals(8000, pessoaValida.getSaldoEmCentavos());
+
         reserva.cancelar();
         assertEquals(StatusReserva.CANCELADA, reserva.getStatus());
+        assertEquals(10000, pessoaValida.getSaldoEmCentavos());
     }
 
     @Test
@@ -130,11 +132,14 @@ class ReservaTest {
                 () -> reserva.concluir());
     }
 
+    // Validação do equals e hashcode
+
     @Test
     void reservaMesmoIdSaoIguais()
     {
         Reserva reservaA = new Reserva(1, periodoValido, pessoaValida, carroValido);
-        Reserva reservaB = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        Pessoa pessoaB = new Pessoa("Felipe", 10000, "22222222222");
+        Reserva reservaB = new Reserva(1, periodoValido, pessoaB, carroValido);
 
         assertEquals(reservaA, reservaB);
     }
@@ -152,7 +157,8 @@ class ReservaTest {
     void contratoHashCode()
     {
         Reserva reservaA = new Reserva(1, periodoValido, pessoaValida, carroValido);
-        Reserva reservaB = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        Pessoa pessoaB = new Pessoa("Felipe", 10000, "22222222222");
+        Reserva reservaB = new Reserva(1, periodoValido, pessoaB, carroValido);
 
         assertEquals(reservaA.hashCode(), reservaB.hashCode());
     }
