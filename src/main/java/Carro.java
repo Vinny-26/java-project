@@ -1,11 +1,12 @@
 import excecoes.DadosInvalidosException;
 import excecoes.EstadoInvalidoException;
+import java.math.BigDecimal;
 
 public class Carro {
     private String placa;
     private String cor;
     private boolean arCondicionado;
-    private int precoEmCentavos;
+    private BigDecimal valor;
     private boolean ativo;
     private final MarcaCarro marca;
     private final String modelo;
@@ -29,7 +30,7 @@ public class Carro {
     }
 
     // Construtor com todos os atributos
-    public Carro(String placa, String cor, boolean arCondicionado, int precoEmCentavos, boolean status, MarcaCarro marca, String modelo) {
+    public Carro(String placa, String cor, boolean arCondicionado, BigDecimal valor, boolean status, MarcaCarro marca, String modelo) {
         if(placa == null || placa.isBlank())
         {
             throw new DadosInvalidosException("A placa do carro não pode ser nula ou vazia");
@@ -51,14 +52,14 @@ public class Carro {
         {
             throw new DadosInvalidosException("A placa do carro deve conter exatamente 7 caracteres");
         }
-        if(precoEmCentavos <= 0)
+        if(valor == null || valor.compareTo(BigDecimal.ZERO) <= 0)
         {
-            throw new DadosInvalidosException("Não é possível cadastrar carro com valor menor ou igual a 0");
+            throw new DadosInvalidosException("Não é possível cadastrar carro com valor nulo ou menor/igual a 0");
         }
         this.placa = placa;
         this.cor = cor; // Estudar possível enum
         this.arCondicionado = arCondicionado;
-        this.precoEmCentavos = precoEmCentavos;
+        this.valor = valor;
         this.ativo = status;
         this.marca = marca;
         this.modelo = modelo;
@@ -73,8 +74,8 @@ public class Carro {
     public boolean hasArCondicionado() {
         return arCondicionado;
     }
-    public int getPrecoEmCentavos() {
-        return precoEmCentavos;
+    public BigDecimal getValor() {
+        return valor;
     }
     public boolean isAtivo() {
         return ativo;

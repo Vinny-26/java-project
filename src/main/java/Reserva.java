@@ -1,5 +1,7 @@
 import excecoes.DadosInvalidosException;
 import excecoes.EstadoInvalidoException;
+
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Reserva {
@@ -20,18 +22,17 @@ public Reserva(int id, Periodo periodo, Pessoa pessoa, Carro carro)
         throw new EstadoInvalidoException("Não é possível criar a reserva, o carro está inativo");
     }
 
-    pessoa.debitar(calcularCustoTotal(carro, periodo));
-
     this.id = id;
     this.periodo = periodo;
     this.pessoa = pessoa;
     this.carro = carro;
     this.status = StatusReserva.CRIADA; //Iniciar o status como criada ;)
+    pessoa.debitar(getCustoTotal());
 }
 
-    private int calcularCustoTotal(Carro carro, Periodo periodo)
+    private BigDecimal calcularCustoTotal(Carro carro, Periodo periodo)
     {
-        return carro.getPrecoEmCentavos() * periodo.diasDoPeriodo();
+        return carro.getValor().multiply(BigDecimal.valueOf(periodo.diasDoPeriodo()));
     }
 
 public void cancelar() {
@@ -39,7 +40,7 @@ public void cancelar() {
     {
         throw new EstadoInvalidoException("Apenas reservas com status CRIADA podem ser canceladas.");
     }
-    pessoa.creditar(calcularCustoTotal(carro, periodo));
+    pessoa.creditar(getCustoTotal());
     this.status = StatusReserva.CANCELADA;
 }
 
@@ -57,6 +58,7 @@ public StatusReserva getStatus() {return status; }
 public Periodo getPeriodo() {return periodo; }
 public Pessoa getPessoa() {return pessoa; }
 public Carro getCarro() {return carro; }
+public BigDecimal getCustoTotal() {return calcularCustoTotal(carro, periodo);}
 
     @Override
     public boolean equals(Object obj)
