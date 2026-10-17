@@ -2,6 +2,8 @@ import excecoes.DadosInvalidosException;
 import excecoes.EstadoInvalidoException;
 import excecoes.SaldoInsuficienteException;
 import org.junit.jupiter.api.BeforeEach;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
@@ -17,8 +19,8 @@ class ReservaTest {
     @BeforeEach
     void setUp()
     {
-        pessoaValida = new Pessoa("Vinícius", 10000, "11111111111");
-        carroValido = new Carro("A6EVBCD", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "HB20");
+        pessoaValida = new Pessoa("Vinícius", new BigDecimal("10000"), "11111111111");
+        carroValido = new Carro("A6EVBCD", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20");
         periodoValido = new Periodo(LocalDateTime.now(), LocalDateTime.now().plusDays(2));
     }
 
@@ -32,7 +34,7 @@ class ReservaTest {
         assertEquals(pessoaValida, reserva.getPessoa());
         assertEquals(carroValido, reserva.getCarro());
         assertEquals(StatusReserva.CRIADA,reserva.getStatus());
-        assertEquals(8000,pessoaValida.getSaldoEmCentavos());
+        assertEquals(0, new BigDecimal("8000").compareTo(pessoaValida.getSaldo()));
     }
 
     @Test
@@ -73,7 +75,7 @@ class ReservaTest {
 
     @Test
     void saldoInsuficienteLancaExcecao() {
-        pessoaValida = new Pessoa("Vinícius", 100, "11111111111");
+        pessoaValida = new Pessoa("Vinícius", new BigDecimal("100"), "11111111111");
         assertThrows(SaldoInsuficienteException.class,
                 () -> new Reserva (1, periodoValido, pessoaValida, carroValido)
         );
@@ -86,11 +88,11 @@ class ReservaTest {
     @Test
     void cancelarComSucessoEstorno() {
         Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
-        assertEquals(8000, pessoaValida.getSaldoEmCentavos());
+        assertEquals(0, new BigDecimal("8000").compareTo(pessoaValida.getSaldo()));
 
         reserva.cancelar();
         assertEquals(StatusReserva.CANCELADA, reserva.getStatus());
-        assertEquals(10000, pessoaValida.getSaldoEmCentavos());
+        assertEquals(0, new BigDecimal("10000").compareTo(pessoaValida.getSaldo()));
     }
 
     @Test
@@ -138,7 +140,7 @@ class ReservaTest {
     void reservaMesmoIdSaoIguais()
     {
         Reserva reservaA = new Reserva(1, periodoValido, pessoaValida, carroValido);
-        Pessoa pessoaB = new Pessoa("Felipe", 10000, "22222222222");
+        Pessoa pessoaB = new Pessoa("Felipe", new BigDecimal("10000"), "22222222222");
         Reserva reservaB = new Reserva(1, periodoValido, pessoaB, carroValido);
 
         assertEquals(reservaA, reservaB);
@@ -157,7 +159,7 @@ class ReservaTest {
     void contratoHashCode()
     {
         Reserva reservaA = new Reserva(1, periodoValido, pessoaValida, carroValido);
-        Pessoa pessoaB = new Pessoa("Felipe", 10000, "22222222222");
+        Pessoa pessoaB = new Pessoa("Felipe", new BigDecimal("10000"), "22222222222");
         Reserva reservaB = new Reserva(1, periodoValido, pessoaB, carroValido);
 
         assertEquals(reservaA.hashCode(), reservaB.hashCode());

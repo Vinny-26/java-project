@@ -2,17 +2,19 @@ import excecoes.DadosInvalidosException;
 import excecoes.EstadoInvalidoException;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CarroTest {
 
     // Métodos auxiliares para simplificação de código(Sugestão de IA)
     private Carro criarCarroPadrao() {
-        return new Carro("A6EVBCD", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "HB20");
+        return new Carro("A6EVBCD", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20");
     }
 
     private Carro criarCarroInativo() {
-        return new Carro("A6EVBCD", "Azul", true, 1000, false, MarcaCarro.HYUNDAI, "HB20");
+        return new Carro("A6EVBCD", "Azul", true, new BigDecimal("1000"), false, MarcaCarro.HYUNDAI, "HB20");
     }
 
 @Test
@@ -23,7 +25,7 @@ class CarroTest {
     assertEquals("A6EVBCD", carro.getPlaca());
     assertEquals("Azul", carro.getCor());
     assertTrue(carro.hasArCondicionado());
-    assertEquals(1000, carro.getPrecoEmCentavos());
+    assertEquals(0, new BigDecimal("1000").compareTo(carro.getValor()));
     assertTrue(carro.isAtivo());
     assertEquals(MarcaCarro.HYUNDAI, carro.getMarca());
     assertEquals("HB20", carro.getModelo());
@@ -31,7 +33,7 @@ class CarroTest {
 
     @Test
     void placaEspacadaEMinusculaEFormatada() {
-        Carro carro = new Carro(" a6evbcd ", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "HB20");
+        Carro carro = new Carro(" a6evbcd ", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20");
 
         assertEquals("A6EVBCD", carro.getPlaca());
     }
@@ -40,7 +42,7 @@ class CarroTest {
     void placaTamanhoInvalidaCriacao() {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("aaecdeasv23", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "HB20")
+                () -> new Carro("aaecdeasv23", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
@@ -49,7 +51,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro(null, "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "HB20")
+                () -> new Carro(null, "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
     @Test
@@ -57,7 +59,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro(" ", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "HB20")
+                () -> new Carro(" ", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
@@ -66,7 +68,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", null, true, 1000, true, MarcaCarro.HYUNDAI, "HB20")
+                () -> new Carro("A6EVBCD", null, true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
@@ -75,7 +77,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", " ", true, 1000, true, MarcaCarro.HYUNDAI, "HB20")
+                () -> new Carro("A6EVBCD", " ", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
@@ -84,7 +86,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", "Azul", true, 1000, true, null, "HB20")
+                () -> new Carro("A6EVBCD", "Azul", true, new BigDecimal("1000"), true, null, "HB20")
         );
     }
 
@@ -93,7 +95,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, null)
+                () -> new Carro("A6EVBCD", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, null)
         );
     }
 
@@ -102,7 +104,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, " ")
+                () -> new Carro("A6EVBCD", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, " ")
         );
     }
 
@@ -111,7 +113,16 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "Gol")
+                () -> new Carro("A6EVBCD", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "Gol")
+        );
+    }
+
+    @Test
+    void valorNuloInvalidaCriacao()
+    {
+        assertThrows(
+                DadosInvalidosException.class,
+                () -> new Carro("A6EVBCD", "Azul", true, null, true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
@@ -120,7 +131,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", "Azul", true, 0, true, MarcaCarro.HYUNDAI, "HB20")
+                () -> new Carro("A6EVBCD", "Azul", true, new BigDecimal("0"), true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
@@ -129,7 +140,7 @@ class CarroTest {
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Carro("A6EVBCD", "Azul", true, -1, true, MarcaCarro.HYUNDAI, "HB20")
+                () -> new Carro("A6EVBCD", "Azul", true, new BigDecimal("-1"), true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
@@ -138,7 +149,7 @@ class CarroTest {
     void carroComMesmaPlacaSaoIguais()
     {
         Carro carroA = criarCarroPadrao();
-        Carro carroB = new Carro("A6EVBCD", "Vermelho", false, 2000, false, MarcaCarro.FIAT, "Uno");
+        Carro carroB = new Carro("A6EVBCD", "Vermelho", false, new BigDecimal("2000"), false, MarcaCarro.FIAT, "Uno");
 
         assertEquals(carroA, carroB);
     }
@@ -147,7 +158,7 @@ class CarroTest {
     void carroComPlacasDiferentesNaoSaoIguais()
     {
         Carro carroA = criarCarroPadrao();
-        Carro carroB = new Carro("A6EVBCT", "Azul", true, 1000, true, MarcaCarro.HYUNDAI, "HB20");
+        Carro carroB = new Carro("A6EVBCT", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20");
 
         assertNotEquals(carroA, carroB);
     }
@@ -156,7 +167,7 @@ class CarroTest {
     void contratoHashCode()
     {
         Carro carroA = criarCarroPadrao();
-        Carro carroB = new Carro("A6EVBCD", "Vermelho", false, 2000, false, MarcaCarro.FIAT, "Uno");
+        Carro carroB = new Carro("A6EVBCD", "Vermelho", false, new BigDecimal("2000"), false, MarcaCarro.FIAT, "Uno");
 
         assertEquals(carroA.hashCode(), carroB.hashCode());
     }

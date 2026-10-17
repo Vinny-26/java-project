@@ -2,6 +2,8 @@ import excecoes.DadosInvalidosException;
 import excecoes.SaldoInsuficienteException;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PessoaTest
@@ -10,12 +12,12 @@ class PessoaTest
     // Métodos auxiliares para simplificação de código(Sugestão de IA)
     private Pessoa criarPessoaPadrao()
     {
-        return new Pessoa("Vinicius", 1000, "11111111111");
+        return new Pessoa("Vinicius", new BigDecimal("1000"), "11111111111");
     }
 
-    private Pessoa criarPessoaComSaldo(int saldoEmCentavos)
+    private Pessoa criarPessoaComSaldo(int saldo)
     {
-        return new Pessoa("Vinicius", saldoEmCentavos, "11111111111");
+        return new Pessoa("Vinicius", new BigDecimal(saldo), "11111111111");
     }
 
     // Validação do construtor
@@ -26,7 +28,7 @@ class PessoaTest
         Pessoa pessoa = criarPessoaPadrao();
 
         assertEquals("Vinicius", pessoa.getTitular());
-        assertEquals(1000, pessoa.getSaldoEmCentavos());
+        assertEquals(0, new BigDecimal("1000").compareTo(pessoa.getSaldo()));
         assertEquals("11111111111", pessoa.getCpf());
     }
 
@@ -41,7 +43,7 @@ class PessoaTest
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Pessoa(null, 1000, "11111111111")
+                () -> new Pessoa(null, new BigDecimal("1000"), "11111111111")
         );
     }
 
@@ -50,7 +52,7 @@ class PessoaTest
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Pessoa(" ", 1000, "11111111111")
+                () -> new Pessoa(" ", new BigDecimal("1000"), "11111111111")
         );
     }
 
@@ -59,7 +61,7 @@ class PessoaTest
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Pessoa("Vinicius", 1000, null)
+                () -> new Pessoa("Vinicius", new BigDecimal("1000"), null)
         );
     }
 
@@ -68,7 +70,7 @@ class PessoaTest
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Pessoa("Vinicius", 1000, " ")
+                () -> new Pessoa("Vinicius", new BigDecimal("1000"), " ")
         );
     }
 
@@ -77,7 +79,7 @@ class PessoaTest
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Pessoa("Vinicius", 1000, "111.111.111-11111")
+                () -> new Pessoa("Vinicius", new BigDecimal("1000"), "111.111.111-11111")
         );
     }
 
@@ -86,7 +88,16 @@ class PessoaTest
     {
         assertThrows(
                 DadosInvalidosException.class,
-                () -> new Pessoa("Vinicius", -1, "11111111111")
+                () -> new Pessoa("Vinicius", new BigDecimal("-1"), "11111111111")
+        );
+    }
+
+    @Test
+    void saldoNuloLancaExcecao()
+    {
+        assertThrows(
+                DadosInvalidosException.class,
+                () -> new Pessoa("Vinicius", null, "11111111111")
         );
     }
 
@@ -94,8 +105,8 @@ class PessoaTest
     @Test
     void pessoasComMesmoCpfSaoIguais()
     {
-        Pessoa pessoaA = new Pessoa("Vinicius", 1000, "11111111111");
-        Pessoa pessoaB = new Pessoa("Felipe", 1500, "11111111111");
+        Pessoa pessoaA = new Pessoa("Vinicius", new BigDecimal("1000"), "11111111111");
+        Pessoa pessoaB = new Pessoa("Felipe", new BigDecimal("1500"), "11111111111");
 
         assertEquals(pessoaA, pessoaB);
     }
@@ -103,8 +114,8 @@ class PessoaTest
     @Test
     void pessoasComCpfDiferentesNaoSaoIguais()
     {
-        Pessoa pessoaA = new Pessoa("Vinicius", 1000, "11111111111");
-        Pessoa pessoaB = new Pessoa("Vinicius", 1000, "22222222222");
+        Pessoa pessoaA = new Pessoa("Vinicius", new BigDecimal("1000"), "11111111111");
+        Pessoa pessoaB = new Pessoa("Vinicius", new BigDecimal("1000"), "22222222222");
 
         assertNotEquals(pessoaA, pessoaB);
     }
@@ -112,8 +123,8 @@ class PessoaTest
     @Test
     void contratoHashCode()
     {
-        Pessoa pessoaA = new Pessoa("Vinicius", 1000, "11111111111");
-        Pessoa pessoaB = new Pessoa("Felipe", 1500, "11111111111");
+        Pessoa pessoaA = new Pessoa("Vinicius", new BigDecimal("1000"), "11111111111");
+        Pessoa pessoaB = new Pessoa("Felipe", new BigDecimal("1500"), "11111111111");
 
         assertEquals(pessoaA.hashCode(), pessoaB.hashCode());
     }
@@ -133,24 +144,34 @@ class PessoaTest
     void saldoMaiorValor()
     {
         Pessoa pessoa = criarPessoaComSaldo(1000);
-        assertTrue(pessoa.saldoSuficiente(200));
+        assertTrue(pessoa.saldoSuficiente(new BigDecimal("200")));
     }
 
     @Test
     void saldoIgualValor()
     {
         Pessoa pessoa = criarPessoaComSaldo(200);
-        assertTrue(pessoa.saldoSuficiente(200));
+        assertTrue(pessoa.saldoSuficiente(new BigDecimal("200")));
     }
 
     @Test
     void saldoMenorValor()
     {
         Pessoa pessoa = criarPessoaComSaldo(200);
-        assertFalse(pessoa.saldoSuficiente(1000));
+        assertFalse(pessoa.saldoSuficiente(new BigDecimal("1000")));
     }
 
     // Validacao debitar
+
+    @Test
+    void debitarNuloLancaExcecao()
+    {
+        Pessoa pessoa = criarPessoaPadrao();
+        assertThrows(
+                DadosInvalidosException.class,
+                () -> pessoa.debitar(null)
+        );
+    }
 
     @Test
     void debitarValorZeroLancaExcecao()
@@ -158,7 +179,7 @@ class PessoaTest
         Pessoa pessoa = criarPessoaPadrao();
         assertThrows(
                 DadosInvalidosException.class,
-                () -> pessoa.debitar(0)
+                () -> pessoa.debitar(new BigDecimal("0"))
         );
     }
 
@@ -166,9 +187,9 @@ class PessoaTest
     void debitarComSucesso()
     {
         Pessoa pessoa = criarPessoaComSaldo(1000);
-        pessoa.debitar(200);
+        pessoa.debitar(BigDecimal.valueOf(200));
 
-        assertEquals(800, pessoa.getSaldoEmCentavos());
+        assertEquals(0, new BigDecimal("800").compareTo(pessoa.getSaldo()));
     }
 
     @Test
@@ -178,7 +199,7 @@ class PessoaTest
 
         assertThrows(
                 DadosInvalidosException.class,
-                () -> pessoa.debitar(-200)
+                () -> pessoa.debitar(new BigDecimal("-200"))
         );
     }
 
@@ -189,11 +210,22 @@ class PessoaTest
 
         assertThrows(
                 SaldoInsuficienteException.class,
-                () -> pessoa.debitar(1000)
+                () -> pessoa.debitar(new BigDecimal("1000"))
         );
     }
 
     // Validacao creditar
+
+    @Test
+    void creditarNuloLancaExcecao()
+    {
+        Pessoa pessoa = criarPessoaPadrao();
+
+        assertThrows(
+                DadosInvalidosException.class,
+                () -> pessoa.creditar(null)
+        );
+    }
 
     @Test
     void creditarValorZeroLancaExcecao()
@@ -202,7 +234,7 @@ class PessoaTest
 
         assertThrows(
                 DadosInvalidosException.class,
-                () -> pessoa.creditar(0)
+                () -> pessoa.creditar(new BigDecimal("0"))
         );
     }
 
@@ -210,9 +242,9 @@ class PessoaTest
     void creditarComSucesso()
     {
         Pessoa pessoa = criarPessoaComSaldo(1000);
-        pessoa.creditar(200);
+        pessoa.creditar(new BigDecimal("200"));
 
-        assertEquals(1200, pessoa.getSaldoEmCentavos());
+        assertEquals(0, new BigDecimal("1200").compareTo(pessoa.getSaldo()));
     }
 
     @Test
@@ -222,7 +254,7 @@ class PessoaTest
 
         assertThrows(
                 DadosInvalidosException.class,
-                () -> pessoa.creditar(-200)
+                () -> pessoa.creditar(new BigDecimal("-200"))
         );
     }
 }
