@@ -1,3 +1,4 @@
+```mermaid 
 ---
 config:
   theme: dark
@@ -64,3 +65,4 @@ classDiagram
     Reserva "0..*" --> "1" Carro : recurso
     Reserva "1" --> "1" StatusReserva : estado
     Carro "0..*" --> "1" MarcaCarro : marca
+``` 
