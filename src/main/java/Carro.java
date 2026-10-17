@@ -1,10 +1,14 @@
+import excecoes.DadosInvalidosException;
+import excecoes.EstadoInvalidoException;
+import java.math.BigDecimal;
+
 public class Carro {
     private String placa;
     private String cor;
     private boolean arCondicionado;
-    private int precoEmCentavos;
+    private BigDecimal valor;
     private boolean ativo;
-    private final String marca;
+    private final MarcaCarro marca;
     private final String modelo;
 
     @Override
@@ -26,36 +30,36 @@ public class Carro {
     }
 
     // Construtor com todos os atributos
-    public Carro(String placa, String cor, boolean arCondicionado, int precoEmCentavos, boolean status, String marca, String modelo) {
+    public Carro(String placa, String cor, boolean arCondicionado, BigDecimal valor, boolean status, MarcaCarro marca, String modelo) {
         if(placa == null || placa.isBlank())
         {
-            throw new IllegalArgumentException("A placa do carro não pode ser nula ou vazia");
+            throw new DadosInvalidosException("A placa do carro não pode ser nula ou vazia");
         }
         if(cor == null || cor.isBlank())
         {
-            throw new IllegalArgumentException("Não é possível inserir carro com cor nula ou vazia");
+            throw new DadosInvalidosException("Não é possível inserir carro com cor nula ou vazia");
         }
-        if(marca == null || marca.isBlank())
+        if(marca == null)
         {
-            throw new IllegalArgumentException("Não é possível cadastrar carro com marca nula ou vazia");
+            throw new DadosInvalidosException("A marca do carro não pode ser nula");
         }
-        if (modelo == null || modelo.isBlank())
+        if(!marca.possuiModelo(modelo))
         {
-            throw new IllegalArgumentException("Não é possível cadastrar carro com modelo nulo ou vazio");
-        }
-        if(placa.length() != 7)
-        {
-            throw new IllegalArgumentException("A placa do carro deve conter exatamente 7 caracteres");
-        }
-        if(precoEmCentavos <= 0)
-        {
-            throw new IllegalArgumentException("Não é possível cadastrar carro com valor menor ou igual a 0");
+            throw new DadosInvalidosException("O modelo " + modelo + " não pertence à marca " + marca.getNomeExibicao());
         }
         placa = placa.trim().toUpperCase();
+        if(placa.length() != 7)
+        {
+            throw new DadosInvalidosException("A placa do carro deve conter exatamente 7 caracteres");
+        }
+        if(valor == null || valor.compareTo(BigDecimal.ZERO) <= 0)
+        {
+            throw new DadosInvalidosException("Não é possível cadastrar carro com valor nulo ou menor/igual a 0");
+        }
         this.placa = placa;
         this.cor = cor; // Estudar possível enum
         this.arCondicionado = arCondicionado;
-        this.precoEmCentavos = precoEmCentavos;
+        this.valor = valor;
         this.ativo = status;
         this.marca = marca;
         this.modelo = modelo;
@@ -67,16 +71,16 @@ public class Carro {
     public String getCor() {
         return cor;
     }
-    public boolean getArCondicionado() {
+    public boolean hasArCondicionado() {
         return arCondicionado;
     }
-    public int getPrecoEmCentavos() {
-        return precoEmCentavos;
+    public BigDecimal getValor() {
+        return valor;
     }
-    public boolean getAtivo() {
+    public boolean isAtivo() {
         return ativo;
     }
-    public String getMarca() {
+    public MarcaCarro getMarca() {
         return marca;
     }
     public String getModelo() {
@@ -84,6 +88,8 @@ public class Carro {
     }
 
     public void setCor(String cor) {
+        if(cor == null || cor.isBlank())
+            throw new DadosInvalidosException("Não é possível alterar a cor do carro para null ou vazia!");
         this.cor = cor;
     }
     public void setArCondicionado(boolean arCondicionado) {
@@ -92,17 +98,14 @@ public class Carro {
 
     public void ativar() {
         if (this.ativo) {
-            throw new IllegalStateException("O carro já está alugado!");
+            throw new EstadoInvalidoException("O carro já está ativo no sistema!");
         }
         this.ativo = true;
-        System.out.println("Carro devolvido com sucesso!");
     }
     public void desativar() {
         if (!this.ativo) {
-            throw new IllegalStateException("O carro já está disponível!");
+            throw new EstadoInvalidoException("O carro já está inativo no sistema!");
         }
         this.ativo = false;
-        System.out.println("Carro reservado com sucesso!");
     }
-
 }

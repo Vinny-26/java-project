@@ -1,96 +1,103 @@
+import excecoes.DadosInvalidosException;
+import excecoes.SaldoInsuficienteException;
 import org.junit.jupiter.api.Test;
+
+import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PessoaTest
 {
+
+    // Métodos auxiliares para simplificação de código(Sugestão de IA)
+    private Pessoa criarPessoaPadrao()
+    {
+        return new Pessoa("Vinicius", new BigDecimal("1000"), "11111111111");
+    }
+
+    private Pessoa criarPessoaComSaldo(int saldo)
+    {
+        return new Pessoa("Vinicius", new BigDecimal(saldo), "11111111111");
+    }
+
     // Validação do construtor
     @Test
     void criacaoValida()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
 
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
+        Pessoa pessoa = criarPessoaPadrao();
 
-        assertEquals(titular, pessoa.getTitular());
-        assertEquals(saldoEmCentavos, pessoa.getSaldoEmCentavos());
-        assertEquals(cpf, pessoa.getCpf());
+        assertEquals("Vinicius", pessoa.getTitular());
+        assertEquals(0, new BigDecimal("1000").compareTo(pessoa.getSaldo()));
+        assertEquals("11111111111", pessoa.getCpf());
     }
 
     @Test
-    void titularNulo()
+    void permiteSaldoZero()
     {
-        String titular = null;
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
+        assertDoesNotThrow(() -> criarPessoaComSaldo(0));
+    }
 
+    @Test
+    void titularNuloLancaExcecao()
+    {
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Pessoa(titular, saldoEmCentavos, cpf)
+                DadosInvalidosException.class,
+                () -> new Pessoa(null, new BigDecimal("1000"), "11111111111")
         );
     }
 
     @Test
-    void titularVazio()
+    void titularVazioLancaExcecao()
     {
-        String titular = " ";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Pessoa(titular, saldoEmCentavos, cpf)
+                DadosInvalidosException.class,
+                () -> new Pessoa(" ", new BigDecimal("1000"), "11111111111")
         );
     }
 
     @Test
-    void cpfNulo()
+    void cpfNuloLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = null;
-
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Pessoa(titular, saldoEmCentavos, cpf)
+                DadosInvalidosException.class,
+                () -> new Pessoa("Vinicius", new BigDecimal("1000"), null)
         );
     }
 
     @Test
-    void cpfVazio()
+    void cpfVazioLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = " ";
-
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Pessoa(titular, saldoEmCentavos, cpf)
+                DadosInvalidosException.class,
+                () -> new Pessoa("Vinicius", new BigDecimal("1000"), " ")
         );
     }
 
     @Test
     void cpfInvalidoLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "111.111.111-11111";
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Pessoa(titular, saldoEmCentavos, cpf)
+                DadosInvalidosException.class,
+                () -> new Pessoa("Vinicius", new BigDecimal("1000"), "111.111.111-11111")
         );
     }
 
     @Test
     void saldoInvalidoLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = -1;
-        String cpf = "11111111111";
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Pessoa(titular, saldoEmCentavos, cpf)
+                DadosInvalidosException.class,
+                () -> new Pessoa("Vinicius", new BigDecimal("-1"), "11111111111")
+        );
+    }
+
+    @Test
+    void saldoNuloLancaExcecao()
+    {
+        assertThrows(
+                DadosInvalidosException.class,
+                () -> new Pessoa("Vinicius", null, "11111111111")
         );
     }
 
@@ -98,16 +105,8 @@ class PessoaTest
     @Test
     void pessoasComMesmoCpfSaoIguais()
     {
-        String titularA = "Vinicius";
-        int saldoEmCentavosA = 1000;
-        String cpfA = "11111111111";
-
-        String titularB = "Felipe";
-        int saldoEmCentavosB = 1500;
-        String cpfB = "11111111111";
-
-        Pessoa pessoaA = new Pessoa(titularA, saldoEmCentavosA, cpfA);
-        Pessoa pessoaB = new Pessoa(titularB, saldoEmCentavosB, cpfB);
+        Pessoa pessoaA = new Pessoa("Vinicius", new BigDecimal("1000"), "11111111111");
+        Pessoa pessoaB = new Pessoa("Felipe", new BigDecimal("1500"), "11111111111");
 
         assertEquals(pessoaA, pessoaB);
     }
@@ -115,16 +114,8 @@ class PessoaTest
     @Test
     void pessoasComCpfDiferentesNaoSaoIguais()
     {
-        String titularA = "Vinicius";
-        int saldoEmCentavosA = 1000;
-        String cpfA = "11111111111";
-
-        String titularB = "Vinicius";
-        int saldoEmCentavosB = 1500;
-        String cpfB = "22222222222";
-
-        Pessoa pessoaA = new Pessoa(titularA, saldoEmCentavosA, cpfA);
-        Pessoa pessoaB = new Pessoa(titularB, saldoEmCentavosB, cpfB);
+        Pessoa pessoaA = new Pessoa("Vinicius", new BigDecimal("1000"), "11111111111");
+        Pessoa pessoaB = new Pessoa("Vinicius", new BigDecimal("1000"), "22222222222");
 
         assertNotEquals(pessoaA, pessoaB);
     }
@@ -132,16 +123,8 @@ class PessoaTest
     @Test
     void contratoHashCode()
     {
-        String titularA = "Vinicius";
-        int saldoEmCentavosA = 1000;
-        String cpfA = "11111111111";
-
-        String titularB = "Felipe";
-        int saldoEmCentavosB = 1500;
-        String cpfB = "11111111111";
-
-        Pessoa pessoaA = new Pessoa(titularA, saldoEmCentavosA, cpfA);
-        Pessoa pessoaB = new Pessoa(titularB, saldoEmCentavosB, cpfB);
+        Pessoa pessoaA = new Pessoa("Vinicius", new BigDecimal("1000"), "11111111111");
+        Pessoa pessoaB = new Pessoa("Felipe", new BigDecimal("1500"), "11111111111");
 
         assertEquals(pessoaA.hashCode(), pessoaB.hashCode());
     }
@@ -149,11 +132,7 @@ class PessoaTest
     @Test
     void comparacaoComNuloOuOutroTipo()
     {
-        String titularA = "Vinicius";
-        int saldoEmCentavosA = 1000;
-        String cpfA = "11111111111";
-
-        Pessoa pessoaA = new Pessoa(titularA, saldoEmCentavosA, cpfA);
+        Pessoa pessoaA = criarPessoaPadrao();
 
         assertFalse(pessoaA.equals(null));
         assertFalse(pessoaA.equals("String de teste"));
@@ -164,153 +143,118 @@ class PessoaTest
     @Test
     void saldoMaiorValor()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 200;
-
-        assertTrue(pessoa.saldoSuficiente(valorEmCentavos));
+        Pessoa pessoa = criarPessoaComSaldo(1000);
+        assertTrue(pessoa.saldoSuficiente(new BigDecimal("200")));
     }
 
     @Test
     void saldoIgualValor()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 200;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 200;
-
-        assertTrue(pessoa.saldoSuficiente(valorEmCentavos));
+        Pessoa pessoa = criarPessoaComSaldo(200);
+        assertTrue(pessoa.saldoSuficiente(new BigDecimal("200")));
     }
 
     @Test
     void saldoMenorValor()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 200;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 1000;
-
-        assertFalse(pessoa.saldoSuficiente(valorEmCentavos));
+        Pessoa pessoa = criarPessoaComSaldo(200);
+        assertFalse(pessoa.saldoSuficiente(new BigDecimal("1000")));
     }
 
     // Validacao debitar
 
     @Test
-    void debitarValorZero()
+    void debitarNuloLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 0;
-
+        Pessoa pessoa = criarPessoaPadrao();
         assertThrows(
-                IllegalArgumentException.class,
-                () -> pessoa.debitar(valorEmCentavos)
+                DadosInvalidosException.class,
+                () -> pessoa.debitar(null)
+        );
+    }
+
+    @Test
+    void debitarValorZeroLancaExcecao()
+    {
+        Pessoa pessoa = criarPessoaPadrao();
+        assertThrows(
+                DadosInvalidosException.class,
+                () -> pessoa.debitar(new BigDecimal("0"))
         );
     }
 
     @Test
     void debitarComSucesso()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
+        Pessoa pessoa = criarPessoaComSaldo(1000);
+        pessoa.debitar(BigDecimal.valueOf(200));
 
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 200;
-
-        pessoa.debitar(valorEmCentavos);
-
-        assertEquals(800, pessoa.getSaldoEmCentavos());
+        assertEquals(0, new BigDecimal("800").compareTo(pessoa.getSaldo()));
     }
 
     @Test
-    void debitarNegativo()
+    void debitarNegativoLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = -200;
+        Pessoa pessoa = criarPessoaPadrao();
 
         assertThrows(
-                IllegalArgumentException.class,
-                () -> pessoa.debitar(valorEmCentavos)
+                DadosInvalidosException.class,
+                () -> pessoa.debitar(new BigDecimal("-200"))
         );
     }
 
     @Test
-    void debitarComSaldoInsuficiente()
+    void debitarComSaldoInsuficienteLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 200;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 1000;
+        Pessoa pessoa = criarPessoaComSaldo(200);
 
         assertThrows(
-                IllegalArgumentException.class,
-                () -> pessoa.debitar(valorEmCentavos)
+                SaldoInsuficienteException.class,
+                () -> pessoa.debitar(new BigDecimal("1000"))
         );
     }
 
     // Validacao creditar
 
     @Test
-    void creditarValorZero()
+    void creditarNuloLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 0;
+        Pessoa pessoa = criarPessoaPadrao();
 
         assertThrows(
-                IllegalArgumentException.class,
-                () -> pessoa.creditar(valorEmCentavos)
+                DadosInvalidosException.class,
+                () -> pessoa.creditar(null)
+        );
+    }
+
+    @Test
+    void creditarValorZeroLancaExcecao()
+    {
+        Pessoa pessoa = criarPessoaPadrao();
+
+        assertThrows(
+                DadosInvalidosException.class,
+                () -> pessoa.creditar(new BigDecimal("0"))
         );
     }
 
     @Test
     void creditarComSucesso()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
+        Pessoa pessoa = criarPessoaComSaldo(1000);
+        pessoa.creditar(new BigDecimal("200"));
 
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = 200;
-
-        pessoa.creditar(valorEmCentavos);
-
-        assertEquals(1200, pessoa.getSaldoEmCentavos());
+        assertEquals(0, new BigDecimal("1200").compareTo(pessoa.getSaldo()));
     }
 
     @Test
-    void creditarNegativo()
+    void creditarNegativoLancaExcecao()
     {
-        String titular = "Vinicius";
-        int saldoEmCentavos = 1000;
-        String cpf = "11111111111";
-
-        Pessoa pessoa = new Pessoa(titular, saldoEmCentavos, cpf);
-        int valorEmCentavos = -200;
+        Pessoa pessoa = criarPessoaPadrao();
 
         assertThrows(
-                IllegalArgumentException.class,
-                () -> pessoa.creditar(valorEmCentavos)
+                DadosInvalidosException.class,
+                () -> pessoa.creditar(new BigDecimal("-200"))
         );
     }
 }

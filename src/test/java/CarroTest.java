@@ -1,232 +1,155 @@
+import excecoes.DadosInvalidosException;
+import excecoes.EstadoInvalidoException;
 import org.junit.jupiter.api.Test;
+
+import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CarroTest {
 
+    // Métodos auxiliares para simplificação de código(Sugestão de IA)
+    private Carro criarCarroPadrao() {
+        return new Carro("A6EVBCD", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20");
+    }
+
+    private Carro criarCarroInativo() {
+        return new Carro("A6EVBCD", "Azul", true, new BigDecimal("1000"), false, MarcaCarro.HYUNDAI, "HB20");
+    }
+
 @Test
     void criacaoValida()
 {
-    String placa = "A6EVBCD";
-    String cor = "Azul";
-    boolean arCondicionado = true;
-    int precoEmCentavos = 1000;
-    boolean ativo = true;
-    String marca = "Hyundai";
-    String modelo = "HB-20";
+    Carro carro = criarCarroPadrao();
 
-    Carro carro = new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo);
-
-    assertEquals(placa, carro.getPlaca());
-    assertEquals(cor, carro.getCor());
-    assertTrue(carro.getArCondicionado());
-    assertEquals(precoEmCentavos, carro.getPrecoEmCentavos());
-    assertTrue(carro.getAtivo());
-    assertEquals(marca, carro.getMarca());
-    assertEquals(modelo, carro.getModelo());
+    assertEquals("A6EVBCD", carro.getPlaca());
+    assertEquals("Azul", carro.getCor());
+    assertTrue(carro.hasArCondicionado());
+    assertEquals(0, new BigDecimal("1000").compareTo(carro.getValor()));
+    assertTrue(carro.isAtivo());
+    assertEquals(MarcaCarro.HYUNDAI, carro.getMarca());
+    assertEquals("HB20", carro.getModelo());
 }
 
-@Test
-    void placaTamanhoInvalidaCriacao()
-    {
-        String placa = "aaecdeasv23";
-        String cor = "Azul";
-        boolean arCondicionado = true;
-        int precoEmCentavos = 1000;
-        boolean ativo = true;
-        String marca = "Hyundai";
-        String modelo = "HB-20";
+    @Test
+    void placaEspacadaEMinusculaEFormatada() {
+        Carro carro = new Carro(" a6evbcd ", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20");
 
+        assertEquals("A6EVBCD", carro.getPlaca());
+    }
+
+    @Test
+    void placaTamanhoInvalidaCriacao() {
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
+                DadosInvalidosException.class,
+                () -> new Carro("aaecdeasv23", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
     @Test
     void placaNulaInvalidaCriacao()
     {
-        String placa = null ;
-        String cor = "Azul";
-        boolean arCondicionado = true;
-        int precoEmCentavos = 1000;
-        boolean ativo = true;
-        String marca = "Hyundai";
-        String modelo = "HB-20";
-
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
+                DadosInvalidosException.class,
+                () -> new Carro(null, "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
     @Test
     void placaVaziaInvalidaCriacao()
     {
-        String placa = " " ;
-        String cor = "Azul";
-        boolean arCondicionado = true;
-        int precoEmCentavos = 1000;
-        boolean ativo = true;
-        String marca = "Hyundai";
-        String modelo = "HB-20";
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
+                DadosInvalidosException.class,
+                () -> new Carro(" ", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
     @Test
     void corNulaInvalidaCriacao()
     {
-        String placa = "a2cd4ef" ;
-        String cor = null;
-        boolean arCondicionado = true;
-        int precoEmCentavos = 1000;
-        boolean ativo = true;
-        String marca = "Hyundai";
-        String modelo = "HB-20";
-
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
+                DadosInvalidosException.class,
+                () -> new Carro("A6EVBCD", null, true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
     @Test
     void corVaziaInvalidaCriacao()
     {
-        String placa = "ad3246c" ;
-        String cor = " ";
-        boolean arCondicionado = true;
-        int precoEmCentavos = 1000;
-        boolean ativo = true;
-        String marca = "Hyundai";
-        String modelo = "HB-20";
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
+                DadosInvalidosException.class,
+                () -> new Carro("A6EVBCD", " ", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
     @Test
     void marcaNulaInvalidaCriacao()
     {
-        String placa = "a2cd4ef" ;
-        String cor = "Azul";
-        boolean arCondicionado = true;
-        int precoEmCentavos = 1000;
-        boolean ativo = true;
-        String marca = null;
-        String modelo = "HB-20";
-
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
-        );
-    }
-
-    @Test
-    void marcaVaziaInvalidaCriacao()
-    {
-        String placa = "ad3246c" ;
-        String cor = "Roxo";
-        boolean arCondicionado = true;
-        int precoEmCentavos = 1000;
-        boolean ativo = true;
-        String marca = " ";
-        String modelo = "HB-20";
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
+                DadosInvalidosException.class,
+                () -> new Carro("A6EVBCD", "Azul", true, new BigDecimal("1000"), true, null, "HB20")
         );
     }
 
     @Test
     void modeloNuloInvalidaCriacao()
     {
-        String placa = "a2cd4ef" ;
-        String cor = "Vermelho";
-        boolean arCondicionado = true;
-        int precoEmCentavos = 1000;
-        boolean ativo = true;
-        String marca = "Hyundai";
-        String modelo = null;
-
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
+                DadosInvalidosException.class,
+                () -> new Carro("A6EVBCD", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, null)
         );
     }
 
     @Test
     void modeloVazioInvalidaCriacao()
     {
-        String placa = "ad3246c" ;
-        String cor = "Azul";
-        boolean arCondicionado = true;
-        int precoEmCentavos = 1000;
-        boolean ativo = true;
-        String marca = "Hyundai";
-        String modelo = " ";
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
+                DadosInvalidosException.class,
+                () -> new Carro("A6EVBCD", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, " ")
+        );
+    }
+
+    @Test
+    void modeloIncompativelLancaExcecao()
+    {
+        assertThrows(
+                DadosInvalidosException.class,
+                () -> new Carro("A6EVBCD", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "Gol")
+        );
+    }
+
+    @Test
+    void valorNuloInvalidaCriacao()
+    {
+        assertThrows(
+                DadosInvalidosException.class,
+                () -> new Carro("A6EVBCD", "Azul", true, null, true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
     @Test
     void carroGratuitoInvalidaCriacao()
     {
-        String placa = "ad3246c" ;
-        String cor = "Azul";
-        boolean arCondicionado = true;
-        int precoEmCentavos = 0;
-        boolean ativo = true;
-        String marca = "Hyundai";
-        String modelo = "HB-20";
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
+                DadosInvalidosException.class,
+                () -> new Carro("A6EVBCD", "Azul", true, new BigDecimal("0"), true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
     @Test
     void carroNegativoInvalidaCriacao()
     {
-        String placa = "ad3246c" ;
-        String cor = "Azul";
-        boolean arCondicionado = true;
-        int precoEmCentavos = -1;
-        boolean ativo = true;
-        String marca = "Hyundai";
-        String modelo = "HB-20";
         assertThrows(
-                IllegalArgumentException.class,
-                () -> new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo)
+                DadosInvalidosException.class,
+                () -> new Carro("A6EVBCD", "Azul", true, new BigDecimal("-1"), true, MarcaCarro.HYUNDAI, "HB20")
         );
     }
 
+    // Validação de equals + hashcode
     @Test
     void carroComMesmaPlacaSaoIguais()
     {
-        String placaA = "A6EVBCD";
-        String corA = "Azul";
-        boolean arCondicionadoA = true;
-        int precoEmCentavosA = 1000;
-        boolean ativoA = true;
-        String marcaA = "Hyundai";
-        String modeloA = "HB-20";
-
-        String placaB = "A6EVBCD";
-        String corB = "Vermelho";
-        boolean arCondicionadoB = true;
-        int precoEmCentavosB = 1500;
-        boolean ativoB = true;
-        String marcaB = "Hyundai";
-        String modeloB = "HB-20";
-
-        Carro carroA = new Carro(placaA, corA, arCondicionadoA, precoEmCentavosA, ativoA, marcaA, modeloA);
-        Carro carroB = new Carro(placaB, corB, arCondicionadoB, precoEmCentavosB, ativoB, marcaB, modeloB);
+        Carro carroA = criarCarroPadrao();
+        Carro carroB = new Carro("A6EVBCD", "Vermelho", false, new BigDecimal("2000"), false, MarcaCarro.FIAT, "Uno");
 
         assertEquals(carroA, carroB);
     }
@@ -234,24 +157,8 @@ class CarroTest {
     @Test
     void carroComPlacasDiferentesNaoSaoIguais()
     {
-        String placaA = "A6EVBCD";
-        String corA = "Azul";
-        boolean arCondicionadoA = true;
-        int precoEmCentavosA = 1000;
-        boolean ativoA = true;
-        String marcaA = "Hyundai";
-        String modeloA = "HB-20";
-
-        String placaB = "A6EVBCT";
-        String corB = "Vermelho";
-        boolean arCondicionadoB = true;
-        int precoEmCentavosB = 1500;
-        boolean ativoB = true;
-        String marcaB = "Hyundai";
-        String modeloB = "HB-20";
-
-        Carro carroA = new Carro(placaA, corA, arCondicionadoA, precoEmCentavosA, ativoA, marcaA, modeloA);
-        Carro carroB = new Carro(placaB, corB, arCondicionadoB, precoEmCentavosB, ativoB, marcaB, modeloB);
+        Carro carroA = criarCarroPadrao();
+        Carro carroB = new Carro("A6EVBCT", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20");
 
         assertNotEquals(carroA, carroB);
     }
@@ -259,24 +166,8 @@ class CarroTest {
     @Test
     void contratoHashCode()
     {
-        String placaA = "A6EVBCD";
-        String corA = "Azul";
-        boolean arCondicionadoA = true;
-        int precoEmCentavosA = 1000;
-        boolean ativoA = true;
-        String marcaA = "Hyundai";
-        String modeloA = "HB-20";
-
-        String placaB = "A6EVBCD";
-        String corB = "Vermelho";
-        boolean arCondicionadoB = true;
-        int precoEmCentavosB = 1500;
-        boolean ativoB = true;
-        String marcaB = "Hyundai";
-        String modeloB = "HB-20";
-
-        Carro carroA = new Carro(placaA, corA, arCondicionadoA, precoEmCentavosA, ativoA, marcaA, modeloA);
-        Carro carroB = new Carro(placaB, corB, arCondicionadoB, precoEmCentavosB, ativoB, marcaB, modeloB);
+        Carro carroA = criarCarroPadrao();
+        Carro carroB = new Carro("A6EVBCD", "Vermelho", false, new BigDecimal("2000"), false, MarcaCarro.FIAT, "Uno");
 
         assertEquals(carroA.hashCode(), carroB.hashCode());
     }
@@ -284,91 +175,82 @@ class CarroTest {
     @Test
     void comparacaoComNuloOuOutroTipo()
     {
-        String placaA = "A6EVBCD";
-        String corA = "Azul";
-        boolean arCondicionadoA = true;
-        int precoEmCentavosA = 1000;
-        boolean ativoA = true;
-        String marcaA = "Hyundai";
-        String modeloA = "HB-20";
-
-        Carro carroA = new Carro(placaA, corA, arCondicionadoA, precoEmCentavosA, ativoA, marcaA, modeloA);
+        Carro carroA = criarCarroPadrao();
 
         assertFalse(carroA.equals(null));
         assertFalse(carroA.equals("String de teste"));
     }
 
     @Test
-    void ativarComSucesso()
+    void setCorValido()
     {
-        String placa = "A6EVBCD";
-        String cor = "Azul";
-        boolean arCondicionado = true;
-        int precoEmCentavos = 1000;
-        boolean ativo = false;
-        String marca = "Hyundai";
-        String modelo = "HB-20";
+        Carro carro = criarCarroPadrao();
+        carro.setCor("Amarelo");
 
-        Carro carro = new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo);
-
-        carro.ativar();
-
-        assertTrue(carro.getAtivo());
+        assertEquals("Amarelo", carro.getCor());
     }
 
     @Test
-    void ativaCarroAtivo()
+    void setCorNulaLancaExcecao()
     {
-        String placa = "A6EVBCD";
-        String cor = "Azul";
-        boolean arCondicionado = true;
-        int precoEmCentavos = 1000;
-        boolean ativo = true;
-        String marca = "Hyundai";
-        String modelo = "HB-20";
-
-        Carro carro = new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo);
+        Carro carro = criarCarroPadrao();
 
         assertThrows(
-                IllegalStateException.class,
-                () -> carro.ativar()
+                DadosInvalidosException.class,
+                () -> carro.setCor(null)
+        );
+    }
+
+    @Test
+    void setCorVaziaLancaExcecao()
+    {
+        Carro carro = criarCarroPadrao();
+
+        assertThrows(
+                DadosInvalidosException.class,
+                () -> carro.setCor(" ")
+        );
+    }
+
+    // Validação da transição de estados ativado e desativado
+
+    @Test
+    void ativarComSucesso()
+    {
+        Carro carro = criarCarroInativo();
+        carro.ativar();
+
+        assertTrue(carro.isAtivo());
+    }
+
+    @Test
+    void ativaCarroAtivoLancaExcecao()
+    {
+        Carro carro = criarCarroPadrao();
+
+        assertThrows(
+                EstadoInvalidoException.class,
+                carro::ativar
         );
     }
 
     @Test
     void desativarComSucesso()
     {
-        String placa = "A6EVBCD";
-        String cor = "Azul";
-        boolean arCondicionado = true;
-        int precoEmCentavos = 1000;
-        boolean ativo = true;
-        String marca = "Hyundai";
-        String modelo = "HB-20";
-
-        Carro carro = new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo);
-
+        Carro carro = criarCarroPadrao();
         carro.desativar();
 
-        assertFalse(carro.getAtivo());
+        assertFalse(carro.isAtivo());
     }
 
     @Test
-    void desativarCarroDesativado()
+    void desativarCarroDesativadoLancaExcecao()
     {
-        String placa = "A6EVBCD";
-        String cor = "Azul";
-        boolean arCondicionado = true;
-        int precoEmCentavos = 1000;
-        boolean ativo = false;
-        String marca = "Hyundai";
-        String modelo = "HB-20";
-
-        Carro carro = new Carro(placa, cor, arCondicionado, precoEmCentavos, ativo, marca, modelo);
+        Carro carro = criarCarroInativo();
 
         assertThrows(
-                IllegalStateException.class,
-                () -> carro.desativar()
+                EstadoInvalidoException.class,
+                carro::desativar
         );
     }
 }

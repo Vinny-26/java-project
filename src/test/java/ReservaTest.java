@@ -1,4 +1,9 @@
+import excecoes.DadosInvalidosException;
+import excecoes.EstadoInvalidoException;
+import excecoes.SaldoInsuficienteException;
 import org.junit.jupiter.api.BeforeEach;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
@@ -14,8 +19,8 @@ class ReservaTest {
     @BeforeEach
     void setUp()
     {
-        pessoaValida = new Pessoa("Vinícius", 10000, "11111111111");
-        carroValido = new Carro("A6EVBCD", "Azul", true, 1000, true, "Hyundai", "HB-20");
+        pessoaValida = new Pessoa("Vinícius", new BigDecimal("10000"), "11111111111");
+        carroValido = new Carro("A6EVBCD", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20");
         periodoValido = new Periodo(LocalDateTime.now(), LocalDateTime.now().plusDays(2));
     }
 
@@ -29,33 +34,33 @@ class ReservaTest {
         assertEquals(pessoaValida, reserva.getPessoa());
         assertEquals(carroValido, reserva.getCarro());
         assertEquals(StatusReserva.CRIADA,reserva.getStatus());
-        assertEquals(8000,pessoaValida.getSaldoEmCentavos());
+        assertEquals(0, new BigDecimal("8000").compareTo(pessoaValida.getSaldo()));
     }
 
     @Test
     void idInvalidoLancaExcecao() {
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(DadosInvalidosException.class,
                 () -> new Reserva (-1, periodoValido, pessoaValida, carroValido)
         );
     }
 
     @Test
     void periodoNuloLancaExcecao() {
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(DadosInvalidosException.class,
                 () -> new Reserva (1, null, pessoaValida, carroValido)
         );
     }
 
     @Test
     void pessoaNulaLancaExcecao() {
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(DadosInvalidosException.class,
                 () -> new Reserva (1, periodoValido, null, carroValido)
         );
     }
 
     @Test
     void carroNuloLancaExcecao() {
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(DadosInvalidosException.class,
                 () -> new Reserva (1, periodoValido, pessoaValida, null)
         );
     }
@@ -63,15 +68,15 @@ class ReservaTest {
     @Test
     void carroInativoLancaExcecao() {
         carroValido.desativar();
-        assertThrows(IllegalStateException.class,
-                () -> new Reserva (1, periodoValido, pessoaValida, carroValido)
+        assertThrows(EstadoInvalidoException.class,
+                () -> new Reserva(1, periodoValido, pessoaValida, carroValido)
         );
     }
 
     @Test
     void saldoInsuficienteLancaExcecao() {
-        pessoaValida = new Pessoa("Vinícius", 100, "11111111111");
-        assertThrows(IllegalArgumentException.class,
+        pessoaValida = new Pessoa("Vinícius", new BigDecimal("100"), "11111111111");
+        assertThrows(SaldoInsuficienteException.class,
                 () -> new Reserva (1, periodoValido, pessoaValida, carroValido)
         );
     }
@@ -81,10 +86,13 @@ class ReservaTest {
     // ==========================================
 
     @Test
-    void cancelarComSucesso() {
+    void cancelarComSucessoEstorno() {
         Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        assertEquals(0, new BigDecimal("8000").compareTo(pessoaValida.getSaldo()));
+
         reserva.cancelar();
         assertEquals(StatusReserva.CANCELADA, reserva.getStatus());
+        assertEquals(0, new BigDecimal("10000").compareTo(pessoaValida.getSaldo()));
     }
 
     @Test
@@ -98,7 +106,7 @@ class ReservaTest {
     void cancelarReservaJaCanceladaLancaExcecao() {
         Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
         reserva.cancelar();
-        assertThrows(IllegalStateException.class,
+        assertThrows(EstadoInvalidoException.class,
                 () -> reserva.cancelar());
     }
 
@@ -106,7 +114,7 @@ class ReservaTest {
     void cancelarReservaConcluidaLancaExcecao() {
         Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
         reserva.concluir();
-        assertThrows(IllegalStateException.class,
+        assertThrows(EstadoInvalidoException.class,
                 () -> reserva.cancelar());
     }
 
@@ -114,7 +122,7 @@ class ReservaTest {
     void concluirReservaJaConcluidaLancaExcecao() {
         Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
         reserva.concluir();
-        assertThrows(IllegalStateException.class,
+        assertThrows(EstadoInvalidoException.class,
                 () -> reserva.concluir());
     }
 
@@ -122,8 +130,49 @@ class ReservaTest {
     void concluirReservaCanceladaLancaExcecao() {
         Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
         reserva.cancelar();
-        assertThrows(IllegalStateException.class,
+        assertThrows(EstadoInvalidoException.class,
                 () -> reserva.concluir());
     }
+
+    // Validação do equals e hashcode
+
+    @Test
+    void reservaMesmoIdSaoIguais()
+    {
+        Reserva reservaA = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        Pessoa pessoaB = new Pessoa("Felipe", new BigDecimal("10000"), "22222222222");
+        Reserva reservaB = new Reserva(1, periodoValido, pessoaB, carroValido);
+
+        assertEquals(reservaA, reservaB);
+    }
+
+    @Test
+    void reservaIdDiferentesNaoSaoIguais()
+    {
+        Reserva reservaA = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        Reserva reservaB = new Reserva(3, periodoValido, pessoaValida, carroValido);
+
+        assertNotEquals(reservaA, reservaB);
+    }
+
+    @Test
+    void contratoHashCode()
+    {
+        Reserva reservaA = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        Pessoa pessoaB = new Pessoa("Felipe", new BigDecimal("10000"), "22222222222");
+        Reserva reservaB = new Reserva(1, periodoValido, pessoaB, carroValido);
+
+        assertEquals(reservaA.hashCode(), reservaB.hashCode());
+    }
+
+    @Test
+    void comparacaoComNuloOuOutroTipo()
+    {
+        Reserva reservaA = new Reserva(1, periodoValido, pessoaValida, carroValido);
+
+        assertFalse(reservaA.equals(null));
+        assertFalse(reservaA.equals("String de teste"));
+    }
+
 }
 

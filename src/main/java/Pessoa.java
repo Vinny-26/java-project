@@ -1,12 +1,14 @@
-public class Pessoa
-{
+import excecoes.DadosInvalidosException;
+import java.math.BigDecimal;
+import excecoes.SaldoInsuficienteException;
+
+public class Pessoa {
     private final String titular;
-    private int saldoEmCentavos;
+    private BigDecimal saldo;
     private final String cpf;
 
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (this == obj) return true;
 
         if (obj == null || getClass() != obj.getClass()) return false;
@@ -17,79 +19,76 @@ public class Pessoa
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return java.util.Objects.hash(cpf);
     }
 
-    public Pessoa(String titular, int saldoEmCentavos, String cpf)
-    {
-        if(titular == null || titular.isBlank())
-        {
-            throw new IllegalArgumentException("O nome do titular deve estar preenchido e não pode ser nulo");
+    public Pessoa(String titular, BigDecimal saldo, String cpf) {
+        if (titular == null || titular.isBlank()) {
+            throw new DadosInvalidosException("O nome do titular deve estar preenchido e não pode ser nulo");
         }
-        if(cpf == null || cpf.isBlank())
-        {
-            throw new IllegalArgumentException("O cpf do titular deve estar preenchido e não pode ser nulo");
+        if (cpf == null || cpf.isBlank()) {
+            throw new DadosInvalidosException("O cpf do titular deve estar preenchido e não pode ser nulo");
         }
-        if(cpf.length() != 11)
-        {
-            throw new IllegalArgumentException("O cpf do titular deve conter apenas 11 digitos");
+        if (cpf.length() != 11) {
+            throw new DadosInvalidosException("O cpf do titular deve conter apenas 11 digitos");
         }
-        if(saldoEmCentavos <= 0)
+        if (saldo == null || saldo.compareTo(BigDecimal.ZERO) < 0)
         {
-            throw new IllegalArgumentException("O saldo do titular não pode ser menor ou igual a 0");
+            throw new DadosInvalidosException("O saldo do titular não pode ser menor que 0 ou nulo");
         }
-            this.titular = titular;
-            this.saldoEmCentavos = saldoEmCentavos;
-            this.cpf = cpf;
+        this.titular = titular;
+        this.saldo = saldo;
+        this.cpf = cpf;
     }
 
-    public String getTitular()
-    {
+    public String getTitular() {
         return this.titular;
     }
-    public int getSaldoEmCentavos()
-    {
-        return this.saldoEmCentavos;
+
+    public BigDecimal getSaldo() {
+        return this.saldo;
     }
-    public String getCpf()
-    {
+
+    public String getCpf() {
         return this.cpf;
     }
 
-    boolean saldoSuficiente(int valorEmCentavos)
-    {
-        return this.saldoEmCentavos >= valorEmCentavos;
+    boolean saldoSuficiente(BigDecimal valor) {
+        return this.saldo.compareTo(valor) >= 0;
     }
 
-    public void debitar(int valorEmCentavos)
-    {
-        if(valorEmCentavos > 0)
+    public void debitar(BigDecimal valor) {
+
+        if(valor == null)
         {
-            if(!saldoSuficiente(valorEmCentavos))
-            {
-                throw new IllegalArgumentException("Voce não possui saldo suficiente para efetuar a Reserva.java");
-            }
-            else
-            {
-                this.saldoEmCentavos -= valorEmCentavos;
-            }
+            throw new DadosInvalidosException("O valor para débito não pode ser nulo");
         }
-        else
+
+        if (valor.compareTo(BigDecimal.ZERO) <=0)
         {
-            throw new IllegalArgumentException("Não é possível debitar um valor negativo");
+            throw new DadosInvalidosException("O valor para débito deve ser estritamente positivo");
         }
+        if (!saldoSuficiente(valor)) {
+            throw new SaldoInsuficienteException("Saldo insuficiente para efetuar a Reserva");
+        }
+        this.saldo = this.saldo.subtract(valor);
     }
-    public void creditar(int valorEmCentavos)
+    public void creditar(BigDecimal valor)
     {
-        if(valorEmCentavos > 0)
+
+        if(valor == null)
         {
-            this.saldoEmCentavos += valorEmCentavos;
+            throw new DadosInvalidosException("O valor para creditar não pode ser nulo");
+        }
+
+        if(valor.compareTo(BigDecimal.ZERO) <= 0)
+        {
+            throw new DadosInvalidosException("O valor a ser creditado deve ser estritamente positivo");
         }
         else
         {
-            throw new IllegalArgumentException("Não é possível creditar valor negativo");
+            this.saldo = this.saldo.add(valor);
         }
     }
 }
