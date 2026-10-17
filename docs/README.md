@@ -14,7 +14,9 @@ README:
 
 ## Repositório
 
-https://github.com/Vinny-26/java-project
+URL: https://github.com/Vinny-26/java-project
+Branch: main
+Hash da entrega: 270435e686d222487ea81c12a748633a30f558b2
 
 ## Diagrama de Classes
 
