@@ -2,6 +2,7 @@ import excecoes.DadosInvalidosException;
 import excecoes.EstadoInvalidoException;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Reserva {
@@ -35,12 +36,13 @@ public Reserva(int id, Periodo periodo, Pessoa pessoa, Carro carro)
         return carro.getValor().multiply(BigDecimal.valueOf(periodo.diasDoPeriodo()));
     }
 
-public void cancelar() {
+public void cancelar(LocalDateTime momentoCancelamento, PoliticaCancelamento politica) {
     if (this.status != StatusReserva.CRIADA)
     {
         throw new EstadoInvalidoException("Apenas reservas com status CRIADA podem ser canceladas.");
     }
-    pessoa.creditar(getCustoTotal());
+    BigDecimal valorEstorno = politica.calcularEstorno(this, momentoCancelamento);
+    this.pessoa.creditar(getCustoTotal());
     this.status = StatusReserva.CANCELADA;
 }
 
