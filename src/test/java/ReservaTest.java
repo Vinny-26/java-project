@@ -138,7 +138,7 @@ class ReservaTest {
                 () -> reserva.cancelar(null, politica));
 
         assertThrows(DadosInvalidosException.class,
-                () -> reserva.cancelar(LocalDateTime.now(), null));
+                () -> reserva.cancelar(periodoValido.inicio(), null));
     }
 
 
