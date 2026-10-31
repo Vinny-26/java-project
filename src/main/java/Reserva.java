@@ -41,8 +41,12 @@ public void cancelar(LocalDateTime momentoCancelamento, PoliticaCancelamento pol
     {
         throw new EstadoInvalidoException("Apenas reservas com status CRIADA podem ser canceladas.");
     }
+    if(momentoCancelamento == null || politica == null)
+    {
+        throw new DadosInvalidosException("Momento do Cancelamento e Politica de Cancelamento não podem ser null.");
+    }
     BigDecimal valorEstorno = politica.calcularEstorno(this, momentoCancelamento);
-    this.pessoa.creditar(getCustoTotal());
+    this.pessoa.creditar(valorEstorno);
     this.status = StatusReserva.CANCELADA;
 }
 
