@@ -1,7 +1,6 @@
 import excecoes.DadosInvalidosException;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
 
 public class ConsultaReservaServico
 {
@@ -56,7 +55,7 @@ public class ConsultaReservaServico
     }
 
     // Verificar se existe reserva ativa para o veículo
-    public boolean CarroPossuiReservaAtiva(String placa)
+    public boolean carroPossuiReservaAtiva(String placa)
     {
         if (placa == null || placa.isBlank()) return false;
 
