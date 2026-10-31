@@ -12,6 +12,12 @@ README:
 - Variante: Carro
 - Regra específica: Um carro só pode ser alugado por uma pessoa de cada vez, devemos utilizar um identificador único para cada veículo.
 
+## Repositório
+
+- URL: https://github.com/Vinny-26/java-project
+- Branch: main
+- Hash da entrega: ed65e2bb99845a6eeaec03438a19a7da8c7d170e
+
 ## Diagrama de Classes
 
 ```mermaid
