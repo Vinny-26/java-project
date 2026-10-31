@@ -19,10 +19,15 @@ class ReservaTest {
     @BeforeEach
     void setUp()
     {
+        LocalDateTime inicio = LocalDateTime.of(2026, 11, 10, 10, 0);
         pessoaValida = new Pessoa("Vinícius", new BigDecimal("10000"), "11111111111");
         carroValido = new Carro("A6EVBCD", "Azul", true, new BigDecimal("1000"), true, MarcaCarro.HYUNDAI, "HB20");
-        periodoValido = new Periodo(LocalDateTime.now(), LocalDateTime.now().plusDays(2));
+        periodoValido = new Periodo(inicio, inicio.plusDays(2));
     }
+
+    // ==========================================
+    // 1. CRIAÇÃO E VALIDAÇÃO DE INVARIANTES
+    // ==========================================
 
     @Test
     void criacaoValida()
@@ -82,18 +87,64 @@ class ReservaTest {
     }
 
     // ==========================================
-    // 2. TRANSIÇÕES DE ESTADO (MÁQUINA DE ESTADOS)
+    // 2. POLÍTICAS DE CANCELAMENTO (STRATEGY)
     // ==========================================
 
     @Test
-    void cancelarComSucessoEstorno() {
+    void cancelarComEstornoTotalDevolve100Porcento()
+    {
         Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
-        assertEquals(0, new BigDecimal("8000").compareTo(pessoaValida.getSaldo()));
+        PoliticaCancelamento politica = new EstornoTotal();
+        LocalDateTime momentoCancelamento = periodoValido.inicio().minusHours(10);
 
-        reserva.cancelar();
+        reserva.cancelar(momentoCancelamento, politica);
+
         assertEquals(StatusReserva.CANCELADA, reserva.getStatus());
         assertEquals(0, new BigDecimal("10000").compareTo(pessoaValida.getSaldo()));
     }
+
+    @Test
+    void cancelarComMultaMaisDe48HorasDevolve100Porcento()
+    {
+        Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        PoliticaCancelamento politica = new EstornoComMulta();
+        LocalDateTime momentoCancelamento = periodoValido.inicio().minusHours(72);
+
+        reserva.cancelar(momentoCancelamento, politica);
+
+        assertEquals(StatusReserva.CANCELADA, reserva.getStatus());
+        assertEquals(0, new BigDecimal("10000").compareTo(pessoaValida.getSaldo()));
+    }
+
+    @Test
+    void cancelarComMultaMenosDe48HorasDevolve80Porcento()
+    {
+        Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        PoliticaCancelamento politica = new EstornoComMulta();
+        LocalDateTime momentoCancelamento = periodoValido.inicio().minusHours(24);
+
+        reserva.cancelar(momentoCancelamento, politica);
+
+        assertEquals(StatusReserva.CANCELADA, reserva.getStatus());
+        assertEquals(0, new BigDecimal("9600").compareTo(pessoaValida.getSaldo()));
+    }
+
+    @Test
+    void cancelarComNuloLancaExcecao()
+    {
+        Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        PoliticaCancelamento politica = new EstornoComMulta();
+        assertThrows(DadosInvalidosException.class,
+                () -> reserva.cancelar(null, politica));
+
+        assertThrows(DadosInvalidosException.class,
+                () -> reserva.cancelar(periodoValido.inicio(), null));
+    }
+
+
+    // ==========================================
+    // 3. TRANSIÇÕES DE ESTADO (MÁQUINA DE ESTADOS)
+    // ==========================================
 
     @Test
     void concluirComSucesso() {
@@ -105,17 +156,23 @@ class ReservaTest {
     @Test
     void cancelarReservaJaCanceladaLancaExcecao() {
         Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
-        reserva.cancelar();
+        PoliticaCancelamento politica = new EstornoTotal();
+
+        reserva.cancelar(periodoValido.inicio().minusHours(72), politica);
+
         assertThrows(EstadoInvalidoException.class,
-                () -> reserva.cancelar());
+                () -> reserva.cancelar(periodoValido.inicio().minusHours(24), politica));
     }
 
     @Test
     void cancelarReservaConcluidaLancaExcecao() {
         Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
+        PoliticaCancelamento politica = new EstornoTotal();
+
         reserva.concluir();
+
         assertThrows(EstadoInvalidoException.class,
-                () -> reserva.cancelar());
+                () -> reserva.cancelar(periodoValido.inicio().minusHours(24), politica));
     }
 
     @Test
@@ -129,12 +186,17 @@ class ReservaTest {
     @Test
     void concluirReservaCanceladaLancaExcecao() {
         Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido);
-        reserva.cancelar();
+        PoliticaCancelamento politica = new EstornoTotal();
+
+        reserva.cancelar(periodoValido.inicio().minusHours(72), politica);
+
         assertThrows(EstadoInvalidoException.class,
                 () -> reserva.concluir());
     }
 
-    // Validação do equals e hashcode
+    // ==========================================
+    // 4. VALIDAÇÃO DO EQUALS E HASHCODE
+    // ==========================================
 
     @Test
     void reservaMesmoIdSaoIguais()

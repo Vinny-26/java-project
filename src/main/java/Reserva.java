@@ -2,9 +2,10 @@ import excecoes.DadosInvalidosException;
 import excecoes.EstadoInvalidoException;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Reserva {
+public class Reserva implements Identificavel<Integer> {
     private final int id;
     private StatusReserva status; //Enum (Guarda 1 de 3 opções "CANCELADA, CRIADA E CONCLUIDA")
     private final Periodo periodo; //Record composição (guarda as datas de início e fim da resrva)
@@ -35,12 +36,17 @@ public Reserva(int id, Periodo periodo, Pessoa pessoa, Carro carro)
         return carro.getValor().multiply(BigDecimal.valueOf(periodo.diasDoPeriodo()));
     }
 
-public void cancelar() {
+public void cancelar(LocalDateTime momentoCancelamento, PoliticaCancelamento politica) {
     if (this.status != StatusReserva.CRIADA)
     {
         throw new EstadoInvalidoException("Apenas reservas com status CRIADA podem ser canceladas.");
     }
-    pessoa.creditar(getCustoTotal());
+    if(momentoCancelamento == null || politica == null)
+    {
+        throw new DadosInvalidosException("Momento do Cancelamento e Politica de Cancelamento não podem ser null.");
+    }
+    BigDecimal valorEstorno = politica.calcularEstorno(this, momentoCancelamento);
+    this.pessoa.creditar(valorEstorno);
     this.status = StatusReserva.CANCELADA;
 }
 
@@ -52,8 +58,7 @@ public void concluir() {
     this.status = StatusReserva.CONCLUIDA;
 
 }
-
-public int getId() {return id; }
+public Integer getId() {return id; }
 public StatusReserva getStatus() {return status; }
 public Periodo getPeriodo() {return periodo; }
 public Pessoa getPessoa() {return pessoa; }

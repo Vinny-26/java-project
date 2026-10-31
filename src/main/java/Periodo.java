@@ -2,6 +2,7 @@
 import excecoes.DadosInvalidosException;
 import excecoes.SobreposicaoPeriodoException;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -39,4 +40,11 @@ public record Periodo(LocalDateTime inicio, LocalDateTime fim)
         int dias = (int) ChronoUnit.DAYS.between(this.inicio, this.fim);
         return Math.max(1, dias);
     }
+    public long horasAteInicio(LocalDateTime momentoConsulta) {
+        if (momentoConsulta == null) {
+            throw new DadosInvalidosException("Momento de consulta não pode ser nulo");
+        }
+        return Duration.between(momentoConsulta, this.inicio).toHours();
+    }
+
 }
