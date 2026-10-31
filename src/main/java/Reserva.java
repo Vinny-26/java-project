@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Reserva {
+public class Reserva implements Identificavel<Integer> {
     private final int id;
     private StatusReserva status; //Enum (Guarda 1 de 3 opções "CANCELADA, CRIADA E CONCLUIDA")
     private final Periodo periodo; //Record composição (guarda as datas de início e fim da resrva)
@@ -58,8 +58,7 @@ public void concluir() {
     this.status = StatusReserva.CONCLUIDA;
 
 }
-
-public int getId() {return id; }
+public Integer getId() {return id; }
 public StatusReserva getStatus() {return status; }
 public Periodo getPeriodo() {return periodo; }
 public Pessoa getPessoa() {return pessoa; }
