@@ -25,9 +25,9 @@ public class PersistenciaJsonServico {
         this.objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }
 
-    /**
-     * Salva a lista de reservas em formato JSON no caminho especificado.
-     */
+
+     // Salva a lista de reservas em formato JSON no caminho especificado.
+
     public void salvar(Path caminho, List<Reserva> reservas) throws IOException {
         if (caminho == null || reservas == null) {
             throw new IllegalArgumentException("Caminho e lista de reservas não podem ser nulos.");
@@ -41,10 +41,8 @@ public class PersistenciaJsonServico {
         objectMapper.writeValue(caminho.toFile(), reservas);
     }
 
-    /**
-     * Carrega as reservas a partir do arquivo JSON.
-     * Os construtores/validadores das entidades de domínio garantem a Invariante 8 durante a desserialização.
-     */
+    //Carrega as reservas a partir do arquivo JSON.
+
     public List<Reserva> restaurar(Path caminho) throws IOException {
         if (caminho == null || !Files.exists(caminho)) {
             throw new IllegalArgumentException("Arquivo de dados não encontrado: " + caminho);

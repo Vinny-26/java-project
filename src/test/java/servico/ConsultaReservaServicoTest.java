@@ -11,6 +11,7 @@ import repositorio.RepositorioMemoria;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -63,7 +64,6 @@ class ConsultaReservaServicoTest {
     void repositorioNuloLancaExcecao()
     {
         assertThrows(DadosInvalidosException.class, () -> new ConsultaReservaServico(null));
-
     }
 
     // Busca por Status
@@ -156,6 +156,35 @@ class ConsultaReservaServicoTest {
 
         assertFalse(servico.carroPossuiReservaAtiva("PLACA999"));
         assertFalse(servico.carroPossuiReservaAtiva(null));
+    }
+
+    // Contagem de reservas por status especifico
+    @Test
+    void contaReservasPorStatusComSucesso() {
+        assertEquals(1, servico.contarReservasPorStatus(StatusReserva.CRIADA));
+        assertEquals(1, servico.contarReservasPorStatus(StatusReserva.CONCLUIDA));
+        assertEquals(1, servico.contarReservasPorStatus(StatusReserva.CANCELADA));
+        assertEquals(0, servico.contarReservasPorStatus(null));
+    }
+
+    // Agrupamento total de reservas por todos os status (RF10)
+    @Test
+    void agrupaTotalReservasPorStatusComSucesso() {
+        Map<StatusReserva, Long> agrupado = servico.agruparTotalReservasPorStatus();
+
+        assertEquals(3, agrupado.size());
+        assertEquals(1L, agrupado.get(StatusReserva.CRIADA));
+        assertEquals(1L, agrupado.get(StatusReserva.CONCLUIDA));
+        assertEquals(1L, agrupado.get(StatusReserva.CANCELADA));
+    }
+
+    @Test
+    void agrupaTotalReservasPorStatusComRepositorioVazio() {
+        Repositorio<Reserva, Integer> repoVazio = new RepositorioMemoria<>();
+        ConsultaReservaServico servicoVazio = new ConsultaReservaServico(repoVazio);
+
+        Map<StatusReserva, Long> agrupado = servicoVazio.agruparTotalReservasPorStatus();
+        assertTrue(agrupado.isEmpty());
     }
 
 }

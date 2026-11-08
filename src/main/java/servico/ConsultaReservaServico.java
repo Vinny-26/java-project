@@ -7,6 +7,8 @@ import dominio.StatusReserva;
 import excecoes.DadosInvalidosException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ConsultaReservaServico
 {
@@ -70,4 +72,23 @@ public class ConsultaReservaServico
                 .anyMatch(r -> r.getCarro().getPlaca().equalsIgnoreCase(placa.trim()));
     }
 
+    // Contar a quantidade exata de reservas para um status específico (ex: CONCLUIDA)
+    public long contarReservasPorStatus(StatusReserva status)
+    {
+        if (status == null) return 0;
+
+        return repositorio.listarTodos().stream()
+                .filter(r -> r.getStatus() == status)
+                .count();
+    }
+
+    // Agrupar e contar a quantidade total de reservas por cada status (RF10)
+    public Map<StatusReserva, Long> agruparTotalReservasPorStatus()
+    {
+        return repositorio.listarTodos().stream()
+                .collect(Collectors.groupingBy(
+                        Reserva::getStatus,
+                        Collectors.counting()
+                ));
+    }
 }
