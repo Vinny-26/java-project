@@ -1,6 +1,9 @@
 
 // Desconsiderar arquivo na etapa 1
 
+import dominio.Carro;
+import dominio.MarcaCarro;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -29,7 +32,7 @@ public static void main(String[] args) {
 
     Carro meuCarro = new Carro(placa, cor, arCondicionado, valor, true, marca, modelo);
 
-    System.out.println("\nCarro cadastrado com sucesso:");
+    System.out.println("\ndominio.Carro cadastrado com sucesso:");
     System.out.println(meuCarro);
 
     leitor.close();

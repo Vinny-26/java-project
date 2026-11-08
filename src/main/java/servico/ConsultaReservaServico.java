@@ -1,3 +1,9 @@
+package servico;
+
+import repositorio.*;
+import dominio.MarcaCarro;
+import dominio.Reserva;
+import dominio.StatusReserva;
 import excecoes.DadosInvalidosException;
 import java.math.BigDecimal;
 import java.util.List;

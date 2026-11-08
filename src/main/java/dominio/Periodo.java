@@ -1,4 +1,6 @@
+package dominio;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import excecoes.DadosInvalidosException;
 import excecoes.SobreposicaoPeriodoException;
 
@@ -6,7 +8,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-public record Periodo(LocalDateTime inicio, LocalDateTime fim)
+public record Periodo(@JsonProperty("inicio") LocalDateTime inicio,
+                      @JsonProperty("fim") LocalDateTime fim)
 {
     public Periodo
     {

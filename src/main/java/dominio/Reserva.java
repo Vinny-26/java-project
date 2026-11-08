@@ -1,3 +1,9 @@
+package dominio;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import politica.*;
 import excecoes.DadosInvalidosException;
 import excecoes.EstadoInvalidoException;
 
@@ -12,11 +18,15 @@ public class Reserva implements Identificavel<Integer> {
     private final Pessoa pessoa; //Associação (classe pessoa/responsável)
     private final Carro carro; //Associação (classe recurso)
 
-public Reserva(int id, Periodo periodo, Pessoa pessoa, Carro carro)
+    @JsonCreator
+public Reserva(@JsonProperty("id") int id,
+               @JsonProperty("periodo") Periodo periodo,
+               @JsonProperty("pessoa") Pessoa pessoa,
+               @JsonProperty("carro") Carro carro )
 {
     if( id <= 0 || periodo == null || pessoa == null || carro == null)
     {
-        throw new DadosInvalidosException("Não é possível criar Reserva com dados inválidos");
+        throw new DadosInvalidosException("Não é possível criar dominio.Reserva com dados inválidos");
     }
     if (!carro.isAtivo())
     {
@@ -28,7 +38,6 @@ public Reserva(int id, Periodo periodo, Pessoa pessoa, Carro carro)
     this.pessoa = pessoa;
     this.carro = carro;
     this.status = StatusReserva.CRIADA; //Iniciar o status como criada ;)
-    pessoa.debitar(getCustoTotal());
 }
 
     private BigDecimal calcularCustoTotal(Carro carro, Periodo periodo)
@@ -63,6 +72,7 @@ public StatusReserva getStatus() {return status; }
 public Periodo getPeriodo() {return periodo; }
 public Pessoa getPessoa() {return pessoa; }
 public Carro getCarro() {return carro; }
+    @JsonIgnore
 public BigDecimal getCustoTotal() {return calcularCustoTotal(carro, periodo);}
 
     @Override

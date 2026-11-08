@@ -1,3 +1,6 @@
+package repositorio;
+
+import dominio.Identificavel;
 import excecoes.DadosInvalidosException;
 
 import java.util.*;

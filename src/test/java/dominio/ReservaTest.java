@@ -1,3 +1,5 @@
+package dominio;
+
 import excecoes.DadosInvalidosException;
 import excecoes.EstadoInvalidoException;
 import excecoes.SaldoInsuficienteException;
@@ -7,6 +9,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
+import politica.EstornoComMulta;
+import politica.EstornoTotal;
+import politica.PoliticaCancelamento;
 
 import static org.junit.jupiter.api.Assertions.*;
 

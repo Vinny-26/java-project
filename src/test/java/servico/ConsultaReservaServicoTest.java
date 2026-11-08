@@ -1,6 +1,12 @@
+package servico;
+
+import dominio.*;
 import excecoes.DadosInvalidosException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import politica.EstornoTotal;
+import repositorio.Repositorio;
+import repositorio.RepositorioMemoria;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -33,16 +39,16 @@ class ConsultaReservaServicoTest {
 
         LocalDateTime inicioBase = LocalDateTime.of(2026, 11, 10, 10, 0);
 
-        // Reserva 1: CRIADA | Pessoa 1 | Hyundai (2 diárias = 2000)
+        // dominio.Reserva 1: CRIADA | dominio.Pessoa 1 | Hyundai (2 diárias = 2000)
         Periodo periodo1 = new Periodo(inicioBase, inicioBase.plusDays(2));
         Reserva r1 = new Reserva(1, periodo1, pessoa1, carroHyundai);
 
-        // Reserva 2: CONCLUÍDA | Pessoa 1 | Toyota (2 diárias = 3000)
+        // dominio.Reserva 2: CONCLUÍDA | dominio.Pessoa 1 | Toyota (2 diárias = 3000)
         Periodo periodo2 = new Periodo(inicioBase.plusDays(5), inicioBase.plusDays(7));
         Reserva r2 = new Reserva(2, periodo2, pessoa1, carroFiat);
         r2.concluir();
 
-        // Reserva 3: CANCELADA | Pessoa 2 | Hyundai (2 diárias = 2000)
+        // dominio.Reserva 3: CANCELADA | dominio.Pessoa 2 | Hyundai (2 diárias = 2000)
         Periodo periodo3 = new Periodo(inicioBase.plusDays(10), inicioBase.plusDays(12));
         Reserva r3 = new Reserva(3, periodo3, pessoa2, carroHyundai);
         r3.cancelar(inicioBase.plusDays(8), new EstornoTotal());
@@ -136,7 +142,7 @@ class ConsultaReservaServicoTest {
         assertEquals(0, BigDecimal.ZERO.compareTo(faturamento));
     }
 
-    // Verificação de Reserva Ativa
+    // Verificação de dominio.Reserva Ativa
 
     @Test
     void retornaTrueSeReservaExistentePlaca() {

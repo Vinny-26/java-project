@@ -1,3 +1,6 @@
+package repositorio;
+
+import dominio.*;
 import excecoes.DadosInvalidosException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

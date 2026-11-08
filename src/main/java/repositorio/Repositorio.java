@@ -1,3 +1,7 @@
+package repositorio;
+
+import dominio.Identificavel;
+
 import java.util.List;
 import java.util.Optional;
 
