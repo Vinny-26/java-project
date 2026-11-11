@@ -34,13 +34,13 @@ public class Carro {
     }
 
     // Construtor com todos os atributos
-    // public Carro(String placa, String cor, boolean arCondicionado, BigDecimal valor, boolean status, MarcaCarro marca, String modelo)
+    // public Carro(String placa, String cor, boolean arCondicionado, BigDecimal valor, boolean ativo, MarcaCarro marca, String modelo)
     @JsonCreator
     public Carro(@JsonProperty("placa") String placa,
                  @JsonProperty("cor") String cor,
                  @JsonProperty("arCondicionado") boolean arCondicionado,
                  @JsonProperty("valor") BigDecimal valor,
-                 @JsonProperty("status") boolean status,
+                 @JsonProperty("ativo") boolean ativo,
                  @JsonProperty("marca") MarcaCarro marca,
                  @JsonProperty("modelo") String modelo) {
         if(placa == null || placa.isBlank())
@@ -72,7 +72,7 @@ public class Carro {
         this.cor = cor; // Estudar possível enum
         this.arCondicionado = arCondicionado;
         this.valor = valor;
-        this.ativo = status;
+        this.ativo = ativo;
         this.marca = marca;
         this.modelo = modelo;
     }

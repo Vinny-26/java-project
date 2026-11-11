@@ -75,6 +75,7 @@ classDiagram
       +getCustoTotal() BigDecimal
       +cancelar(momento: LocalDateTime, politica: politica.PoliticaCancelamento)
       +concluir()
+      +restaurar(id: int, status: StatusReserva, periodo: Periodo, pessoa: Pessoa, carro: Carro) Reserva$
     }
 
     class repositorio.Repositorio~T, ID~ {
@@ -93,13 +94,21 @@ classDiagram
       +deletarPorId(id: ID)
     }
 
+    class repositorio.PersistenciaJsonServico {
+      -ObjectMapper objectMapper
+      +salvar(caminho: Path, reservas: List~dominio.Reserva~) void
+      +restaurar(caminho: Path) List~dominio.Reserva~
+    }
+
     class servico.ConsultaReservaServico {
       -repositorio.Repositorio~dominio.Reserva, Integer~ repositorio
       +buscarReservaPorStatus(status: dominio.StatusReserva) List~dominio.Reserva~
       +buscarReservaPorCPF(cpf: String) List~dominio.Reserva~
       +buscarReservaPorMarcaCarro(marca: dominio.MarcaCarro) List~dominio.Reserva~
       +calcularFaturamentoConcluido() BigDecimal
-      +CarroPossuiReservaAtiva(placa: String) boolean
+      +carroPossuiReservaAtiva(placa: String) boolean
+      +contarReservasPorStatus(status: dominio.StatusReserva) long
+      +agruparTotalReservasPorStatus() Map~dominio.StatusReserva, Long~
     }
 
     dominio.Identificavel~Integer~ <|.. dominio.Reserva : implementa
@@ -114,3 +123,4 @@ classDiagram
     dominio.Reserva ..> politica.PoliticaCancelamento : usa
     dominio.Carro "0..*" --> "1" dominio.MarcaCarro : marca
     servico.ConsultaReservaServico --> repositorio.Repositorio~dominio.Reserva, Integer~ : consulta
+    repositorio.PersistenciaJsonServico ..> dominio.Reserva : persiste / restaura
