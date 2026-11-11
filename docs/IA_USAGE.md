@@ -41,7 +41,7 @@ documentação ou decisões.
 
 ### Uso 4
 
-- Data: 10/11/2026
+- Data: 07/11/2026
 - Ferramenta: Gemini
 - Objetivo: Implementar a persistência em arquivos JSON com Jackson, assegurando a garantia de revalidação de invariantes na restauração sem execução de débitos financeiros duplicados 
 - Parte do projeto afetada: Classe dominio.Reserva, dominio.Carro, dominio.Pessoa, record dominio.Periodo, classe repositorio.PersistenciaJsonServico e suíte de testes repositorio.PersistenciaTest 

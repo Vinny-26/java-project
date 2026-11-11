@@ -48,3 +48,28 @@ Registre decisões que afetem o modelo, a API, as dependências ou a evolução.
 - Decisão: Implementar a interface dominio.Identificavel<ID> nas entidades e criar a classe genérica repositorio.RepositorioMemoria<T, ID>, combinada a uma classe de serviço (servico.ConsultaReservaServico) dedicada a consultas
 - Consequências: Estrutura de repositório reutilizável para qualquer entidade (dominio.Reserva, dominio.Carro, dominio.Pessoa) e desacoplamento total entre o armazenamento em memória e as regras de consulta/agregacao
 - Teste ou evidência que verifica a decisão: Passagem com sucesso de $100\%$ dos testes unitários em repositorio.RepositorioMemoriaTest e servico.ConsultaReservaServicoTest, cobrindo as operações de CRUD em memória e as consultas
+
+
+- Data: 07/11
+
+- Problema observado: Ao restaurar instâncias de dominio.Reserva via Jackson a partir do JSON, o construtor padrão executava novamente o débito financeiro na conta da dominio.Pessoa, duplicando a cobrança ou lançando exceção por saldo insuficiente, além da necessidade de revalidar as regras de negócio ao carregar o ficheiro.
+- Alternativas consideradas: Remover o débito financeiro de todos os construtores de domínio ou criar um método de fábrica estático com anotação @JsonCreator dedicado exclusivamente à restauração.
+- Decisão: Criar o método de fábrica estático dominio.Reserva.restaurar(...) anotado com @JsonCreator para desserialização do Jackson sem execução de débitos, mantendo a chamada de débito nos construtores públicos de criação de novas reservas.
+- Consequências: Revalidação estrita das invariantes de domínio na desserialização do JSON (Invariante 8) sem duplicar cobranças no saldo do cliente nem alterar o comportamento da aplicação.
+- Teste ou evidência que verifica a decisão: Testes unitários e de integração em repositorio.PersistenciaTest (deveSalvarERestaurarReservaValidaComSucesso e deveRejeitarJsonComInvarianteViolada) e dominio.ReservaTest executados com 100% de aprovação.
+
+
+- Data: 07/11
+- Problema observado: O Jackson mapeava automaticamente métodos getters públicos derivados, como getCustoTotal(), serializando o campo "custoTotal" no JSON e provocando exceções de propriedades não reconhecidas (com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException) na restauração.
+- Alternativas consideradas: Criar um atributo físico custoTotal com getter/setter, ignorar propriedades desconhecidas globalmente no ObjectMapper (FAIL_ON_UNKNOWN_PROPERTIES = false) ou utilizar anotações explícitas de ignoramento.
+- Decisão: Adicionar a anotação @JsonIgnore no método getter calculado getCustoTotal() na classe dominio.Reserva.
+- Consequências: JSON gerado mais limpo e sem campos redundantes, garantindo que o custo total continue sendo calculado dinamicamente com base no Período e na diária do Carro.
+- Teste ou evidência que verifica a decisão: Passagem sem falhas nos testes de integração de persistência em repositorio.PersistenciaTest ao gravar e restaurar listas de reservas em arquivo temporário gerido pelo @TempDir.
+
+
+- Data: 07/11
+- Problema observado: Necessidade de gerar relatórios sintéticos e agregações estatísticas por status das reservas.
+- Alternativas consideradas: Laços imperativos tradicionais com mapas manuais ou utilização da API de Java Streams.
+- Decisão: Implementar os métodos de agregação e contagem no servico.ConsultaReservaServico (contarReservasPorStatus e agruparTotalReservasPorStatus) utilizando Collectors.groupingBy e Collectors.counting da API de Java Streams.
+- Consequências: Código declarativo, expressivo, legível e alinhado aos padrões modernos do Java 25 para geração de relatórios sobre o repositório.
+- Teste ou evidência que verifica a decisão: Testes unitários agrupaTotalReservasPorStatusComSucesso e contaReservasPorStatusComSucesso aprovados na suíte de testes de servico.ConsultaReservaServicoTest.
