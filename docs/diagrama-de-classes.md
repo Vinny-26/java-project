@@ -5,14 +5,14 @@ config:
 ---
 classDiagram
 
-    class StatusReserva {
+    class dominio.StatusReserva {
       <<enum>>
       CRIADA
       CANCELADA
       CONCLUIDA
     }
 
-    class MarcaCarro {
+    class dominio.MarcaCarro {
       <<enum>>
       FIAT
       VOLKSWAGEN
@@ -22,25 +22,25 @@ classDiagram
       +possuiModelo(modelo: String) boolean
     }
 
-    class Identificavel~ID~ {
+    class dominio.Identificavel~ID~ {
       <<interface>>
       +getId() ID
     }
 
-    class PoliticaCancelamento {
+    class politica.PoliticaCancelamento {
       <<interface>>
-      +calcularEstorno(reserva: Reserva, momentoCancelamento: LocalDateTime) BigDecimal
+      +calcularEstorno(reserva: dominio.Reserva, momentoCancelamento: LocalDateTime) BigDecimal
     }
 
-    class EstornoTotal {
-      +calcularEstorno(reserva: Reserva, momentoCancelamento: LocalDateTime) BigDecimal
+    class politica.EstornoTotal {
+      +calcularEstorno(reserva: dominio.Reserva, momentoCancelamento: LocalDateTime) BigDecimal
     }
 
-    class EstornoComMulta {
-      +calcularEstorno(reserva: Reserva, momentoCancelamento: LocalDateTime) BigDecimal
+    class politica.EstornoComMulta {
+      +calcularEstorno(reserva: dominio.Reserva, momentoCancelamento: LocalDateTime) BigDecimal
     }
 
-    class Pessoa {
+    class dominio.Pessoa {
       -String titular
       -String cpf
       -BigDecimal saldo
@@ -49,35 +49,36 @@ classDiagram
       +creditar(valor: BigDecimal)
     }
 
-    class Carro {
+    class dominio.Carro {
       -String placa
       -String cor
       -boolean arCondicionado
       -BigDecimal valor
       -boolean ativo
-      -MarcaCarro marca
+      -dominio.MarcaCarro marca
       -String modelo
       +ativar()
       +desativar()
     }
 
-    class Periodo {
+    class dominio.Periodo {
       <<record>>
       +LocalDateTime inicio
       +LocalDateTime fim
-      +temSobreposicao(outro: Periodo) boolean
+      +temSobreposicao(outro: dominio.Periodo) boolean
       +diasDoPeriodo() long
     }
 
-    class Reserva {
+    class dominio.Reserva {
       -int id
-      -StatusReserva status
+      -dominio.StatusReserva status
       +getCustoTotal() BigDecimal
-      +cancelar(momento: LocalDateTime, politica: PoliticaCancelamento)
+      +cancelar(momento: LocalDateTime, politica: politica.PoliticaCancelamento)
       +concluir()
+      +restaurar(id: int, status: StatusReserva, periodo: Periodo, pessoa: Pessoa, carro: Carro) Reserva$
     }
 
-    class Repositorio~T, ID~ {
+    class repositorio.Repositorio~T, ID~ {
       <<interface>>
       +salvar(entidade: T)
       +buscarPorId(id: ID) Optional~T~
@@ -85,7 +86,7 @@ classDiagram
       +deletarPorId(id: ID)
     }
 
-    class RepositorioMemoria~T, ID~ {
+    class repositorio.RepositorioMemoria~T, ID~ {
       -Map~ID, T~ mapa
       +salvar(entidade: T)
       +buscarPorId(id: ID) Optional~T~
@@ -93,24 +94,33 @@ classDiagram
       +deletarPorId(id: ID)
     }
 
-    class ConsultaReservaServico {
-      -Repositorio~Reserva, Integer~ repositorio
-      +buscarReservaPorStatus(status: StatusReserva) List~Reserva~
-      +buscarReservaPorCPF(cpf: String) List~Reserva~
-      +buscarReservaPorMarcaCarro(marca: MarcaCarro) List~Reserva~
-      +calcularFaturamentoConcluido() BigDecimal
-      +CarroPossuiReservaAtiva(placa: String) boolean
+    class repositorio.PersistenciaJsonServico {
+      -ObjectMapper objectMapper
+      +salvar(caminho: Path, reservas: List~dominio.Reserva~) void
+      +restaurar(caminho: Path) List~dominio.Reserva~
     }
 
-    Identificavel~Integer~ <|.. Reserva : implementa
-    PoliticaCancelamento <|.. EstornoTotal : implementa
-    PoliticaCancelamento <|.. EstornoComMulta : implementa
-    Repositorio~T, ID~ <|.. RepositorioMemoria~T, ID~ : implementa
+    class servico.ConsultaReservaServico {
+      -repositorio.Repositorio~dominio.Reserva, Integer~ repositorio
+      +buscarReservaPorStatus(status: dominio.StatusReserva) List~dominio.Reserva~
+      +buscarReservaPorCPF(cpf: String) List~dominio.Reserva~
+      +buscarReservaPorMarcaCarro(marca: dominio.MarcaCarro) List~dominio.Reserva~
+      +calcularFaturamentoConcluido() BigDecimal
+      +carroPossuiReservaAtiva(placa: String) boolean
+      +contarReservasPorStatus(status: dominio.StatusReserva) long
+      +agruparTotalReservasPorStatus() Map~dominio.StatusReserva, Long~
+    }
 
-    Reserva "1" *-- "1" Periodo : composição
-    Reserva "0..*" --> "1" Pessoa : responsável
-    Reserva "0..*" --> "1" Carro : recurso
-    Reserva "1" --> "1" StatusReserva : estado
-    Reserva ..> PoliticaCancelamento : usa
-    Carro "0..*" --> "1" MarcaCarro : marca
-    ConsultaReservaServico --> Repositorio~Reserva, Integer~ : consulta
+    dominio.Identificavel~Integer~ <|.. dominio.Reserva : implementa
+    politica.PoliticaCancelamento <|.. politica.EstornoTotal : implementa
+    politica.PoliticaCancelamento <|.. politica.EstornoComMulta : implementa
+    repositorio.Repositorio~T, ID~ <|.. repositorio.RepositorioMemoria~T, ID~ : implementa
+
+    dominio.Reserva "1" *-- "1" dominio.Periodo : composição
+    dominio.Reserva "0..*" --> "1" dominio.Pessoa : responsável
+    dominio.Reserva "0..*" --> "1" dominio.Carro : recurso
+    dominio.Reserva "1" --> "1" dominio.StatusReserva : estado
+    dominio.Reserva ..> politica.PoliticaCancelamento : usa
+    dominio.Carro "0..*" --> "1" dominio.MarcaCarro : marca
+    servico.ConsultaReservaServico --> repositorio.Repositorio~dominio.Reserva, Integer~ : consulta
+    repositorio.PersistenciaJsonServico ..> dominio.Reserva : persiste / restaura

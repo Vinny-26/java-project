@@ -1,3 +1,5 @@
+package dominio;
+
 import excecoes.DadosInvalidosException;
 import excecoes.SobreposicaoPeriodoException;
 import org.junit.jupiter.api.Test;
@@ -169,7 +171,7 @@ class PeriodoTest {
         assertFalse(periodoA.temSobreposicao(null));
     }
 
-    // Teste do cálculo de dias da Reserva
+    // Teste do cálculo de dias da dominio.Reserva
 
     @Test
     void periodoMenorQue24RetornaUmaDiaria()

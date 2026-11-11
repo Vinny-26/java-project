@@ -1,3 +1,7 @@
+package politica;
+
+import dominio.Reserva;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

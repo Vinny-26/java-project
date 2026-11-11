@@ -1,3 +1,5 @@
+package dominio;
+
 import excecoes.DadosInvalidosException;
 import excecoes.EstadoInvalidoException;
 import org.junit.jupiter.api.Test;

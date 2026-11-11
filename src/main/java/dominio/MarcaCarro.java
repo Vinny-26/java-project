@@ -1,3 +1,5 @@
+package dominio;
+
 import java.util.List;
 
 public enum MarcaCarro {

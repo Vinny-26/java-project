@@ -1,3 +1,7 @@
+package dominio;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import excecoes.DadosInvalidosException;
 import java.math.BigDecimal;
 import excecoes.SaldoInsuficienteException;
@@ -22,8 +26,10 @@ public class Pessoa {
     public int hashCode() {
         return java.util.Objects.hash(cpf);
     }
-
-    public Pessoa(String titular, BigDecimal saldo, String cpf) {
+    @JsonCreator
+    public Pessoa(@JsonProperty("titular") String titular,
+                  @JsonProperty("saldo") BigDecimal saldo,
+                  @JsonProperty("cpf") String cpf) {
         if (titular == null || titular.isBlank()) {
             throw new DadosInvalidosException("O nome do titular deve estar preenchido e não pode ser nulo");
         }
@@ -54,7 +60,7 @@ public class Pessoa {
         return this.cpf;
     }
 
-    boolean saldoSuficiente(BigDecimal valor) {
+    public boolean saldoSuficiente(BigDecimal valor) {
         return this.saldo.compareTo(valor) >= 0;
     }
 
@@ -70,7 +76,7 @@ public class Pessoa {
             throw new DadosInvalidosException("O valor para débito deve ser estritamente positivo");
         }
         if (!saldoSuficiente(valor)) {
-            throw new SaldoInsuficienteException("Saldo insuficiente para efetuar a Reserva");
+            throw new SaldoInsuficienteException("Saldo insuficiente para efetuar a dominio.Reserva");
         }
         this.saldo = this.saldo.subtract(valor);
     }
