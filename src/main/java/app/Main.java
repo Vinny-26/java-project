@@ -77,7 +77,7 @@ public class Main
             System.out.println("[Recusa - Saldo Insuficiente]: " + e.getMessage());
         }
 
-        System.out.println("\n=== 4. CICLO DE VIDA E POLÍTICA DE CANCELAMENTO (RF5, RF6) ===");
+        System.out.println("\n=== 4. CICLO DE VIDA E POLÍTICA DE CANCELAMENTO ===");
         r1.concluir();
         // Cancelamento com menos de 48h de antecedência -> estorno de 80% de R$ 1.260,00 = R$ 1.008,00
         r2.cancelar(base.plusDays(4), new EstornoComMulta());
