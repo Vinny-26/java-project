@@ -50,3 +50,16 @@ documentação ou decisões.
 - Correções ou decisões da equipe: 
   - Adotou-se o uso de um método de fábrica estático marcado com @JsonCreator (Reserva.restaurar) para segregar o fluxo de restauração JSON (sem novo débito financeiro) da criação convencional de novas reservas (que efetua o débito inicial na conta do cliente). 
   - Incluiu-se a anotação @JsonIgnore em métodos calculados como getCustoTotal() para evitar que atributos derivados sejam gravados no JSON e provoquem exceções de propriedades não reconhecidas (UnrecognizedPropertyException).
+
+### Uso 5
+
+- Data: 20/11/2026
+- Ferramenta: Gemini
+- Objetivo: Implementar o padrão Strategy para precificação de reservas, desacoplar a validação de sobreposição de agenda em serviço dedicado, adicionar ordenações nas consultas, estruturar a classe executável Main e revisar a cobertura final de testes e documentação
+- Parte do projeto afetada: Interface politica.CalculoPreco, classes politica.PrecoPadrao e politica.PrecoDescontoLongaDuracao, classe dominio.Reserva, serviços servico.ReservaServico e servico.ConsultaReservaServico, classe app.Main, suítes de testes (CalculoPrecoTest, ReservaTest, ReservaServicoTest, ConsultaReservaServicoTest, PersistenciaTest) e arquivos do diretório docs
+- Resultado aproveitado: Estruturação das duas estratégias de preço com BigDecimal, persistência explícita do atributo imutável custoTotal no JSON, verificação de conflito de períodos ativos antes da criação da reserva e revisão de casos de fronteira nos testes JUnit
+- Verificações executadas: Execução completa da suíte de testes automatizados via Maven (./mvnw clean test) com zero falhas e execução ponta a ponta da aplicação pela linha de comando (app.Main), validando fluxos válidos, bloqueios por exceção de domínio e restauração de arquivo JSON
+- Correções ou decisões da equipe:
+  - Decidiu-se lançar DadosInvalidosException explicitamente quando a estratégia de preço ou o custoTotal restaurado forem nulos/inválidos, evitando fallbacks silenciosos.
+  - Manteve-se a checagem de sobreposição de períodos exclusivamente em servico.ReservaServico para preservar o baixo acoplamento da entidade dominio.Reserva e as classes de persistencia com JSON.
+  - Nos testes de ordenação de ConsultaReservaServicoTest, optou-se por reutilizar diretamente as reservas configuradas no @BeforeEach e validar a ordem pelos IDs, evitando instanciar novas reservas para cumprir o mesmo objetivo.
