@@ -5,6 +5,7 @@ import excecoes.DadosInvalidosException;
 import dominio.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import politica.PrecoDescontoLongaDuracao;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PersistenciaTest {
 
     @Test
-    void deveSalvarERestaurarReservaValidaComSucesso(@TempDir Path tempDir) throws IOException {
+    void deveSalvarERestaurarReservaValida(@TempDir Path tempDir) throws IOException {
         Path arquivoJson = tempDir.resolve("reservas.json");
         PersistenciaJsonServico persistencia = new PersistenciaJsonServico();
 
@@ -42,7 +43,7 @@ class PersistenciaTest {
     }
 
     @Test
-    void deveRejeitarJsonComInvarianteViolada(@TempDir Path tempDir) throws IOException {
+    void deveRejeitarJsonInvarianteViolada(@TempDir Path tempDir) throws IOException {
         Path jsonInvalido = tempDir.resolve("reserva_invalida.json");
 
         String conteudoCorrompido = """
@@ -71,5 +72,27 @@ class PersistenciaTest {
 
         assertInstanceOf(DadosInvalidosException.class, exception.getCause());
         assertEquals("A data/hora inicial deve ser estritamente anterior à final.", exception.getCause().getMessage());
+    }
+
+    @Test
+    void devePreservarCustoTotalComDescontoAposSalvarERestaurarJson(@TempDir Path tempDir) throws IOException
+    {
+        PersistenciaJsonServico persistencia = new PersistenciaJsonServico();
+        Path arquivo = tempDir.resolve("reservas-desconto.json");
+
+        Pessoa pessoa = new Pessoa("Fernanda Lima", new BigDecimal("3000.00"), "33344455566");
+        Carro carro = new Carro("JKL4M56", "Cinza", true, new BigDecimal("200.00"), true, MarcaCarro.FIAT, "Uno");
+        LocalDateTime inicio = LocalDateTime.of(2026, 12, 5, 14, 0);
+        Periodo seteDias = new Periodo(inicio, inicio.plusDays(7));
+
+        // 7 * 200 = 1400 -> com 10% de desconto = 1260.00
+        Reserva original = new Reserva(5, seteDias, pessoa, carro, new PrecoDescontoLongaDuracao());
+        persistencia.salvar(arquivo, List.of(original));
+
+        List<Reserva> restauradas = persistencia.restaurar(arquivo);
+
+        assertEquals(1, restauradas.size());
+        assertEquals(0, new BigDecimal("1260.00").compareTo(restauradas.getFirst().getCustoTotal()));
+        assertEquals(0, new BigDecimal("1740.00").compareTo(restauradas.getFirst().getPessoa().getSaldo()));
     }
 }

@@ -29,18 +29,26 @@ class CalculoPrecoTest
     {
         CalculoPreco estrategia = new PrecoPadrao();
         Periodo tresDias = new Periodo(base, base.plusDays(3));
-
         BigDecimal valorCalculado = estrategia.calcular(carro, tresDias);
 
         assertEquals(0, new BigDecimal("300.00").compareTo(valorCalculado));
     }
 
     @Test
-    void descontoInvalidoPeriodoMenorQueSete()
+    void precoPadraoCobraIntegralMesmoAcimaDeSeteDias()
+    {
+        CalculoPreco estrategia = new PrecoPadrao();
+        Periodo dezDias = new Periodo(base, base.plusDays(10));
+        BigDecimal valorCalculado = estrategia.calcular(carro, dezDias);
+
+        assertEquals(0, new BigDecimal("1000.00").compareTo(valorCalculado));
+    }
+
+    @Test
+    void semDescontoParaPeriodoMenorQueSeteDias()
     {
         CalculoPreco estrategia = new PrecoDescontoLongaDuracao();
         Periodo seisDias = new Periodo(base, base.plusDays(6));
-
         BigDecimal valorCalculado = estrategia.calcular(carro, seisDias);
 
         assertEquals(0, new BigDecimal("600.00").compareTo(valorCalculado));
@@ -51,7 +59,6 @@ class CalculoPrecoTest
     {
         CalculoPreco estrategia = new PrecoDescontoLongaDuracao();
         Periodo seteDias = new Periodo(base, base.plusDays(7));
-
         BigDecimal valorCalculado = estrategia.calcular(carro, seteDias);
 
         // 7 * 100 = 700 -> com 10% de desconto = 630.00
@@ -63,7 +70,6 @@ class CalculoPrecoTest
     {
         CalculoPreco estrategia = new PrecoDescontoLongaDuracao();
         Periodo dezDias = new Periodo(base, base.plusDays(10));
-
         BigDecimal valorCalculado = estrategia.calcular(carro, dezDias);
 
         // 10 * 100 = 1000 -> com 10% de desconto = 900.00
