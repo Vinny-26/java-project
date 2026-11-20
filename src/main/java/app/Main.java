@@ -39,7 +39,7 @@ public class Main
 
         LocalDateTime base = LocalDateTime.of(2026, 12, 1, 10, 0);
 
-        System.out.println("\n=== 2. FLUXO PRINCIPAL E ESTRATÉGIAS DE PREÇO (RF4, RF7) ===");
+        System.out.println("\n=== 2. FLUXO PRINCIPAL E ESTRATÉGIAS DE PREÇO ===");
         // Reserva 1: 3 dias * R$ 200,00 = R$ 600,00 (PrecoPadrao)
         Reserva r1 = reservaServico.criarReserva(1, new Periodo(base, base.plusDays(3)), cliente1, carroAtivo, new PrecoPadrao());
         // Reserva 2: 7 dias * R$ 200,00 = R$ 1.400,00 - 10% = R$ 1.260,00 (PrecoDescontoLongaDuracao)
@@ -84,13 +84,13 @@ public class Main
         System.out.println("Status R1: " + r1.getStatus() + " | Status R2: " + r2.getStatus());
         System.out.println("Saldo Ana Silva após estorno parcial: R$ " + cliente1.getSaldo());
 
-        System.out.println("\n=== 5. CONSULTAS, ORDENAÇÃO E RELATÓRIO SINTÉTICO (RF8, RF10) ===");
+        System.out.println("\n=== 5. CONSULTAS, ORDENAÇÃO E RELATÓRIO SINTÉTICO ===");
         System.out.println("Faturamento concluído: R$ " + consultaServico.calcularFaturamentoConcluido());
         System.out.println("Resumo por status: " + consultaServico.agruparTotalReservasPorStatus());
         System.out.println("IDs ordenados por maior custo: " +
                 consultaServico.listarReservasOrdenadasPorCustoDecrescente().stream().map(Reserva::getId).toList());
 
-        System.out.println("\n=== 6. PERSISTÊNCIA E RESTAURAÇÃO JSON (RF9, INVARIANTE 8) ===");
+        System.out.println("\n=== 6. PERSISTÊNCIA E RESTAURAÇÃO JSON ===");
         persistencia.salvar(arquivoJson, repositorio.listarTodos());
         List<Reserva> restauradas = persistencia.restaurar(arquivoJson);
         System.out.println("Reservas restauradas do arquivo JSON: " + restauradas.size());
