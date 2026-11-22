@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import politica.EstornoComMulta;
 import politica.EstornoTotal;
 import politica.PoliticaCancelamento;
+import politica.PrecoDescontoLongaDuracao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -44,7 +45,7 @@ class ReservaTest {
         assertEquals(pessoaValida, reserva.getPessoa());
         assertEquals(carroValido, reserva.getCarro());
         assertEquals(StatusReserva.CRIADA,reserva.getStatus());
-        assertEquals(0, new BigDecimal("8000").compareTo(pessoaValida.getSaldo()));
+        assertEquals(0, new BigDecimal("2000").compareTo(reserva.getCustoTotal()));
     }
 
     @Test
@@ -88,6 +89,33 @@ class ReservaTest {
         pessoaValida = new Pessoa("Vinícius", new BigDecimal("100"), "11111111111");
         assertThrows(SaldoInsuficienteException.class,
                 () -> new Reserva (1, periodoValido, pessoaValida, carroValido)
+        );
+    }
+
+    @Test
+    void criaReservaAplicandoDescontoLongaDuracao()
+    {
+        Periodo periodoDezDias = new Periodo(periodoValido.inicio(), periodoValido.inicio().plusDays(10));
+
+        Reserva reserva = new Reserva(1, periodoDezDias, pessoaValida, carroValido, new PrecoDescontoLongaDuracao());
+        assertEquals(0, new BigDecimal("9000.00").compareTo(reserva.getCustoTotal()));
+        assertEquals(0, new BigDecimal("1000.00").compareTo(pessoaValida.getSaldo()));
+    }
+
+    @Test
+    void criaSemDescontoParaPeriodoMenorQueSeteDias()
+    {
+        Reserva reserva = new Reserva(1, periodoValido, pessoaValida, carroValido, new PrecoDescontoLongaDuracao());
+
+        assertEquals(0, new BigDecimal("2000.00").compareTo(reserva.getCustoTotal()));
+        assertEquals(0, new BigDecimal("8000.00").compareTo(pessoaValida.getSaldo()));
+    }
+
+    @Test
+    void rejeitaEstrategiaDeCalculoNula()
+    {
+        assertThrows(DadosInvalidosException.class, () ->
+                new Reserva(1, periodoValido, pessoaValida, carroValido, null)
         );
     }
 

@@ -6,6 +6,7 @@ import dominio.Reserva;
 import dominio.StatusReserva;
 import excecoes.DadosInvalidosException;
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -90,5 +91,20 @@ public class ConsultaReservaServico
                         Reserva::getStatus,
                         Collectors.counting()
                 ));
+    }
+    // Ordenar reservas cronologicamente pela data de início
+    public List<Reserva> listarReservasOrdenadasPorDataInicio()
+    {
+        return repositorio.listarTodos().stream()
+                .sorted(Comparator.comparing(r -> r.getPeriodo().inicio()))
+                .toList();
+    }
+
+    // Ordenar reservas pelo maior custo total
+    public List<Reserva> listarReservasOrdenadasPorCustoDecrescente()
+    {
+        return repositorio.listarTodos().stream()
+                .sorted(Comparator.comparing(Reserva::getCustoTotal).reversed())
+                .toList();
     }
 }

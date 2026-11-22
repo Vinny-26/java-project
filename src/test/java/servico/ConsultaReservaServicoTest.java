@@ -187,4 +187,25 @@ class ConsultaReservaServicoTest {
         assertTrue(agrupado.isEmpty());
     }
 
+    @Test
+    void deveOrdenarReservasPorDataInicio()
+    {
+        List<Integer> idsPorData = servico.listarReservasOrdenadasPorDataInicio().stream()
+                .map(Reserva::getId)
+                .toList();
+
+        assertEquals(List.of(1, 2, 3), idsPorData);
+
+
+    }
+
+    @Test
+    void deveOrdenarReservasPorCusto()
+    {
+        List<Integer> idsPorCusto = servico.listarReservasOrdenadasPorCustoDecrescente().stream()
+                .map(Reserva::getId)
+                .toList();
+
+        assertEquals(List.of(2, 1, 3), idsPorCusto);
+    }
 }
